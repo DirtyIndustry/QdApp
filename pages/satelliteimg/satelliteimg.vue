@@ -74,7 +74,6 @@
 </script>
 
 <style scoped>
-    @import "../../common/FontAwesome.css";
     @import "../../common/generic.css";
 
     Page {

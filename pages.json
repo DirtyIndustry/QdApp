@@ -11,7 +11,7 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "山东海洋预报",
+				"navigationBarTitleText": "青岛海洋预报",
 				"enablePullDownRefresh": true
 			}
 		},
@@ -129,7 +129,7 @@
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
-		"navigationBarTitleText": "山东海洋预报",
+		"navigationBarTitleText": "青岛海洋预报",
 		"navigationBarBackgroundColor": "#0092d4",
 		"backgroundColor": "#F00"
 	},

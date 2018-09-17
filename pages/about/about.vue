@@ -11,8 +11,8 @@
         <view class="section-bottom">
             <view class="column-bottom column-bottom-left">
                 <view class="bottom-content bottom-content-left">
-                    <view class="bottom-text-small text-small">山东省海洋与渔业厅</view>
-                    <view class="bottom-text-small text-small">山东海洋预报台</view>
+                    <view class="bottom-text-small text-small">青岛市海洋与渔业局</view>
+                    <view class="bottom-text-small text-small">青岛市海洋预报中心</view>
                 </view>
             </view>
             <view class="column-bottom column-bottom-right">

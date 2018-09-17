@@ -41,3 +41,9 @@ DONE... delete city forecast picker css
 DONE... delete weather forecast picker css  
 DONE... change icon image  
 DONE... change background image  
+DONE... change page.json global and index page navibar title  
+DONE... change about page institution name  
+DONE... delete radar image page city select module  
+DONE... change radar image page data source name  
+DONE... delete radar image page fontawesome import  
+DONE... delete satellite image page fontawesome import  
