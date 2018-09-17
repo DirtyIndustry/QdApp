@@ -1,12 +1,20 @@
 <template>
     <view class="uni-flex uni-row title-section">
+        <view class="ball-column" >
+            <view class="ball" />
+            <view class="ball-row" />
+        </view>
         <!-- 标题 -->
-        <view class="title text-large text-bold text-blue">
+        <view class="title text-large text-bold text-dark">
             <image v-if="icon !== ''" class="title-icon" :src="icon" mode="widthFix" />
             &nbsp;{{title}}
         </view>
         <!-- 日期 -->
         <view class="date text-small">{{date}}</view>
+        <view class="ball-column" >
+            <view class="ball" />
+            <view class="ball-row" />
+        </view>
     </view>
 </template>
 
@@ -55,6 +63,25 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.ball-column {
+    width: 60px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.ball-row {
+    height: 35px;
+    width: 100%;
+}
+.ball {
+    width: 25px;
+    height: 25px;
+    border: 1px solid #000;
+    border-radius: 20px;
+    background-color: #c6830d;
 }
 /* 标题图标+渔场预报字样 */
 .title {

@@ -45,39 +45,31 @@
 			</view>
 			<view class="separator" />
 			<!-- 近海预报 -->
-			<view class="page-section">
-				<tableTitle :title="inshoreData.location" :date="inshoreTitleDate" icon="../../static/Images/top_left_img_newS.png" />
-				<view class="section-body">
-					<inshoreTableNew :inshoreData="inshoreData" />
-				</view>
+			<view class="page-section section-body">
+				<tableTitle title="近海预报" :date="inshoreTitleDate" icon="../../static/Images/top_left_img_newS.png" />
+				<inshoreTableNew :inshoreData="inshoreData" />
 			</view>
+			<view class="separator" />
 			<!-- 浴场预报 -->
-			<view class="page-section" v-if="bathsData.showBaths">
-				<view class="separator" />
+			<view class="page-section section-body" v-if="bathsData.showBaths">
 				<tableTitle title="浴场预报" :date="bathsTitleDate" icon="../../static/Images/top_left_img_newS.png" />
-				<view class="section-body">
-					<bathsTable :bathsData="bathsData.data" />
-				</view>
+				<bathsTable :bathsData="bathsData.data" />
 			</view>
 			<!-- 精细化预报 -->
-			<view class="page-section" v-show="refinedData.show">
-				<view class="separator" />
-				<view class="section-body">
-					<refinedChartAlt :option="refinedData.optionOne" :data="refinedData.dataOne" canvasId="refinedOne" />
-					<!-- 两个图表之间的空白 -->
-					<view style="height: 60px" v-if="refinedData.showTwo" />
-					<view v-show="refinedData.showTwo">
-						<refinedChartAlt :option="refinedData.optionTwo" :data="refinedData.dataTwo" canvasId="refinedTwo" />
-					</view>
+			<view class="separator" />
+			<view class="page-section section-body">
+				<refinedChartAlt :option="refinedData.optionOne" :data="refinedData.dataOne" canvasId="refinedOne" />
+				<!-- 两个图表之间的空白 -->
+				<view style="height: 60px" v-if="refinedData.showTwo" />
+				<view v-show="refinedData.showTwo">
+					<refinedChartAlt :option="refinedData.optionTwo" :data="refinedData.dataTwo" canvasId="refinedTwo" />
 				</view>
 			</view>
 			<view class="separator" />
 			<!-- 五日天气预报 -->
-			<view class="page-section">
-				<tableTitle title="天气预报" />
-				<view class="section-body">
-					<fivedayForcast :option="fivedayData.optionFiveday" :fivedayWeather="fivedayData.fivedayWeather" canvasId="fiveday" />
-				</view>
+			<view class="page-section section-body">
+				<tableTitle title="天气预报" date="数据源: 聚合数据"/>
+				<fivedayForcast :option="fivedayData.optionFiveday" :fivedayWeather="fivedayData.fivedayWeather" canvasId="fiveday" />
 			</view>
 			<view class="separator" />
 		</view>
