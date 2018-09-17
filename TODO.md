@@ -58,3 +58,5 @@ DONE... index page tableTitle styling
 DONE... city forecast page tableTitle styling  
 DONE... weather forecast page tableTitle styling  
 DONE... ocean forecast page tableTitle styling  
+webservice  
+realtime weather module styling  
