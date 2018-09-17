@@ -22,29 +22,12 @@
             <view class="menu-row">
                 <!-- 第二行左 -->
                 <view class="menu-cell menu-column">
-                    <button class="menu-button" type="default" @tap="fisheryTap">
-                        <image class="menu-button-icon" mode="aspectFit" src="../../static/Images/fishery_img.png" />
-                        <view class="text-large text-blue">渔场预报</view>
-                    </button>
-                </view>
-                <!-- 第二行右 -->
-                <view class="menu-cell menu-column">
-                    <button class="menu-button" type="default" @tap="trendTap">
-                        <image class="menu-button-icon" mode="aspectFit" src="../../static/Images/trendPrediction_img.png" />
-                        <view class="text-large text-blue">趋势预测</view>
-                    </button>
-                </view>
-            </view>
-            <!-- 第三行 -->
-            <view class="menu-row">
-                <!-- 第三行左 -->
-                <view class="menu-cell menu-column">
                     <button class="menu-button" type="default" @tap="weatherTap">
                         <image class="menu-button-icon" mode="aspectFit" src="../../static/Images/WeatherForecast_img.png" />
                         <view class="text-large text-blue">天气预报</view>
                     </button>
                 </view>
-                <!-- 第三行右 -->
+                <!-- 第二行右 -->
                 <view class="menu-cell menu-column">
                     <button class="menu-button" type="default" @tap="weatherimgTap">
                         <image class="menu-button-icon" mode="aspectFit" src="../../static/Images/WeatherMap_img.png" />
@@ -52,16 +35,16 @@
                     </button>
                 </view>
             </view>
-            <!-- 第四行 -->
+            <!-- 第三行 -->
             <view class="menu-row">
-                <!-- 第四行左 -->
+                <!-- 第三行左 -->
                 <view class="menu-cell menu-column">
                     <button class="menu-button" type="default" @tap="satelliteimgTap">
                         <image class="menu-button-icon" mode="aspectFit" src="../../static/Images/SatelliteCloudMap_img.png" />
                         <view class="text-large text-blue">卫星云图</view>
                     </button>
                 </view>
-                <!-- 第四行右 -->
+                <!-- 第三行右 -->
                 <view class="menu-cell menu-column">
                     <button class="menu-button" type="default" @tap="radarimgTap">
                         <image class="menu-button-icon" mode="aspectFit" src="../../static/Images/RadarMap_img.png" />
@@ -69,16 +52,16 @@
                     </button>
                 </view>
             </view>
-            <!-- 第五行 -->
+            <!-- 第四行 -->
             <view class="menu-row">
-                <!-- 第五行左 -->
+                <!-- 第四行左 -->
                 <view class="menu-cell menu-column">
                     <button class="menu-button" type="default" @tap="typhoonpathTap">
                         <image class="menu-button-icon" mode="aspectFit" src="../../static/Images/Typhoon_img.png" />
                         <view class="text-large text-blue">台风路径</view>
                     </button>
                 </view>
-                <!-- 第五行右 -->
+                <!-- 第四行右 -->
                 <!-- <view class="menu-cell menu-column">
                     <button class="menu-button" type="default" @tap="newscenterTap">
                         <image class="menu-button-icon" mode="aspectFit" src="../../static/Images/news_img.png" />
@@ -112,20 +95,6 @@ export default {
             console.log('预警报点击')
             uni.navigateTo({
                 url: '../warninglist/warninglist'
-            })
-        },
-        // 渔场预报
-        fisheryTap (e) {
-            console.log('渔场预报点击')
-            uni.navigateTo({
-                url: '../fisheryforecast/fisheryforecast'
-            })
-        },
-        // 趋势预测
-        trendTap (e) {
-            console.log('趋势预测点击')
-            uni.navigateTo({
-                url: '../trendprediction/trendprediction'
             })
         },
         // 天气预报
