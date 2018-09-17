@@ -392,7 +392,7 @@
 	page {
 		background-color: #F8F8F8;
 		height: 100%;
-		font-size: 30px;
+		font-size: 30upx;
 		line-height: 1.6;
 	}
 

@@ -44,7 +44,6 @@ export default {
 	flex-grow: 1;
 }
 .table-body {
-    /* border: 1px solid #000; */
     position: relative;
     left: 3.5%;
     width: 93%;
@@ -52,7 +51,7 @@ export default {
     flex-direction: column;
 }
 .table-row {
-    height: 70px;
+    height: 70upx;
     display: flex;
     flex-direction: row;
 }

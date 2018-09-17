@@ -8,7 +8,7 @@
             <view class="flex-cell-single text">{{item.date}}</view>
             <view class="flex-cell-single text">{{item.weather}}</view>
             <view class="flex-cell-single">
-                <image :src="item.weatherIcon" mode="widthFix" style="width: 50px; height: 50px" />
+                <image :src="item.weatherIcon" mode="widthFix" style="width: 50upx; height: 50upx" />
             </view>
             <view class="flex-cell-quad"> </view>
             <view class="flex-cell-single text" :class="{'text-small': item.windDir.length > 4}">{{item.windDir}}</view>
@@ -74,7 +74,7 @@ export default {
 	/* 5日天气预报的列 */
 	.fiveday-column {
 		flex: 1;
-		height: 600px;
+		height: 600upx;
 	}
 
 	/* 5日天气预报非最右边的列 添加右边框 */
@@ -98,9 +98,8 @@ export default {
 	/* 五日天气预报气温图表 */
 	.chart-fiveday {
 		width: 100%;
-		height: 235px;
-		/* margin-top: -360px; */
-		top: 240px;
+		height: 235upx;
+		top: 240upx;
 		position: absolute;
 	}
 

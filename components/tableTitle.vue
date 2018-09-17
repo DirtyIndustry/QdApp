@@ -65,49 +65,49 @@ export default {
 }
 /* 标题部分容器 */
 .title-section {
-    border-bottom: 1px solid #000;
-    height: 80px;
+    border-bottom: 1upx solid #000;
+    height: 80upx;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .ball-column {
-    width: 60px;
-    height: 80px;
+    width: 60upx;
+    height: 80upx;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 .ball-row {
-    height: 35px;
+    height: 35upx;
     width: 100%;
 }
 .ball {
-    width: 25px;
-    height: 25px;
+    width: 25upx;
+    height: 25upx;
     border: 1px solid #000;
-    border-radius: 20px;
+    border-radius: 20upx;
     background-color: #c6830d;
 }
 /* 标题图标+渔场预报字样 */
 .title {
     flex: 3;
-    height: 60px;
+    height: 60upx;
     display: flex;
     align-items: center;
 }
 /* 标题图标 */
 .title-icon {
-    width: 60px;
-    height: 60px;
+    width: 60upx;
+    height: 60upx;
 }
 
 /* 标题日期 */
 .date {
     flex: 4;
-    height: 80px;
-    line-height: 125px;
+    height: 80upx;
+    line-height: 125upx;
     text-align: right;
 }
 </style>

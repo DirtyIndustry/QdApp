@@ -156,8 +156,6 @@ export default {
 @import "../common/generic.css";
 /* 控件最外城容器 */
 .tabbar-container {
-    /* border: 1px solid #000; */
-    /* position: relative; */
     position: fixed;
     top: 0;
     left: 0;
@@ -168,7 +166,6 @@ export default {
 
 /* 按钮组 */
 .tabbar {
-    /* border: 1px solid #000; */
     background-color: #fff;
     top: 0;
     height: 120px;
@@ -190,7 +187,7 @@ export default {
 .tabbar-right {
     width: 64%;
     flex-direction: row-reverse;
-    right: 0px;
+    right: 0;
     z-index: 5;
 }
 /* 背景按钮组 */
@@ -204,7 +201,6 @@ export default {
 
 /* 按钮组中的按钮 */
 .tabbar-button {
-    /* border: 1px solid #0f0; */
     height: 120px;
     display: flex;
     flex-shrink: 0;
@@ -214,18 +210,15 @@ export default {
 
 /* 左边的按钮 */
 .tabbar-button-left {
-    /* border: 1px solid #f00; */
     left: 0;
 }
 /* 右边的按钮 */
 .tabbar-button-right {
-    /* border: 1px solid #00f; */
     right: 0;
 }
 
 /* 按钮内层容器 */
 .button-inner {
-    /* border: 1px solid #f00; */
     width: 100%;
     height: 80px;
     display: flex;

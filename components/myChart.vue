@@ -72,7 +72,7 @@
 	/* 曲线图的容器 必须设置宽度和高度 */
     .chart {
         width: 290%;
-        height: 250px;
+        height: 250upx;
         border: 1px solid #000000;
     }
 </style>

@@ -18,7 +18,7 @@
             <view class="warning-fader warning-fader-right"></view>
         </view>
         <!-- 分隔栏 -->
-        <view style="height: 5px;"></view>
+        <view style="height: 5upx;"></view>
         <!-- 海浪警报 -->
         <view class="warning-section" v-if="wave !== ''" @tap="$emit('waveTap')">
             <view class="warning-header">
@@ -70,7 +70,7 @@ export default {
 @import "../common/generic.css";
 .warning-section {
     border: 1px solid #999;
-    height: 60px;
+    height: 60upx;
     position: relative;
     overflow: hidden;
     background-color: rgba(255, 255, 255, 0.8);
@@ -80,8 +80,8 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    height: 60px; 
-    width: 120px;
+    height: 60upx; 
+    width: 120upx;
     background-color: whitesmoke;
     display: flex;
     align-items: center;
@@ -89,20 +89,20 @@ export default {
     z-index: 6;
 }
 .warning-header-icon {
-    width: 40px;
-    height: 40px;
+    width: 40upx;
+    height: 40upx;
 }
 .warning-header-text-container {
     flex: 1;
-    height: 60px;
+    height: 60upx;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .warning-header-text {
     border: 1px solid #000;
-    border-radius: 10px;
-    height: 38px;
+    border-radius: 10upx;
+    height: 38upx;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -110,12 +110,12 @@ export default {
 .warning-fader {
     position: absolute;
     top: 0;
-    width: 80px;
-    height: 60px;
+    width: 80upx;
+    height: 60upx;
     z-index: 6;
 }
 .warning-fader-left {
-    left: 120px;
+    left: 120upx;
     background: linear-gradient(left, rgba(245,245,245,1), rgba(255,255,255,0));
 }
 .warning-fader-right {
@@ -126,7 +126,7 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    height: 60px;
+    height: 60upx;
     display: flex;
     align-items: center;
     white-space: nowrap;

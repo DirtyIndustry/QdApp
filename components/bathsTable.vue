@@ -60,7 +60,7 @@ export default {
     /* 浴场预报表格的行 */
     .baths-row {
         flex: 1;
-        height: 70px;
+        height: 70upx;
         border-left: 1px solid #000;
         border-right: 1px solid #000;
         border-bottom: 1px solid #000;

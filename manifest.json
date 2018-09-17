@@ -4,6 +4,7 @@
     "description": "",
     "versionName": "0.0.1",
     "versionCode": "001",
+    "transformPx": false,
     "app-plus": { /* 5+App特有相关 */
         "modules": { /* 模块配置 */
 
