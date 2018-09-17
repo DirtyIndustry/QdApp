@@ -4,6 +4,7 @@
 		<view class="page-body">
 			<image src="../../static/Images/back_images.png" mode="aspectFill" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: -1;" />
 			
+			<view class="separator" />
 			<!-- 潮汐预报模块 -->
 			<view class="page-section section-body">
 				<tableTitle title="潮汐预报" icon="../../static/Images/top_left_img_new.png" />
@@ -35,19 +36,15 @@
 			</view>
 			<view class="separator" />
 			<!-- 近海预报 -->
-			<view class="page-section">
-				<tableTitle :title="inshoreData.location" :date="inshoreTitleDate" icon="../../static/Images/top_left_img_newS.png" />
-				<view class="section-body">
-					<inshoreTableNew :inshoreData="inshoreData" />
-				</view>
+			<view class="page-section section-body">
+				<tableTitle title="近海预报" :date="inshoreTitleDate" icon="../../static/Images/top_left_img_newS.png" />
+				<inshoreTableNew :inshoreData="inshoreData" />
 			</view>
 			<view class="separator" />
 			<!-- 浴场预报 -->
-			<view class="page-section" v-if="bathsData.showBaths">
+			<view class="page-section section-body" v-if="bathsData.showBaths">
 				<tableTitle title="浴场预报" :date="bathsTitleDate" icon="../../static/Images/top_left_img_newS.png" />
-				<view class="section-body">
-					<bathsTable :bathsData="bathsData.data" />
-				</view>
+				<bathsTable :bathsData="bathsData.data" />
 			</view>
 			<view class="separator" />
 			<!-- 精细化预报 -->

@@ -54,4 +54,6 @@ DONE... change menu page icons
 DONE... change menu page button texts  
 DONE... menu page button styling  
 DONE... change menu page subpages title  
-fiveday forecast module  
+DONE... index page tableTitle styling  
+DONE... city forecast page tableTitle styling  
+weather forecast page tableTitle styling  
