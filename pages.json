@@ -30,21 +30,21 @@
 		{
 			"path": "pages/cityforecast/cityforecast",
 			"style": {
-				"navigationBarTitleText": "城市预报",
+				"navigationBarTitleText": "近海预报",
 				"enablePullDownRefresh": true
 			}
 		},
 		{
 			"path": "pages/cityforecastAlt/cityforecastAlt",
 			"style": {
-				"navigationBarTitleText": "城市预报",
+				"navigationBarTitleText": "近海预报",
 				"enablePullDownRefresh": true
 			}
 		},
 		{
 			"path": "pages/warninglist/warninglist",
 			"style": {
-				"navigationBarTitleText": "预警报",
+				"navigationBarTitleText": "海洋警报",
 				"enablePullDownRefresh": true
 			}
 		},
@@ -91,13 +91,6 @@
 			"path": "pages/radarimg/radarimg",
 			"style": {
 				"navigationBarTitleText": "雷达图",
-				"enablePullDownRefresh": true
-			}
-		},
-		{
-			"path": "pages/newscenter/newscenter",
-			"style": {
-				"navigationBarTitleText": "新闻中心",
 				"enablePullDownRefresh": true
 			}
 		},

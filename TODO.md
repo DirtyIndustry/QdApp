@@ -51,5 +51,6 @@ DONE... change contact us page request areaflg
 DONE... change setting page check update request areaflg  
 DONE... change bienvenu page images  
 DONE... change menu page icons  
-change menu page button texts  
-change menu page subpages title  
+DONE... change menu page button texts  
+DONE... menu page button styling  
+DONE... change menu page subpages title  
