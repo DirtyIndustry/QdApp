@@ -211,7 +211,6 @@
 	import appsettings from '../../utils/appsettings.js'
 	import utils from '../../utils/utils.js'
 	import bathsTable from '../../components/bathsTable.vue'
-	import myPicker from '../../components/myPicker.vue'
 	import tableTitle from '../../components/tableTitle.vue'
 	import inshoreTableNew from '../../components/inshoreTableNew.vue'
 	import * as echarts from 'echarts'
@@ -229,7 +228,6 @@
 	export default {
 		components: {
 			bathsTable,
-			myPicker,
 			tableTitle,
 			inshoreTableNew,
 			mpvueEcharts

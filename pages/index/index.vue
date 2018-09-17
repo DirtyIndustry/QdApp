@@ -87,7 +87,6 @@
 	import bathsTable from '../../components/bathsTable.vue'
 	import refinedChart from '../../components/refinedChart.vue'
 	import refinedChartAlt from '../../components/refinedChartAlt.vue'
-	import myPicker from '../../components/myPicker.vue'
 	import tableTitle from '../../components/tableTitle.vue'
 
 	export default {
@@ -100,7 +99,6 @@
 			bathsTable,
 			refinedChart,
 			refinedChartAlt,
-			myPicker,
 			tableTitle
 		},
 		data() {

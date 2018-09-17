@@ -10,8 +10,9 @@
 				<realtimeWeather :weatherData="weatherData" />
 			</view>
 			<!-- 五日天气预报 -->
-			<view class="page-section">
-				<view class="fiveday-body section-body">
+			<view class="page-section section-body">
+				<tableTitle title="天气预报" date="数据源: 聚合数据"/>
+				<view class="fiveday-body">
 					<view class="uni-flex uni-row">
 						<!-- 依据fivedayWeather生成列 -->
 						<view class="fiveday-column uni-flex uni-column" :class="{'fiveday-column-left': index < 4}" v-for="(item, index) in fivedayData.fivedayWeather"
@@ -42,7 +43,7 @@
 	import appsettings from '../../utils/appsettings.js'
 	import utils from '../../utils/utils.js'
 	import realtimeWeather from '../../components/realtimeWeather.vue'
-	import myPicker from '../../components/myPicker.vue'
+	import tableTitle from '../../components/tableTitle.vue'
 	import * as echarts from 'echarts'
 	import mpvueEcharts from 'mpvue-echarts'
 
@@ -51,7 +52,7 @@
 	export default {
 		components: {
 			realtimeWeather,
-			myPicker,
+			tableTitle,
 			mpvueEcharts
 		},
 		data() {
