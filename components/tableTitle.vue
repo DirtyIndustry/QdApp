@@ -5,7 +5,7 @@
             <view class="ball-row" />
         </view>
         <!-- 标题 -->
-        <view class="title text-large text-bold text-dark">
+        <view class="title text-bold text-dark" :class="{'text-large': !smalltext, 'text': smalltext}">
             <image v-if="icon !== ''" class="title-icon" :src="icon" mode="widthFix" />
             &nbsp;{{title}}
         </view>
@@ -41,6 +41,13 @@ export default {
             type: String,
             default () {
                 return ''
+            }
+        },
+        // 小字体
+        smalltext: {
+            type: Boolean,
+            default () {
+                return false
             }
         }
     }

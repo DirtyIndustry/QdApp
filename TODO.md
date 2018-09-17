@@ -56,4 +56,5 @@ DONE... menu page button styling
 DONE... change menu page subpages title  
 DONE... index page tableTitle styling  
 DONE... city forecast page tableTitle styling  
-weather forecast page tableTitle styling  
+DONE... weather forecast page tableTitle styling  
+DONE... ocean forecast page tableTitle styling  

@@ -5,51 +5,27 @@
         <!-- 页眉空白 -->
         <view class="separator"></view>
         <!-- 标题部分 -->
-        <view class="page-section">
-
-            <view class="uni-flex uni-row title-section">
-                <!-- 标题 -->
-                <view class="title text text-bold text-blue">
-                    &nbsp;24小时海区预报
-                </view>
-                <!-- 日期 -->
-                <view class="date text-small">{{forecastdate24h}}</view>
-            </view>
-            <view class="section-body">
-                <oceanTable :data="oceantable24h"></oceanTable>
-            </view>
-            <!-- 表格下方空白 -->
-            <view class="separator"></view>
-        
-            <view class="uni-flex uni-row title-section">
-                <!-- 标题 -->
-                <view class="title text text-bold text-blue">
-                    &nbsp;48小时海区预报
-                </view>
-                <!-- 日期 -->
-                <view class="date text-small">{{forecastdate48h}}</view>
-            </view>
-            <view class="section-body">
-                <oceanTable :data="oceantable48h"></oceanTable>
-            </view>
-            <!-- 表格下方空白 -->
-            <view class="separator"></view>
-
-            <view class="uni-flex uni-row title-section">
-                <!-- 标题 -->
-                <view class="title text text-bold text-blue">
-                    &nbsp;72小时海区预报
-                </view>
-                <!-- 日期 -->
-                <view class="date text-small">{{forecastdate72h}}</view>
-            </view>
-            <view class="section-body">
-                <oceanTable :data="oceantable72h"></oceanTable>
-            </view>
-            
-            <!-- 页脚空白 -->
-            <view class="separator"></view>
+        <view class="page-section section-body">
+            <tableTitle title="24小时海区预报" :date="forecastdate24h" smalltext="true" />
+            <oceanTable :data="oceantable24h"></oceanTable>
         </view>
+        <!-- 表格下方空白 -->
+        <view class="separator"></view>
+    
+        <view class="page-section section-body">
+            <tableTitle title="48小时海区预报" :date="forecastdate48h" smalltext="true" />
+            <oceanTable :data="oceantable48h"></oceanTable>
+        </view>
+        <!-- 表格下方空白 -->
+        <view class="separator"></view>
+
+        <view class="page-section section-body">
+            <tableTitle title="72小时海区预报" :date="forecastdate72h" smalltext="true" />
+            <oceanTable :data="oceantable72h"></oceanTable>
+        </view>
+        
+        <!-- 页脚空白 -->
+        <view class="separator"></view>
         
     </view>
 </template>
@@ -57,10 +33,12 @@
 <script>
 import appsettings from '../../utils/appsettings.js'
 import oceanTable from '../../components/oceanTable.vue'
+import tableTitle from '../../components/tableTitle.vue'
 
 export default {
     components: {
-        oceanTable
+        oceanTable,
+        tableTitle
     },
     data () {
         return {
