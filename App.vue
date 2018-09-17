@@ -8,18 +8,6 @@
 				get() {return this.$store.state.Infos.systeminfo},
 				set(value) {this.$store.dispatch('setSystemInfo', value)}
 			},
-			// 城市选择列表
-			cityArray() { return this.$store.state.Infos.cityarray },
-			// 城市选择列表 所选index
-			cityIndex: {
-				get () { return this.$store.state.Infos.cityindex },
-				set (value) { this.$store.dispatch('setCityIndex', value) }
-			},
-			// 当前城市名称
-			cityName: {
-				get () { return this.$store.state.Datas.cityname },
-				set (value) { this.$store.dispatch('setCityName', value) }
-			},
 			// 实时天气
 			weatherData: {
 				get () {return this.$store.state.Datas.weatherdata},
@@ -192,19 +180,6 @@
 					}
 				})
 			}, // end-getLocalStorage()
-			// 根据index切换城市 允许自动定位 不写入缓存
-			switchCityByIndex(index) {
-				// 切换城市
-				utils.switchCity(this.cityArray[index], this.switchCityByName)
-			},
-			// 根据name切换城市 写入缓存
-			switchCityByName(city) {
-				// 写入Vuex和缓存
-				this.cityName = city
-				utils.storeToLocal('cityname', city)
-				// 根据城市向服务器申请数据
-				this.loadShandongData(city)
-			},
 			// 读取山东预报数据 包括天气 潮汐 近海 浴场 精细化 五日 威海专项
 			loadShandongData (cityname) {
 				let that = this
@@ -387,83 +362,10 @@
 						console.log('[服务器]: 请求 山东预报数据 失败')
 					}
 				})
-			},
-			// 根据城市设置各面板显隐
-			setPageLayout (cityname) {
-				switch (cityname) {
-					case '青岛':
-						// 显示第二个潮汐曲线
-						this.tideData.chartTideTwoShow = true
-						// 潮汐预报地区名称
-						this.tideData.chartTideOneTitle = '第一海水浴场'
-						this.tideData.chartTideTwoTitle = '金沙滩'
-						// 显示精细化
-						this.refinedData.show = true
-						// 显示第二个精细化曲线
-						this.refinedData.showTwo = true
-						// 7到9月份显示浴场预报
-						this.bathsData.showBaths = new Date().getMonth() > 5 & new Date().getMonth() < 9 ? true : false
-						// 不显示威海专项预报
-						this.weihaiData.show = false
-						break
-					case '威海':
-						// 不显示第二个潮汐曲线
-						this.tideData.chartTideTwoShow = false
-						// 潮汐预报不显示地区名称
-						this.tideData.chartTideOneTitle = ''
-						this.tideData.chartTideTwoTitle = ''
-						// 显示精细化
-						this.refinedData.show = true
-						// 不显示第二个精细化
-						this.refinedData.showTwo = false
-						// 不显示浴场预报
-						this.bathsData.showBaths = false
-						// 显示威海专项预报
-						this.weihaiData.show = true
-						this.weihaiData.first.show = true
-						this.weihaiData.second.show = true
-						this.weihaiData.third.show = true
-						this.weihaiData.fourth.show = true
-						break
-					case '滨州':
-						// 不显示第二个潮汐曲线
-						this.tideData.chartTideTwoShow = false
-						// 潮汐预报不显示地区名称
-						this.tideData.chartTideOneTitle = ''
-						this.tideData.chartTideTwoTitle = ''
-						// 不显示精细化
-						this.refinedData.show = false
-						// 不显示第二个精细化
-						this.refinedData.showTwo = false
-						// 不显示浴场预报
-						this.bathsData.showBaths = false
-						// 显示威海专项预报
-						this.weihaiData.show = false
-						break
-					default:
-						// 不显示第二个潮汐曲线
-						this.tideData.chartTideTwoShow = false
-						// 潮汐预报不显示地区名称
-						this.tideData.chartTideOneTitle = ''
-						this.tideData.chartTideTwoTitle = ''
-						// 显示精细化
-						this.refinedData.show = true
-						// 不显示第二个精细化
-						this.refinedData.showTwo = false
-						// 不显示浴场预报
-						this.bathsData.showBaths = false
-						// 显示威海专项预报
-						this.weihaiData.show = false
-						break
-				}
-			},
+			}
 		}, // end-methods
 		onLaunch: function () {
 			console.log('App Launch')
-			// uni.showLoading({
-			// 	title: '加载中',
-			// 	mask: true
-			// })
 			
 			//#ifdef APP-PLUS
 			/* 5+环境锁定屏幕方向 */
@@ -473,7 +375,7 @@
 			this.checkNetwork()
 			this.getSystemInfo()
 			this.getLocalStorage()
-			this.switchCityByIndex(this.cityIndex)
+			this.loadShandongData('青岛')
 		},
 		onShow: function () {
 			console.log('App Show')

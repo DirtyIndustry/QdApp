@@ -1,32 +1,9 @@
 <template>
-	<!-- <view style="background-image: url(../../static/Images/back_images.jpg); background-repeat: no-repeat; background-size: contain; background-attachment: scroll;"> -->
+	<!-- <view style="background-image: url(../../static/Images/back_images.png); background-repeat: no-repeat; background-size: contain; background-attachment: scroll;"> -->
 	<view>
-		<myPicker ref="citypicker" :items="cityArray" @itemSelected="mypickerSelect"></myPicker>
 		<view class="page-body">
-			<image src="../../static/Images/back_images.jpg" mode="aspectFill" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: -1;" />
-			<!-- 地区选择模块 -->
-			<!-- #ifdef MP-WEIXIN -->
-			<view style="position: fixed; width: 100%; left: 0; opacity: 0.9; z-index: 9;">
-				<!-- 布局右侧宽度固定，左侧自适应 -->
-				<view class="container section-body">
-					<view class="main text-large text-bold text-blue">
-						{{cityName}}地区预报
-					</view>
-					<view class="sidebar">
-						<!-- 切换城市按钮 -->
-						<picker class="city-picker" @change="bindPickerChange" :value="cityIndex" :range="cityArray">
-							<view class="sidebar-cell">切换城市</view>
-						</picker>
-					</view>
-				</view>
-			</view>
-			<!-- 占位空白模块 -->
-			<view style="height: 100px;" />
-			<!-- #endif -->
-			<!-- #ifdef APP-PLUS -->
-			<view class="page-section header text-large text-bold text-blue">{{cityName}}地区预报</view>
-			<view style="height: 20px;" />
-			<!-- #endif -->
+			<image src="../../static/Images/back_images.png" mode="aspectFill" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: -1;" />
+			
 			<!-- 潮汐预报模块 -->
 			<view class="page-section section-body">
 				<tableTitle title="潮汐预报" icon="../../static/Images/top_left_img_new.png" />
@@ -312,18 +289,6 @@
 		computed: {
 			// 系统信息
 			systemInfo() { return this.$store.state.Infos.systeminfo },
-			// 城市选择列表
-			cityArray() { return this.$store.state.Infos.cityarray },
-			// 城市选择列表 所选index
-			cityIndex: {
-				get() { return this.$store.state.Infos.cityindex },
-				set(value) { this.$store.dispatch('setCityIndex', value) }
-			},
-			// 当前城市名称
-			cityName: {
-				get() { return this.$store.state.Datas.cityname },
-				set(value) { this.$store.dispatch('setCityName', value) }
-			},
 			// 实时天气
 			weatherData: {
 				get() { return this.$store.state.Datas.weatherdata },
@@ -372,41 +337,10 @@
 			weihaiDataOptionFour () { return this.$store.state.Datas.weihaidata.fourth.option }
 		},
 		methods: {
-			// 地区选择菜单操作
-			bindPickerChange: function (e) {
-				// 弹出loading toast
-				uni.showLoading({
-					title: '加载中',
-					mask: true
-				})
-				// 写入Vuex和缓存
-				this.cityIndex = e.target.value
-				utils.storeToLocal('cityindex', e.target.value)
-				this.switchCityByIndex(e.target.value)
-
-				// // 10秒后关闭toast
-				// setTimeout(function () {
-				// 	uni.hideLoading()
-				// }.bind(this), 10000)
-			},
-			// 根据index切换城市 允许自动定位 不写入缓存
-			switchCityByIndex(index) {
-				// 切换城市
-				utils.switchCity(this.cityArray[index], this.switchCityByName)
-			},
-			// 根据name切换城市 写入缓存
-			switchCityByName(city) {
-				// 写入Vuex和缓存
-				this.cityName = city
-				utils.storeToLocal('cityname', city)
-				// 根据城市向服务器申请数据
-				this.requestData(city)
-			},
 			// 读取服务器数据
 			requestData(city) {
 				// 任务计数器归零
 				this.completedRequestCount = 0
-				this.setPageLayout(city)
 				this.setTitleDates(city)
 				this.loadShandongData(city)
 			},
@@ -600,75 +534,6 @@
 						that.completedRequestCount++
 					}
 				})
-			},
-			// 根据城市设置各面板显隐
-			setPageLayout (cityname) {
-				switch (cityname) {
-					case '青岛':
-						// 显示第二个潮汐曲线
-						this.tideData.chartTideTwoShow = true
-						// 潮汐预报地区名称
-						this.tideData.chartTideOneTitle = '第一海水浴场'
-						this.tideData.chartTideTwoTitle = '金沙滩'
-						// 显示精细化
-						this.refinedData.show = true
-						// 显示第二个精细化曲线
-						this.refinedData.showTwo = true
-						// 7到9月份显示浴场预报
-						this.bathsData.showBaths = new Date().getMonth() > 5 & new Date().getMonth() < 9 ? true : false
-						// 不显示威海专项预报
-						this.weihaiData.show = false
-						break
-					case '威海':
-						// 不显示第二个潮汐曲线
-						this.tideData.chartTideTwoShow = false
-						// 潮汐预报不显示地区名称
-						this.tideData.chartTideOneTitle = ''
-						this.tideData.chartTideTwoTitle = ''
-						// 显示精细化
-						this.refinedData.show = true
-						// 不显示第二个精细化
-						this.refinedData.showTwo = false
-						// 不显示浴场预报
-						this.bathsData.showBaths = false
-						// 显示威海专项预报
-						this.weihaiData.show = true
-						this.weihaiData.first.show = true
-						this.weihaiData.second.show = true
-						this.weihaiData.third.show = true
-						this.weihaiData.fourth.show = true
-						break
-					case '滨州':
-						// 不显示第二个潮汐曲线
-						this.tideData.chartTideTwoShow = false
-						// 潮汐预报不显示地区名称
-						this.tideData.chartTideOneTitle = ''
-						this.tideData.chartTideTwoTitle = ''
-						// 不显示精细化
-						this.refinedData.show = false
-						// 不显示第二个精细化
-						this.refinedData.showTwo = false
-						// 不显示浴场预报
-						this.bathsData.showBaths = false
-						// 显示威海专项预报
-						this.weihaiData.show = false
-						break
-					default:
-						// 不显示第二个潮汐曲线
-						this.tideData.chartTideTwoShow = false
-						// 潮汐预报不显示地区名称
-						this.tideData.chartTideOneTitle = ''
-						this.tideData.chartTideTwoTitle = ''
-						// 显示精细化
-						this.refinedData.show = true
-						// 不显示第二个精细化
-						this.refinedData.showTwo = false
-						// 不显示浴场预报
-						this.bathsData.showBaths = false
-						// 显示威海专项预报
-						this.weihaiData.show = false
-						break
-				}
 			},
 			// 根据城市名称设置近海和浴场预报表头时间
 			setTitleDates (cityname) {
@@ -880,23 +745,6 @@
 				// utils.setDateballStatus(e.detail.scrollLeft, this.systemInfo.windowWidth - 60, this.ballStatus)
 				this.setDateballStatus(e.detail.scrollLeft, this.ballStatusRefinedTwo)
 			},
-			// 自定义picker选择
-			mypickerSelect(index, item) {
-				// 弹出loading toast
-				uni.showLoading({
-					title: '加载中',
-					mask: true
-				})
-				// 写入Vuex和缓存
-				this.cityIndex = index
-				utils.storeToLocal('cityindex', index)
-				this.switchCityByIndex(index)
-
-				// // 10秒后关闭toast
-				// setTimeout(function () {
-				// 	uni.hideLoading()
-				// }.bind(this), 10000)
-			}
 		}, // end-methods
 		watch: {
 			// 完成的request
@@ -1005,27 +853,14 @@
 		},
 		mounted() {
 			console.log('cityforecast vue mounted.')
-			this.setTitleDates(this.cityName)
+			this.setTitleDates('青岛')
 			// 加载时根据当前日期设置日期球文字
             this.setDateballText()
             this.setDateballLeft()
-			// 根据index切换城市 允许自动定位 不写入缓存 
-			// this.switchCityByIndex(this.cityIndex)
-			// // 10秒后关闭toast
-			// setTimeout(function () {
-			// 	uni.hideLoading()
-			// }.bind(this), 10000)
 		},
 		onPullDownRefresh() {
 			console.log('[界面]: 城市预报 下拉刷新')
-			this.requestData(this.cityName)
-			// // 10秒后关闭提示
-			// setTimeout(function () {
-			// 	uni.stopPullDownRefresh()
-			// }.bind(this), 10000)
-		},
-		onNavigationBarButtonTap() {
-			this.$refs.citypicker.switchDialog()
+			this.requestData('青岛')
 		}
 	}
 </script>
@@ -1033,43 +868,6 @@
 <style scoped>
 	@import "../../common/FontAwesome.css";
 	@import "../../common/generic.css";
-
-	.header {
-		/* background-color: #fff; */
-		height: 80px;
-		display: flex;
-		align-items: center;
-	}
-
-	/* 微信小程序城市选择器 */
-	.container {
-		display: flex;
-		height: 80px;
-		width: 100%;
-	}
-	.main {
-		flex: 1;
-		height: 100%;
-		display: flex;
-		align-items: center;
-	}
-	.sidebar {
-		width: 150px;
-		height: 100%;
-	}
-	.city-picker {
-		height: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-	.sidebar-cell {
-		width: 100%;
-		height: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
 
 	/* 潮汐曲线容器 */
 	.chart-container {
