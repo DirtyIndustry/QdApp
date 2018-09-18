@@ -60,4 +60,5 @@ DONE... weather forecast page tableTitle styling
 DONE... ocean forecast page tableTitle styling  
 DONE... webservice  
 DONE... change px to upx  
+DONE... fix typhoon warning bug  
 realtime weather module styling  
