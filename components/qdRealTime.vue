@@ -47,7 +47,7 @@
                         <view class="cell-body">
                             <view class="cell-content text">&nbsp;{{weatherData.pm25}}</view>
                             <view class="cell-content">
-                                <view style="height: 20upx;" />
+                                <view style="height: 15upx;" />
                                 <view class="text-mini">&nbsp;μg/m³</view>
                             </view>
                         </view>

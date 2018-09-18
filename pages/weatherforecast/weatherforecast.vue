@@ -5,10 +5,12 @@
 			<image src="../../static/Images/back_images.png" mode="aspectFill" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: -1;"
 			/>
 			
+			<view class="separator" />
 			<!-- 天气预报模块 -->
 			<view class="page-section">
-				<realtimeWeather :weatherData="weatherData" />
+				<realtimeWeatherQD :weatherData="weatherData" />
 			</view>
+			<view class="separator" />
 			<!-- 五日天气预报 -->
 			<view class="page-section section-body">
 				<tableTitle title="天气预报" date="数据源: 聚合数据"/>
@@ -43,6 +45,7 @@
 	import appsettings from '../../utils/appsettings.js'
 	import utils from '../../utils/utils.js'
 	import realtimeWeather from '../../components/realtimeWeather.vue'
+	import realtimeWeatherQD from '../../components/realtimeWeatherQD.vue'
 	import tableTitle from '../../components/tableTitle.vue'
 	import * as echarts from 'echarts'
 	import mpvueEcharts from 'mpvue-echarts'
@@ -52,6 +55,7 @@
 	export default {
 		components: {
 			realtimeWeather,
+			realtimeWeatherQD,
 			tableTitle,
 			mpvueEcharts
 		},
