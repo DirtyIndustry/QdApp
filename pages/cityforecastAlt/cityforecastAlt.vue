@@ -111,98 +111,6 @@
 				</view>
 			</view>
 			<view class="separator" />
-			<!-- 威海专项预报 -->
-			<!-- <view class="page-section" v-show="weihaiData.show"> -->
-			<view class="page-section" :class="{hide: !weihaiData.show}">
-				<!-- 第一部分 -->
-				<!-- <view v-show="weihaiData.first.show"> -->
-				<view :class="{hide: !weihaiData.first.show}">
-					<tableTitle :title="weihaiData.first.REPORTAREA" icon="../../static/Images/top_left_img_newS.png" />
-					<!-- 图表部分 -->
-					<view class="section-body">
-						<view class="chart-weihai">
-							<mpvue-echarts :echarts="echarts" :onInit="handleInitWeihaiOne" canvasId="canvasIdWeihaiOne" ref="echartsRefWeihaiOne"></mpvue-echarts>
-						</view>
-						<view class="weihai-infopanel">
-							<view class="weihai-infocolumn-side" />
-							<view class="weihai-infocolumn">
-								<view class="text">水温:{{weihaiData.first.WATERTEMP}}℃</view>
-							</view>
-							<view class="weihai-infocolumn">
-								<view class="text">浪高:{{weihaiData.first.WAVEHEIGHT}}米</view>
-							</view>
-							<view class="weihai-infocolumn-side" />
-						</view>
-					</view>
-				</view>
-				<view class="separator" />
-				<!-- 第二部分 -->
-				<!-- <view v-show="weihaiData.second.show"> -->
-				<view :class="{hide: !weihaiData.second.show}">
-					<tableTitle :title="weihaiData.second.REPORTAREA" icon="../../static/Images/top_left_img_newS.png" />
-					<!-- 图表部分 -->
-					<view class="section-body">
-						<view class="chart-weihai">
-							<mpvue-echarts :echarts="echarts" :onInit="handleInitWeihaiTwo" canvasId="canvasIdWeihaiTwo" ref="echartsRefWeihaiTwo"></mpvue-echarts>
-						</view>
-						<view class="weihai-infopanel">
-							<view class="weihai-infocolumn-side" />
-							<view class="weihai-infocolumn">
-								<view class="text">水温:{{weihaiData.second.WATERTEMP}}℃</view>
-							</view>
-							<view class="weihai-infocolumn">
-								<view class="text">浪高:{{weihaiData.second.WAVEHEIGHT}}米</view>
-							</view>
-							<view class="weihai-infocolumn-side" />
-						</view>
-					</view>
-				</view>
-				<view class="separator" />
-				<!-- 第三部分 -->
-				<!-- <view v-show="weihaiData.third.show"> -->
-				<view :class="{hide: !weihaiData.third.show}">
-					<tableTitle :title="weihaiData.third.REPORTAREA" icon="../../static/Images/top_left_img_newS.png" />
-					<!-- 图表部分 -->
-					<view class="section-body">
-						<view class="chart-weihai">
-							<mpvue-echarts :echarts="echarts" :onInit="handleInitWeihaiThree" canvasId="canvasIdWeihaiThree" ref="echartsRefWeihaiThree"></mpvue-echarts>
-						</view>
-						<view class="weihai-infopanel">
-							<view class="weihai-infocolumn-side" />
-							<view class="weihai-infocolumn">
-								<view class="text">水温:{{weihaiData.third.WATERTEMP}}℃</view>
-							</view>
-							<view class="weihai-infocolumn">
-								<view class="text">浪高:{{weihaiData.third.WAVEHEIGHT}}米</view>
-							</view>
-							<view class="weihai-infocolumn-side" />
-						</view>
-					</view>
-				</view>
-				<view class="separator" />
-				<!-- 第四部分 -->
-				<!-- <view v-show="weihaiData.fourth.show"> -->
-				<view :class="{hide: !weihaiData.fourth.show}">
-					<tableTitle :title="weihaiData.fourth.REPORTAREA" icon="../../static/Images/top_left_img_newS.png" />
-					<!-- 图表部分 -->
-					<view class="section-body">
-						<view class="chart-weihai">
-							<mpvue-echarts :echarts="echarts" :onInit="handleInitWeihaiFour" canvasId="canvasIdWeihaiFour" ref="echartsRefWeihaiFour"></mpvue-echarts>
-						</view>
-						<view class="weihai-infopanel">
-							<view class="weihai-infocolumn-side" />
-							<view class="weihai-infocolumn">
-								<view class="text">水温:{{weihaiData.fourth.WATERTEMP}}℃</view>
-							</view>
-							<view class="weihai-infocolumn">
-								<view class="text">浪高:{{weihaiData.fourth.WAVEHEIGHT}}米</view>
-							</view>
-							<view class="weihai-infocolumn-side" />
-						</view>
-					</view>
-				</view>
-			</view>
-			<view class="separator" />
 		</view>
 	</view>
 </template>
@@ -220,10 +128,6 @@
 	let chartTideTwo = undefined
 	let chartRefinedOne = undefined
 	let chartRefinedTwo = undefined
-	let chartWeihaiOne = undefined
-	let chartWeihaiTwo = undefined
-	let chartWeihaiThree = undefined
-	let chartWeihaiFour = undefined
 
 	export default {
 		components: {
@@ -314,22 +218,17 @@
 				get() { return this.$store.state.Datas.fivedaydata },
 				set(value) { this.$store.dispatch('setFivedayData', value) }
 			},
-			// 威海专项
-			weihaiData: {
-				get() { return this.$store.state.Datas.weihaidata },
-				set(value) { this.$store.dispatch('setWeihaiData', value) }
+			// 青岛首页专项
+			qdOceanData: {
+				get () { return this.$store.state.Datas.qdoceandata },
+				set (value) { this.$store.dispatch('setQdOceanData', value) }
 			},
 			// 潮汐预报chart option
 			tideDataOptionOne () { return this.$store.state.Datas.tidedata.optionTideOne },
 			tideDataOptionTwo () { return this.$store.state.Datas.tidedata.optionTideTwo },
 			// 精细化预报chart option
 			refinedDataOptionOne () { return this.$store.state.Datas.refineddata.optionOne },
-			refinedDataOptionTwo () { return this.$store.state.Datas.refineddata.optionTwo },
-			// 威海专项chart option
-			weihaiDataOptionOne () { return this.$store.state.Datas.weihaidata.first.option },
-			weihaiDataOptionTwo () { return this.$store.state.Datas.weihaidata.second.option },
-			weihaiDataOptionThree () { return this.$store.state.Datas.weihaidata.third.option },
-			weihaiDataOptionFour () { return this.$store.state.Datas.weihaidata.fourth.option }
+			refinedDataOptionTwo () { return this.$store.state.Datas.refineddata.optionTwo }
 		},
 		methods: {
 			// 读取服务器数据
@@ -337,20 +236,20 @@
 				// 任务计数器归零
 				this.completedRequestCount = 0
 				this.setTitleDates(city)
-				this.loadShandongData(city)
+				this.loadQingdaoData()
 			},
-			// 读取山东预报数据 包括天气 潮汐 近海 浴场 精细化 五日 威海专项
-			loadShandongData (cityname) {
+			// 读取青岛预报数据 包括天气 潮汐 近海 浴场 精细化 五日 青岛专项
+			loadQingdaoData () {
 				let that = this
 				uni.request({
-					url: appsettings.hosturl + 'GetShandongData',
-					data: {name: 'admin', city: cityname},
+					url: appsettings.hosturl + 'GetQingdaoData',
+					data: {name: 'admin', areaflg: '青岛'},
 					method: 'POST',
 					success: function (res) {
-						console.log('[服务器]: 返回 山东预报数据')
+						console.log('[服务器]: 返回 青岛预报数据')
 						// 判断返回数据有效性
 						if (!res.data.d | res.data.d === '无权访问该接口' | res.data.d === '无该地区数据') { // 返回的值为空
-							console.log('[服务器]: 返回 山东预报数据 返回值为空')
+							console.log('[服务器]: 返回 青岛预报数据 返回值为空')
 							return false
 						}
 						res = JSON.parse(res.data.d)
@@ -361,40 +260,32 @@
 						that.weatherData.weatherIcon = utils.setWeatherIcon(res.weatherData.weather)
 						that.weatherData.pm25Style = utils.setAirconClass(res.weatherData.airconDesc)
 
+						// 青岛专项
+						that.qdOceanData = res.qdOceanData
+
 						// 潮汐预报
-						if (res.astroDatas.length > 1) {	// 如果是青岛
-							that.tideData.chartTideTwoShow = true
-							that.tideData.chartTideOneTitle = '第一海水浴场'
-							that.tideData.chartTideTwoTitle = '金沙滩'
-							for (let i = 0; i < res.astroDatas.length; i++) {
-								let tide = utils.buildTidedata(res.astroDatas[i].tidedata)
-								let mark = utils.buildMarkdata(res.astroDatas[i].markdata)
-								if (res.astroDatas[i].location === '第一海水浴场') {
-									that.tideData.optionTideOne = utils.getAstroOptionNew(tide, mark, res.astroDatas[i].max, res.astroDatas[i].min)
-								} else {
-									let optiontwo = utils.getAstroOptionNew(tide, mark, res.astroDatas[i].max, res.astroDatas[i].min)
-									optiontwo.series[0].lineStyle.color = "#0092d4"
-									that.tideData.optionTideTwo = optiontwo
-								}
-							}
-						} else {	// 如果是青岛以外的城市
-							that.tideData.chartTideTwoShow = false
-							that.tideData.chartTideOneTitle = ''
-							that.tideData.chartTideTwoTitle = ''
-							for (let i = 0; i < res.astroDatas.length; i++) {
-								let tide = utils.buildTidedata(res.astroDatas[i].tidedata)
-								let mark = utils.buildMarkdata(res.astroDatas[i].markdata)
+						that.tideData.chartTideTwoShow = true
+						that.tideData.chartTideOneTitle = '第一海水浴场'
+						that.tideData.chartTideTwoTitle = '金沙滩'
+						for (let i = 0; i < res.astroDatas.length; i++) {
+							let tide = utils.buildTidedata(res.astroDatas[i].tidedata)
+							let mark = utils.buildMarkdata(res.astroDatas[i].markdata)
+							if (res.astroDatas[i].location === '第一海水浴场') {
 								that.tideData.optionTideOne = utils.getAstroOptionNew(tide, mark, res.astroDatas[i].max, res.astroDatas[i].min)
+							} else {
+								let optiontwo = utils.getAstroOptionNew(tide, mark, res.astroDatas[i].max, res.astroDatas[i].min)
+								optiontwo.series[0].lineStyle.color = '#0092d4'
+								that.tideData.optionTideTwo = optiontwo
 							}
-						} // if-else 是否是青岛
+						}
 
 						// 近海预报
 						// 写入Vuex
 						that.inshoreData = res.inshoreData
 
 						// 浴场预报
-						// 判断月份和城市
-						if (new Date().getMonth() > 5 & new Date().getMonth() < 9 & cityname === '青岛') {
+						// 判断月份
+						if (new Date().getMonth() > 5 & new Date().getMonth() < 9) {
 							that.bathsData.showBaths = true
 						} else {
 							that.bathsData.showBaths = false
@@ -403,56 +294,31 @@
 						that.bathsData.data = res.bathsDatas
 
 						// 精细化预报
-						// 判断城市
-						if (cityname === '滨州') {
-							that.refinedData.show = false
-						} else {
-							that.refinedData.show = true
-						}
-						if (res.refinedDatas.length > 1) {	// 如果是青岛
-							that.refinedData.showTwo = true
-							for (let i = 0; i < res.refinedDatas.length; i++) {
-								let tide = utils.buildTidedata(res.refinedDatas[i].tideinfo.tidedata)
-								let mark = utils.buildMarkdata(res.refinedDatas[i].tideinfo.markdata)
-								let option = utils.getAstroOptionNew(tide, mark, res.refinedDatas[i].tideinfo.max, res.refinedDatas[i].tideinfo.min)
-								// 曲线颜色蓝色
-								option.series[0].lineStyle.color = '#0092d4'
-								// label颜色绿色
-								option.series[0].label.color = '#1c8d3b'
-								// 时间颜色红色
-								option.series[0].markLine.label.textStyle.color = 'red'
-								// 不显示日期
-								option.xAxis.axisLabel.show = false
-								// 将地名字母代号转为中文地名
-								res.refinedDatas[i].extrainfo[0].loc = utils.getLocName(res.refinedDatas[i].extrainfo[0].loc)
-								if (res.refinedDatas[i].tideinfo.location === 'DJKP') {
-									that.refinedData.optionOne = option
-									that.refinedData.dataOne = res.refinedDatas[i].extrainfo
-								} else {
-									that.refinedData.optionTwo = option
-									that.refinedData.dataTwo = res.refinedDatas[i].extrainfo
-								}
-							}
-						} else {	// 如果是青岛以外的城市
-							that.refinedData.showTwo = false
-							for (let i = 0; i < res.refinedDatas.length; i++) {
-								let tide = utils.buildTidedata(res.refinedDatas[i].tideinfo.tidedata)
-								let mark = utils.buildMarkdata(res.refinedDatas[i].tideinfo.markdata)
-								let option = utils.getAstroOptionNew(tide, mark, res.refinedDatas[i].tideinfo.max, res.refinedDatas[i].tideinfo.min)
-								// 曲线颜色蓝色
-								option.series[0].lineStyle.color = '#0092d4'
-								// label颜色绿色
-								option.series[0].label.color = '#1c8d3b'
-								// 时间颜色红色
-								option.series[0].markLine.label.textStyle.color = 'red'
-								// 不显示日期
-								option.xAxis.axisLabel.show = false
+						that.refinedData.show = true
+						that.refinedData.showTwo = true
+						for (let i = 0; i < res.refinedDatas.length; i++) {
+							let tide = utils.buildTidedata(res.refinedDatas[i].tideinfo.tidedata)
+							let mark = utils.buildMarkdata(res.refinedDatas[i].tideinfo.markdata)
+							let option = utils.getAstroOptionNew(tide, mark, res.refinedDatas[i].tideinfo.max, res.refinedDatas[i].tideinfo.min)
+							// 曲线颜色蓝色
+							option.series[0].lineStyle.color = '#0092d4'
+							// label颜色绿色
+							option.series[0].label.color = '#1c8d3b'
+							// 时间颜色红色
+							option.series[0].markLine.label.textStyle.color = 'red'
+							// 不显示日期
+							option.xAxis.axisLabel.show = false
+							// 将地名字母代号转为中文地名
+							res.refinedDatas[i].extrainfo[0].loc = utils.getLocName(res.refinedDatas[i].extrainfo[0].loc)
+							if (res.refinedDatas[i].tideinfo.location === 'DJKP') {
 								that.refinedData.optionOne = option
-								// 将地名字母代号转为中文地名
-								res.refinedDatas[i].extrainfo[0].loc = utils.getLocName(res.refinedDatas[i].extrainfo[0].loc)
 								that.refinedData.dataOne = res.refinedDatas[i].extrainfo
+							} else {
+								that.refinedData.optionTwo = option
+								that.refinedData.dataTwo = res.refinedDatas[i].extrainfo
 							}
 						}
+						
 
 						// 五日天气预报
 						let fivedayData = {
@@ -465,52 +331,6 @@
 						// 写入Vuex
 						that.fivedayData = fivedayData
 
-						// 威海专项
-						// 判断城市
-						if (res.weihaiDatas.length > 0) {	// 如果是威海
-							that.weihaiData.show = true
-							that.weihaiData.first.show = true
-							that.weihaiData.second.show = true
-							that.weihaiData.third.show = true
-							that.weihaiData.fourth.show = true
-							for (let i = 0; i < res.weihaiDatas.length; i++) {
-								let data = {
-									show: res.weihaiDatas[i].show,
-									REPORTAREA: res.weihaiDatas[i].REPORTAREA,
-									FORECASTDATE: res.weihaiDatas[i].FORECASTDATE,
-									WAVEHEIGHT: res.weihaiDatas[i].WAVEHEIGHT,
-									WATERTEMP: res.weihaiDatas[i].WATERTEMP,
-								}
-								let tide = utils.buildTidedata(res.weihaiDatas[i].tideinfo.tidedata)
-								let mark = utils.buildMarkdata(res.weihaiDatas[i].tideinfo.markdata)
-								data.option = utils.getAstroOptionNew(tide, mark, res.weihaiDatas[i].tideinfo.max, res.weihaiDatas[i].tideinfo.min)
-								data.option.grid = {
-									top: '4%',
-									left: '-3%',
-									right: '5%',
-									bottom: '20%',
-									containLabel: true
-								}
-								switch (res.weihaiDatas[i].REPORTAREA) {
-									case '成山头':
-										that.weihaiData.first = data
-										break
-									case '乳山':
-										that.weihaiData.second = data
-										break
-									case '石岛':
-										that.weihaiData.third = data
-										break
-									case '文登':
-										that.weihaiData.fourth = data
-										break
-									default:
-										break
-								}
-							} // end-for res.weihaiDatas
-						} else {	// 如果是威海以外的城市
-							that.weihaiData.show = false
-						}
 						// 写入本地缓存
 						utils.storeToLocal('weatherdata', JSON.stringify(res.weatherData))
 						utils.storeToLocal('tidedata', JSON.stringify(that.tideData))
@@ -518,15 +338,10 @@
 						utils.storeToLocal('bathsdata', JSON.stringify(that.bathsData))
 						utils.storeToLocal('refineddata', JSON.stringify(that.refinedData))
 						utils.storeToLocal('fivedaydata', JSON.stringify(fivedayData))
-						utils.storeToLocal('weihaidata', JSON.stringify(that.weihaiData))
-
+						utils.storeToLocal('qdoceandata', JSON.stringify(res.qdOceanData))
 					}, // success-request
 					fail: function (res) {
 						console.log('[服务器]: 请求 山东预报数据 失败')
-						that.completedRequestCount++
-					},
-					complete: function (res) {
-						that.completedRequestCount++
 					}
 				})
 			},
@@ -590,46 +405,6 @@
 				canvas.setChart(chartRefinedTwo)
 				chartRefinedTwo.setOption(this.refinedData.optionTwo, true)
 				return chartRefinedTwo
-			},
-			// 初始化威海专项图表一
-			handleInitWeihaiOne(canvas, width, height) {
-				chartWeihaiOne = echarts.init(canvas, null, {
-					width: width,
-					height: height
-				})
-				canvas.setChart(chartWeihaiOne)
-				chartWeihaiOne.setOption(this.weihaiData.first.option, true)
-				return chartWeihaiOne
-			},
-			// 初始化威海专项图表二
-			handleInitWeihaiTwo(canvas, width, height) {
-				chartWeihaiTwo = echarts.init(canvas, null, {
-					width: width,
-					height: height
-				})
-				canvas.setChart(chartWeihaiTwo)
-				chartWeihaiTwo.setOption(this.weihaiData.second.option, true)
-				return chartWeihaiTwo
-			},
-			// 初始化威海专项图表三
-			handleInitWeihaiThree(canvas, width, height) {
-				chartWeihaiThree = echarts.init(canvas, null, {
-					width: width,
-					height: height
-				})
-				canvas.setChart(chartWeihaiThree)
-				chartWeihaiThree.setOption(this.weihaiData.third.option, true)
-				return chartWeihaiThree
-			},
-			// 初始化威海专项图表四
-			handleInitWeihaiFour(canvas, width, height) {
-				chartWeihaiFour = echarts.init(canvas, null, {
-					width: width,
-					height: height
-				})
-				canvas.setChart(chartWeihaiFour)
-				chartWeihaiFour.setOption(this.weihaiData.fourth.option, true)
-				return chartWeihaiFour
 			},
 			// 设置曲线图下方日期球的日期
 			setDateballText() {
@@ -794,50 +569,6 @@
 						}
 					}
 				}
-			},
-			// 威海专项第一个chart更新
-			weihaiDataOptionOne: {
-				handler (newVal, oldVal) {
-					if (chartWeihaiOne !== undefined) {
-						if (newVal) {
-							// chartWeihaiOne.setOption(newVal, true)
-							this.$refs.echartsRefWeihaiOne.init()
-						}
-					}
-				}
-			},
-			// 威海专项第二个chart更新
-			weihaiDataOptionTwo: {
-				handler (newVal, oldVal) {
-					if (chartWeihaiTwo !== undefined) {
-						if (newVal) {
-							// chartWeihaiTwo.setOption(newVal, true)
-							this.$refs.echartsRefWeihaiTwo.init()
-						}
-					}
-				}
-			},
-			// 威海专项第三个chart更新
-			weihaiDataOptionThree: {
-				handler (newVal, oldVal) {
-					if (chartWeihaiThree !== undefined) {
-						if (newVal) {
-							// chartWeihaiThree.setOption(newVal, true)
-							this.$refs.echartsRefWeihaiThree.init()
-						}
-					}
-				}
-			},
-			// 威海专项第四个chart更新
-			weihaiDataOptionFour: {
-				handler (newVal, oldVal) {
-					if (chartWeihaiFour !== undefined) {
-						if (newVal) {
-							// chartWeihaiFour.setOption(newVal, true)
-							this.$refs.echartsRefWeihaiFour.init()
-						}
-					}
-				}
 			}
 		},
 		onLoad() {
@@ -954,34 +685,6 @@
 	/* 左边的列 文字水平靠右 */
 	.infocolumn-left {
 		text-align: right;
-	}
-
-	/* 威海专项图表 */
-	.chart-weihai {
-		width: 100%;
-		height: 250upx;
-	}
-
-	/* 威海专项 图表下信息面板 */
-	.weihai-infopanel {
-		width: 100%;
-		height: 50upx;
-		display: flex;
-		flex-direction: row;
-		flex-wrap: nowrap;
-	}
-
-	/* 威海专项 信息面板的列 */
-	.weihai-infocolumn {
-		flex: 2;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	/* 威海专项 信息面板两侧留白列 */
-	.weihai-infocolumn-side {
-		flex: 1;
 	}
 
 	/* 潮汐曲线上左右箭头 */

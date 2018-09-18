@@ -61,4 +61,15 @@ DONE... ocean forecast page tableTitle styling
 DONE... webservice  
 DONE... change px to upx  
 DONE... fix typhoon warning bug  
+DONE... create qdoceandata in vuex  
+DONE... create computed qdoceandata in App.vue  
+DONE... create computed qdoceandata in index page  
+DONE... create computed qdoceandata in city forecast page  
+DONE... create computed qdoceandata in weather forecast page  
+DONE... App.vue load local storage qdoceandata  
+DONE... setting page clear cache qdoceandata  
+DONE... apply new webservice to App.vue  
+DONE... apply new webservice to index page  
+DONE... apply new webservice to city forecast page  
+DONE... apply new webservice to weather forecast page  
 realtime weather module styling  

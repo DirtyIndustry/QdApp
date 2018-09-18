@@ -200,41 +200,12 @@ var state = {
         ],
         optionFiveday: {}   // 五日高低温图表option
     },
-    // 威海专项预报
-    weihaidata: {
-        show: false,
-        first: {
-            show: false,
-            FORECASTDATE: '',
-            REPORTAREA: '',
-            WAVEHEIGHT: '',
-            WATERTEMP: '',
-            option: {}
-        },
-        second: {
-            show: false,
-            FORECASTDATE: '',
-            REPORTAREA: '',
-            WAVEHEIGHT: '',
-            WATERTEMP: '',
-            option: {}
-        },
-        third: {
-            show: false,
-            FORECASTDATE: '',
-            REPORTAREA: '',
-            WAVEHEIGHT: '',
-            WATERTEMP: '',
-            option: {}
-        },
-        fourth: {
-            show: false,
-            FORECASTDATE: '',
-            REPORTAREA: '',
-            WAVEHEIGHT: '',
-            WATERTEMP: '',
-            option: {}
-        }
+    // 青岛首页专项
+    qdoceandata: {
+        wave: '',
+        temp: '',
+        tidehigh: '',
+        tidelow: ''
     }
 }
 
@@ -257,8 +228,8 @@ const mutations = {
     setfiveday (state, value) {
         state.fivedaydata = value
     },
-    setweihai (state, value) {
-        state.weihaidata = value
+    setqdocean (state, value) {
+        state.qdoceandata = value
     }
 }
 
@@ -281,8 +252,8 @@ const actions = {
     setFivedayData (context, fivedaydata) {
         context.commit('setfiveday', fivedaydata)
     },
-    setWeihaiData (context, weihaidata) {
-        context.commit('setweihai', weihaidata)
+    setQdOceanData (context, qdoceandata) {
+        context.commit('setqdocean', qdoceandata)
     }
 }
 

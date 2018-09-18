@@ -126,7 +126,7 @@
 					uni.removeStorageSync('bathsdata')
 					uni.removeStorageSync('refineddata')
 					uni.removeStorageSync('fivedaydata')
-					uni.removeStorageSync('weihaidata')
+					uni.removeStorageSync('qdoceandata')
 				} catch (e) {
 					console.log('[缓存]: 删除键值出错')
 					console.log(JSON.stringify(e))

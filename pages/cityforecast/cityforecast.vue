@@ -139,98 +139,6 @@
 				</view>
 			</view>
 			<view class="separator" />
-			<!-- 威海专项预报 -->
-			<!-- <view class="page-section" v-show="weihaiData.show"> -->
-			<view class="page-section" :class="{hide: !weihaiData.show}">
-				<!-- 第一部分 -->
-				<!-- <view v-show="weihaiData.first.show"> -->
-				<view :class="{hide: !weihaiData.first.show}">
-					<tableTitle :title="weihaiData.first.REPORTAREA" icon="../../static/Images/top_left_img_newS.png" />
-					<!-- 图表部分 -->
-					<view class="section-body">
-						<view class="chart-weihai">
-							<mpvue-echarts :echarts="echarts" :onInit="handleInitWeihaiOne" canvasId="canvasIdWeihaiOne" ref="echartsRefWeihaiOne"></mpvue-echarts>
-						</view>
-						<view class="weihai-infopanel">
-							<view class="weihai-infocolumn-side" />
-							<view class="weihai-infocolumn">
-								<view class="text">水温:{{weihaiData.first.WATERTEMP}}℃</view>
-							</view>
-							<view class="weihai-infocolumn">
-								<view class="text">浪高:{{weihaiData.first.WAVEHEIGHT}}米</view>
-							</view>
-							<view class="weihai-infocolumn-side" />
-						</view>
-					</view>
-				</view>
-				<view class="separator" />
-				<!-- 第二部分 -->
-				<!-- <view v-show="weihaiData.second.show"> -->
-				<view :class="{hide: !weihaiData.second.show}">
-					<tableTitle :title="weihaiData.second.REPORTAREA" icon="../../static/Images/top_left_img_newS.png" />
-					<!-- 图表部分 -->
-					<view class="section-body">
-						<view class="chart-weihai">
-							<mpvue-echarts :echarts="echarts" :onInit="handleInitWeihaiTwo" canvasId="canvasIdWeihaiTwo" ref="echartsRefWeihaiTwo"></mpvue-echarts>
-						</view>
-						<view class="weihai-infopanel">
-							<view class="weihai-infocolumn-side" />
-							<view class="weihai-infocolumn">
-								<view class="text">水温:{{weihaiData.second.WATERTEMP}}℃</view>
-							</view>
-							<view class="weihai-infocolumn">
-								<view class="text">浪高:{{weihaiData.second.WAVEHEIGHT}}米</view>
-							</view>
-							<view class="weihai-infocolumn-side" />
-						</view>
-					</view>
-				</view>
-				<view class="separator" />
-				<!-- 第三部分 -->
-				<!-- <view v-show="weihaiData.third.show"> -->
-				<view :class="{hide: !weihaiData.third.show}">
-					<tableTitle :title="weihaiData.third.REPORTAREA" icon="../../static/Images/top_left_img_newS.png" />
-					<!-- 图表部分 -->
-					<view class="section-body">
-						<view class="chart-weihai">
-							<mpvue-echarts :echarts="echarts" :onInit="handleInitWeihaiThree" canvasId="canvasIdWeihaiThree" ref="echartsRefWeihaiThree"></mpvue-echarts>
-						</view>
-						<view class="weihai-infopanel">
-							<view class="weihai-infocolumn-side" />
-							<view class="weihai-infocolumn">
-								<view class="text">水温:{{weihaiData.third.WATERTEMP}}℃</view>
-							</view>
-							<view class="weihai-infocolumn">
-								<view class="text">浪高:{{weihaiData.third.WAVEHEIGHT}}米</view>
-							</view>
-							<view class="weihai-infocolumn-side" />
-						</view>
-					</view>
-				</view>
-				<view class="separator" />
-				<!-- 第四部分 -->
-				<!-- <view v-show="weihaiData.fourth.show"> -->
-				<view :class="{hide: !weihaiData.fourth.show}">
-					<tableTitle :title="weihaiData.fourth.REPORTAREA" icon="../../static/Images/top_left_img_newS.png" />
-					<!-- 图表部分 -->
-					<view class="section-body">
-						<view class="chart-weihai">
-							<mpvue-echarts :echarts="echarts" :onInit="handleInitWeihaiFour" canvasId="canvasIdWeihaiFour" ref="echartsRefWeihaiFour"></mpvue-echarts>
-						</view>
-						<view class="weihai-infopanel">
-							<view class="weihai-infocolumn-side" />
-							<view class="weihai-infocolumn">
-								<view class="text">水温:{{weihaiData.fourth.WATERTEMP}}℃</view>
-							</view>
-							<view class="weihai-infocolumn">
-								<view class="text">浪高:{{weihaiData.fourth.WAVEHEIGHT}}米</view>
-							</view>
-							<view class="weihai-infocolumn-side" />
-						</view>
-					</view>
-				</view>
-			</view>
-			<view class="separator" />
 		</view>
 	</view>
 </template>
@@ -249,10 +157,6 @@
 	let chartTideTwo = undefined
 	let chartRefinedOne = undefined
 	let chartRefinedTwo = undefined
-	let chartWeihaiOne = undefined
-	let chartWeihaiTwo = undefined
-	let chartWeihaiThree = undefined
-	let chartWeihaiFour = undefined
 
 	export default {
 		components: {
@@ -352,12 +256,7 @@
 			tideDataOptionTwo () { return this.$store.state.Datas.tidedata.optionTideTwo },
 			// 精细化预报chart option
 			refinedDataOptionOne () { return this.$store.state.Datas.refineddata.optionOne },
-			refinedDataOptionTwo () { return this.$store.state.Datas.refineddata.optionTwo },
-			// 威海专项chart option
-			weihaiDataOptionOne () { return this.$store.state.Datas.weihaidata.first.option },
-			weihaiDataOptionTwo () { return this.$store.state.Datas.weihaidata.second.option },
-			weihaiDataOptionThree () { return this.$store.state.Datas.weihaidata.third.option },
-			weihaiDataOptionFour () { return this.$store.state.Datas.weihaidata.fourth.option }
+			refinedDataOptionTwo () { return this.$store.state.Datas.refineddata.optionTwo }
 		},
 		methods: {
 			// 地区选择菜单操作
@@ -700,46 +599,6 @@
 				chartRefinedTwo.setOption(this.refinedData.optionTwo, true)
 				return chartRefinedTwo
 			},
-			// 初始化威海专项图表一
-			handleInitWeihaiOne(canvas, width, height) {
-				chartWeihaiOne = echarts.init(canvas, null, {
-					width: width,
-					height: height
-				})
-				canvas.setChart(chartWeihaiOne)
-				chartWeihaiOne.setOption(this.weihaiData.first.option, true)
-				return chartWeihaiOne
-			},
-			// 初始化威海专项图表二
-			handleInitWeihaiTwo(canvas, width, height) {
-				chartWeihaiTwo = echarts.init(canvas, null, {
-					width: width,
-					height: height
-				})
-				canvas.setChart(chartWeihaiTwo)
-				chartWeihaiTwo.setOption(this.weihaiData.second.option, true)
-				return chartWeihaiTwo
-			},
-			// 初始化威海专项图表三
-			handleInitWeihaiThree(canvas, width, height) {
-				chartWeihaiThree = echarts.init(canvas, null, {
-					width: width,
-					height: height
-				})
-				canvas.setChart(chartWeihaiThree)
-				chartWeihaiThree.setOption(this.weihaiData.third.option, true)
-				return chartWeihaiThree
-			},
-			// 初始化威海专项图表四
-			handleInitWeihaiFour(canvas, width, height) {
-				chartWeihaiFour = echarts.init(canvas, null, {
-					width: width,
-					height: height
-				})
-				canvas.setChart(chartWeihaiFour)
-				chartWeihaiFour.setOption(this.weihaiData.fourth.option, true)
-				return chartWeihaiFour
-			},
 			// 设置曲线图下方日期球的日期
 			setDateballText() {
 				let now = new Date()
@@ -905,50 +764,6 @@
 						}
 					}
 				}
-			},
-			// 威海专项第一个chart更新
-			weihaiDataOptionOne: {
-				handler (newVal, oldVal) {
-					if (chartWeihaiOne !== undefined) {
-						if (newVal) {
-							chartWeihaiOne.setOption(newVal, true)
-							// this.$refs.echartsRefWeihaiOne.init()
-						}
-					}
-				}
-			},
-			// 威海专项第二个chart更新
-			weihaiDataOptionTwo: {
-				handler (newVal, oldVal) {
-					if (chartWeihaiTwo !== undefined) {
-						if (newVal) {
-							chartWeihaiTwo.setOption(newVal, true)
-							// this.$refs.echartsRefWeihaiTwo.init()
-						}
-					}
-				}
-			},
-			// 威海专项第三个chart更新
-			weihaiDataOptionThree: {
-				handler (newVal, oldVal) {
-					if (chartWeihaiThree !== undefined) {
-						if (newVal) {
-							chartWeihaiThree.setOption(newVal, true)
-							// this.$refs.echartsRefWeihaiThree.init()
-						}
-					}
-				}
-			},
-			// 威海专项第四个chart更新
-			weihaiDataOptionFour: {
-				handler (newVal, oldVal) {
-					if (chartWeihaiFour !== undefined) {
-						if (newVal) {
-							chartWeihaiFour.setOption(newVal, true)
-							// this.$refs.echartsRefWeihaiFour.init()
-						}
-					}
-				}
 			}
 		},
 		onLoad() {
@@ -962,20 +777,10 @@
 			this.setTitleDates(this.cityName)
 			// 加载时根据当前日期设置日期球文字
 			this.setDateballText()
-			// 根据index切换城市 允许自动定位 不写入缓存 
-			// this.switchCityByIndex(this.cityIndex)
-			// // 10秒后关闭toast
-			// setTimeout(function () {
-			// 	uni.hideLoading()
-			// }.bind(this), 10000)
 		},
 		onPullDownRefresh() {
 			console.log('[界面]: 城市预报 下拉刷新')
 			this.requestData(this.cityName)
-			// // 10秒后关闭提示
-			// setTimeout(function () {
-			// 	uni.stopPullDownRefresh()
-			// }.bind(this), 10000)
 		},
 		onNavigationBarButtonTap() {
 			this.$refs.citypicker.switchDialog()
