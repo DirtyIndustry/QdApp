@@ -30,6 +30,12 @@
 .text-large {
     font-size: 37upx;
 }
+.text-XL {
+    font-size: 47upx;
+}
+.text-XXL {
+    font-size: 57upx;
+}
 .text-bold {
     font-weight: bold;
 }

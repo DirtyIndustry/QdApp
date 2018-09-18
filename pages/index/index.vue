@@ -3,10 +3,11 @@
 	<view>
 		<view class="page-body">
 			<image src="../../static/Images/back_images.png" mode="aspectFill" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: -1;" />
-			
+			<view class="separator" />
 			<!-- 天气预报模块 -->
 			<view class="page-section">
-				<realtimeWeather :weatherData="weatherData" />
+				<!-- <realtimeWeather :weatherData="weatherData" /> -->
+				<qdRealTime :weatherData="weatherData" :qdOceanData="qdOceanData" />
 			</view>
 			<view class="separator" />
 			<!-- 警报模块 -->
@@ -81,6 +82,7 @@
 	import utils from '../../utils/utils.js'
 	import myChart from '../../components/myChart.vue'
 	import realtimeWeather from '../../components/realtimeWeather.vue'
+	import qdRealTime from '../../components/qdRealTime.vue'
 	import warningSection from '../../components/warningSection.vue'
 	import fivedayForcast from '../../components/fivedayForcast.vue'
 	import inshoreTableNew from '../../components/inshoreTableNew.vue'
@@ -93,6 +95,7 @@
 		components: {
 			myChart,
 			realtimeWeather,
+			qdRealTime,
 			warningSection,
 			fivedayForcast,
 			inshoreTableNew,
@@ -317,6 +320,9 @@
 					}, // success-request
 					fail: function (res) {
 						console.log('[服务器]: 请求 山东预报数据 失败')
+					},
+					complete: function (res) {
+						that.completedRequestCount++
 					}
 				})
 			},
