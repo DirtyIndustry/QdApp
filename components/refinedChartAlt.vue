@@ -222,7 +222,7 @@
         position: relative;
         width: 95%;
         left: 2.5%;
-        border-bottom: 1px solid #666;
+        border-bottom: 1upx solid #666;
     }
 
     /* 日期球的外观样式 */

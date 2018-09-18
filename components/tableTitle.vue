@@ -86,7 +86,7 @@ export default {
 .ball {
     width: 25upx;
     height: 25upx;
-    border: 1px solid #000;
+    border: 1upx solid #000;
     border-radius: 20upx;
     background-color: #c6830d;
 }

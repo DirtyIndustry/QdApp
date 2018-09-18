@@ -76,7 +76,7 @@
                 imgindex: 0,
                 isPlaying: false,
                 isButtonHide: false,
-                viewHeight: '538px',
+                viewHeight: '538upx',
                 btnTimer: undefined,
                 playbtnclick: false,
                 nextbtnclick: false,
@@ -283,7 +283,6 @@
     }
 
     .btn_box {
-        /* border: 1px solid #000; */
         width: 70%;
         left: 15%;
         bottom: 160upx;

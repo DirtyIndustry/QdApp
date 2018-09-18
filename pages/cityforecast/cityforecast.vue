@@ -1034,7 +1034,7 @@
 		position: relative;
         width: 95%;
 		left: 2.5%;
-        border-bottom: 1px solid #666;
+        border-bottom: 1upx solid #666;
 	}
 
 	/* 潮汐预报曲线图的容器 必须设置宽度和高度 */

@@ -85,7 +85,7 @@
     .list-body {
         border-radius: 15upx;
         background-color: rgba(250, 250, 250, 0.8);
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0 20upx rgba(0, 0, 0, 0.5);
     }
 
     /* 列表行 */
@@ -98,7 +98,7 @@
 
     /* 列表中的横分隔线 */
     .border-top {
-        border-top: 1px solid #999;
+        border-top: 1upx solid #999;
     }
 
     /* 左边显示icon的单元格 */

@@ -139,39 +139,5 @@ export default {
         flex-direction: row;
     }
 
-    /* 标题部分容器 */
-    .title-section {
-        border-bottom: 1px solid #666;
-        height: 80px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /* 标题图标+渔场预报字样 */
-    .title {
-        /* border: 1px solid #f00; */
-        flex: 3;
-        height: 60px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /* 标题图标 */
-    .title-icon {
-        width: 60px;
-        height: 60px;
-    }
-
-    /* 标题日期 */
-    .date {
-        /* border: 1px solid #000; */
-        flex: 5;
-        height: 80px;
-        line-height: 125px;
-        text-align: right;
-    }
-
 </style>
 

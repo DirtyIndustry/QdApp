@@ -73,7 +73,7 @@ export default {
         return {
             sideButtonWidth: 0, // 两侧按钮的宽度
             midButtonWidth: 0,  // 中间按钮的宽度
-            rightTabbarRight: '1px',    // 右按钮组的右边距
+            rightTabbarRight: '1upx',    // 右按钮组的右边距
             leftTabWidth: '6%',         // 左tabbar宽度
             rightTabWidth: '64%',       // 右tabbar宽度
             leftMarkerWidth: '8%',      // 左指示器宽度
@@ -108,9 +108,9 @@ export default {
             // console.log(this.systemInfo.system)
             // console.log(this.systemInfo.platform)
             if (this.systemInfo.platform === 'android') {
-                this.rightTabbarRight = '1px'
+                this.rightTabbarRight = '1upx'
             } else {
-                this.rightTabbarRight = '0px'
+                this.rightTabbarRight = '0'
             }
         },
         // 将tab选择状态发送出去
@@ -168,7 +168,7 @@ export default {
 .tabbar {
     background-color: #fff;
     top: 0;
-    height: 120px;
+    height: 120upx;
     position: absolute;
     overflow: hidden;
     display: flex;
@@ -196,12 +196,12 @@ export default {
     flex-direction: row;
     left: 0;
     z-index: 4;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 0upx 2upx 10upx rgba(0, 0, 0, 0.4);
 }
 
 /* 按钮组中的按钮 */
 .tabbar-button {
-    height: 120px;
+    height: 120upx;
     display: flex;
     flex-shrink: 0;
     align-items: center;
@@ -220,15 +220,15 @@ export default {
 /* 按钮内层容器 */
 .button-inner {
     width: 100%;
-    height: 80px;
+    height: 80upx;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 /* 中间按钮内层容器 */
 .border-inner-middle {
-    border-left: 1px solid #999999;
-    border-right: 1px solid #999999;
+    border-left: 1upx solid #999999;
+    border-right: 1upx solid #999999;
 }
 /* 背景按钮组 按钮内层容器 */
 .button-inner-background {
@@ -238,8 +238,8 @@ export default {
 /* 下方蓝色指示器 */
 .marker {
     position: absolute;
-    top: 120px;
-    height: 5px;
+    top: 120upx;
+    height: 5upx;
     overflow: hidden;
     display: flex;
     flex-shrink: 0;

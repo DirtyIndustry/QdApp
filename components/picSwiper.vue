@@ -76,7 +76,7 @@
                 imgindex: 0,
                 isPlaying: false,
                 isButtonHide: false,
-                viewHeight: '538px',
+                viewHeight: '538upx',
                 btnTimer: undefined
             }
         },

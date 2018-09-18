@@ -69,7 +69,7 @@ export default {
 <style scoped>
 @import "../common/generic.css";
 .warning-section {
-    border: 1px solid #999;
+    border: 1upx solid #999;
     height: 60upx;
     position: relative;
     overflow: hidden;
@@ -100,7 +100,7 @@ export default {
     justify-content: center;
 }
 .warning-header-text {
-    border: 1px solid #000;
+    border: 1upx solid #000;
     border-radius: 10upx;
     height: 38upx;
     display: flex;

@@ -197,34 +197,34 @@ export default {
         position: relative;
     }
     .button-container {
-        width: 300px;
-        height: 100px;
+        width: 300upx;
+        height: 100upx;
         position: relative;
     }
     .menu-button {
         width: 100%;
-        height: 90px;
+        height: 90upx;
         display: flex;
         align-items: center;
         justify-content: center;
-        border: 1px solid #373737;
+        border: 1upx solid #373737;
         z-index: 3;
     }
     .button-shadow {
         position: absolute;
-        top: 10px;
-        left: 2px;
-        width: calc(100% - 7px);
-        height: 90px;
-        background:repeating-linear-gradient(60deg,#fb3, #fb3 2px, rgba(255, 255, 255, 0.4) 0,rgba(255, 255, 255, 0.4) 10px);
-        border: 1px solid #fb3;
-        border-radius: 10px;
+        top: 10upx;
+        left: 2upx;
+        width: calc(100% - 5upx);
+        height: 90upx;
+        background:repeating-linear-gradient(60deg,#fb3, #fb3 2upx, rgba(255, 255, 255, 0.4) 0,rgba(255, 255, 255, 0.4) 10upx);
+        border: 1upx solid #fb3;
+        border-radius: 10upx;
         z-index: 2;
     }
 
     .menu-button-icon {
-        width: 50px;
-        height: 50px;
+        width: 50upx;
+        height: 50upx;
     }
 
 </style>

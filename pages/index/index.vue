@@ -60,7 +60,7 @@
 			<view class="page-section section-body">
 				<refinedChartAlt :option="refinedData.optionOne" :data="refinedData.dataOne" canvasId="refinedOne" />
 				<!-- 两个图表之间的空白 -->
-				<view style="height: 60px" v-if="refinedData.showTwo" />
+				<view style="height: 60upx" v-if="refinedData.showTwo" />
 				<view v-show="refinedData.showTwo">
 					<refinedChartAlt :option="refinedData.optionTwo" :data="refinedData.dataTwo" canvasId="refinedTwo" />
 				</view>
@@ -509,19 +509,19 @@
 	/* 潮汐预报曲线图的容器 必须设置宽度和高度 */
 	.chart-tide {
 		width: 290%;
-		height: 250px;
+		height: 250upx;
 	}
 	/* 潮汐曲线上方的地名 */
 	.chart-title {
 		position: relative;
         width: 95%;
 		left: 2.5%;
-        border-bottom: 1px solid #666;
+        border-bottom: 1upx solid #666;
 	}
 	/* 潮汐曲线上左右箭头 */
 	.chevron {
 		position: absolute;
-		bottom: 125px;
+		bottom: 125upx;
 		color: #666;
 	}
 	.chevron-right {

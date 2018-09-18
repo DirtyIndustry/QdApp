@@ -22,7 +22,7 @@
 							<view class="flex-cell-single">{{item.date}}</view>
 							<view class="flex-cell-single">{{item.weather}}</view>
 							<view class="flex-cell-single">
-								<image :src="item.weatherIcon" mode="widthFix" style="width: 50px; height: 50px" />
+								<image :src="item.weatherIcon" mode="widthFix" style="width: 50upx; height: 50upx" />
 							</view>
 							<view class="flex-cell-quad"> </view>
 							<view class="flex-cell-single">{{item.windDir}}</view>
@@ -348,8 +348,8 @@
 	/* 潮汐预报曲线图的容器 必须设置宽度和高度 */
 	.chart-tide {
 		width: 290%;
-		height: 250px;
-		border: 1px solid #000;
+		height: 250upx;
+		border: 1upx solid #000;
 	}
 
 	.uni-flex {
@@ -373,12 +373,12 @@
 	/* 5日天气预报的列 */
 	.fiveday-column {
 		flex: 1;
-		height: 600px;
+		height: 600upx;
 	}
 
 	/* 5日天气预报非最右边的列 添加右边框 */
 	.fiveday-column-left {
-		border-right: 1px solid #000000;
+		border-right: 1upx solid #000000;
 	}
 
 	/* 5日天气预报中每列中的单元格 */
@@ -397,9 +397,8 @@
 	/* 五日天气预报气温图表 */
 	.chart-fiveday {
 		width: 100%;
-		height: 235px;
-		/* margin-top: -360px; */
-		top: 240px;
+		height: 235upx;
+		top: 240upx;
 		position: absolute;
 	}
 </style>

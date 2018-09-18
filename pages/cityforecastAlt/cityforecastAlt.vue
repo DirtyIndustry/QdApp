@@ -78,7 +78,7 @@
 					<view v-if="ballStatusRefinedOne.chevronLeftShow" class="chevron-refined chevron-left fa fa-chevron-left" />
 				</view>
 				<!-- 两个图表之间的空白 -->
-				<view style="height: 60px" v-if="refinedData.showTwo" />
+				<view style="height: 60upx" v-if="refinedData.showTwo" />
 				<!-- <view v-if="refinedData.showTwo"> -->
 				<view :class="{hide: !refinedData.showTwo}">
 					<view class="refinedChart-body">
@@ -878,14 +878,13 @@
 		position: relative;
         width: 95%;
 		left: 2.5%;
-        border-bottom: 1px solid #666;
+        border-bottom: 1upx solid #666;
 	}
 
 	/* 潮汐预报曲线图的容器 必须设置宽度和高度 */
 	.chart-tide {
 		width: 290%;
-		height: 250px;
-		/* border: 1px solid #000; */
+		height: 250upx;
 	}
 
 	/* 整个精细化组件的容器 */
@@ -896,18 +895,18 @@
 	/* 曲线图的容器 必须设置宽度和高度 */
 	.chart-refined {
 		width: 290%;
-		height: 250px;
+		height: 250upx;
 	}
 
 	/* 日期球的外观样式 */
 	.dateball {
 		display: flex;
-		width: 62px;
-		height: 62px;
+		width: 62upx;
+		height: 62upx;
         position: absolute;
-        bottom: 11px;
+        bottom: 11upx;
 		background-color: rgba(148, 148, 148, 0.8);
-		border-radius: 62px;
+		border-radius: 62upx;
 		align-items: center;
 		justify-content: center;
 	}
@@ -934,7 +933,7 @@
 		display: flex;
 		flex-direction: row;
 		flex-wrap: nowrap;
-		height: 80px;
+		height: 80upx;
 	}
 
 	/* 信息面板中一天的部分 */
@@ -948,7 +947,7 @@
 	/* 信息面板的列 */
 	.infocolumn {
 		flex: 1;
-		padding: 10px;
+		padding: 10upx;
 		white-space: pre-wrap;
 	}
 
@@ -960,14 +959,13 @@
 	/* 威海专项图表 */
 	.chart-weihai {
 		width: 100%;
-		height: 250px;
-		/* border: 1px solid #000000; */
+		height: 250upx;
 	}
 
 	/* 威海专项 图表下信息面板 */
 	.weihai-infopanel {
 		width: 100%;
-		height: 50px;
+		height: 50upx;
 		display: flex;
 		flex-direction: row;
 		flex-wrap: nowrap;
@@ -989,13 +987,13 @@
 	/* 潮汐曲线上左右箭头 */
 	.chevron {
 		position: absolute;
-		bottom: 125px;
+		bottom: 125upx;
 		color: #666;
 	}
 	/* 精细化曲线上左右箭头 */
 	.chevron-refined {
 		position: absolute;
-		bottom: 205px;
+		bottom: 205upx;
 		color: #666;
 	}
 	.chevron-right {

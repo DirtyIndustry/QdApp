@@ -73,6 +73,6 @@
     .chart {
         width: 290%;
         height: 250upx;
-        border: 1px solid #000000;
+        border: 1upx solid #000000;
     }
 </style>

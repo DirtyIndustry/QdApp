@@ -206,25 +206,23 @@ onShow () {
 	background-color: #eeeeee;
 	width: 100%;
 	height: 100%;
-	/* display: flex;
-	flex-direction: column; */
 }
 
 .separator-vertical{
-	height: 40px;
+	height: 40upx;
 }
 
 .separator-vertical-small {
-	height: 10px;
+	height: 10upx;
 }
 
 .separator-horizontal {
-	width: 40px;
+	width: 40upx;
 }
 
 .input {
-    border: 1px solid #999;
-    border-radius: 10px;
+    border: 1upx solid #999;
+    border-radius: 10upx;
     background-color: #fff;
     position: relative;
     display: flex;
@@ -234,19 +232,18 @@ onShow () {
 }
 
 .input-small {
-	height: 80px;
+	height: 80upx;
 }
 
 .input-big {
-	height: 380px;
+	height: 380upx;
 }
 
 .submit-button {
     width: 90%;
-    height: 80px;
+    height: 80upx;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* border: 1px solid #0092d4; */
 }
 </style>

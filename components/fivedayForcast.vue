@@ -79,7 +79,7 @@ export default {
 
 	/* 5日天气预报非最右边的列 添加右边框 */
 	.fiveday-column-left {
-		border-right: 1px solid #000000;
+		border-right: 1upx solid #000000;
 	}
 
 	/* 5日天气预报中每列中的单元格 */
