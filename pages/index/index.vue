@@ -2,7 +2,7 @@
 	<!-- <view style="background-image: url(../../static/Images/back_images.png); background-repeat: no-repeat; background-size: contain; background-attachment: scroll;"> -->
 	<view>
 		<view class="page-body">
-			<image src="../../static/Images/back_images.png" mode="aspectFill" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: -1;" />
+			<image src="../../static/Images/back_images_Sec.png" mode="aspectFill" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: -1;" />
 			<view class="separator" />
 			<!-- 天气预报模块 -->
 			<view class="page-section">

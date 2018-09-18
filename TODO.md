@@ -72,4 +72,7 @@ DONE... apply new webservice to App.vue
 DONE... apply new webservice to index page  
 DONE... apply new webservice to city forecast page  
 DONE... apply new webservice to weather forecast page  
-realtime weather module styling  
+DONE... index page realtime weather module  
+DONE... index page ocean module  
+DONE... index page change background picture  
+DONE... weather forecast page realtime weather module    
