@@ -1,6 +1,6 @@
 <template>
 	<view class="wrap" @tap="pageTap">
-		<view style="height: 40px;"></view>
+		<view style="height: 40upx;"></view>
 		<view class="choose_source" @tap="showModel">
 			<picker @change="source_change" v-model="cityIndex" :range="sourceArray">
 				<text class="choose-source-header text">数据源:&nbsp;&nbsp;</text>
@@ -9,7 +9,7 @@
 			</picker>
 		</view>
 		<view class="separator"></view>
-		<picSwiperAlt :imgArray="imageArray" :titleArray="dateArray" :startIndex="startIndex" :autoStart="autostart" interval="3000"
+		<picSwiperAlt :imgArray="imageArray" :titleArray="dateArray" :startIndex="startIndex" :autoStart="autostart" interval="1500"
 		 ref="picswiper"></picSwiperAlt>
 	</view>
 </template>
@@ -98,13 +98,13 @@
 
 	.choose_source {
 		width: 100%;
-		height: 80px;
+		height: 80upx;
 		background-color: #fff;
-		line-height: 80px;
+		line-height: 80upx;
 	}
 
 	.choose-source-header {
-		margin-left: 100px;
+		margin-left: 100upx;
 	}
 
 </style>

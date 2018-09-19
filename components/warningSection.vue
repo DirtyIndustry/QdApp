@@ -1,7 +1,7 @@
 <template>
     <view v-show="hasWarning">
         <!-- 台风警报 -->
-        <view class="warning-section" v-if="typhoon !== ''" @tap="$emit('typhoonTap')">
+        <view class="warning-section typhoon-warning" v-if="typhoon !== ''" @tap="$emit('typhoonTap')">
             <view class="warning-header">
                 <image class="warning-header-icon" src="../../static/Images/bugle.png" mode="aspectFit"/>
                 <view class="warning-header-text-container">
@@ -17,10 +17,8 @@
             </view>
             <view class="warning-fader warning-fader-right"></view>
         </view>
-        <!-- 分隔栏 -->
-        <view style="height: 5px;"></view>
         <!-- 海浪警报 -->
-        <view class="warning-section" v-if="wave !== ''" @tap="$emit('waveTap')">
+        <view class="warning-section ocean-warning" v-if="wave !== ''" @tap="$emit('waveTap')">
             <view class="warning-header">
                 <image class="warning-header-icon" src="../../static/Images/warning.png" mode="aspectFit"/>
                 <view class="warning-header-text-container">
@@ -69,19 +67,28 @@ export default {
 <style scoped>
 @import "../common/generic.css";
 .warning-section {
-    border: 1px solid #999;
-    height: 60px;
-    position: relative;
+    border: 1upx solid #999;
+    width: 100%;
+    height: 60upx;
+    position: fixed;
     overflow: hidden;
     background-color: rgba(255, 255, 255, 0.8);
-    /* --marqueeWidth--: -12em; */
+    z-index: 10;
+}
+.typhoon-warning {
+    top: 0;
+    left: 0;
+}
+.ocean-warning {
+    bottom: 0;
+    left: 0;
 }
 .warning-header {
     position: absolute;
     top: 0;
     left: 0;
-    height: 60px; 
-    width: 120px;
+    height: 60upx; 
+    width: 120upx;
     background-color: whitesmoke;
     display: flex;
     align-items: center;
@@ -89,20 +96,20 @@ export default {
     z-index: 6;
 }
 .warning-header-icon {
-    width: 40px;
-    height: 40px;
+    width: 40upx;
+    height: 40upx;
 }
 .warning-header-text-container {
     flex: 1;
-    height: 60px;
+    height: 60upx;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .warning-header-text {
-    border: 1px solid #000;
-    border-radius: 10px;
-    height: 38px;
+    border: 1upx solid #000;
+    border-radius: 10upx;
+    height: 38upx;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -110,12 +117,12 @@ export default {
 .warning-fader {
     position: absolute;
     top: 0;
-    width: 80px;
-    height: 60px;
+    width: 80upx;
+    height: 60upx;
     z-index: 6;
 }
 .warning-fader-left {
-    left: 120px;
+    left: 120upx;
     background: linear-gradient(left, rgba(245,245,245,1), rgba(255,255,255,0));
 }
 .warning-fader-right {
@@ -126,7 +133,7 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    height: 60px;
+    height: 60upx;
     display: flex;
     align-items: center;
     white-space: nowrap;

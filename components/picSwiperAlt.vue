@@ -66,7 +66,7 @@
             interval: {
                 type: Number,
                 default () {
-                    return 2000
+                    return 3000
                 }
             }
         },
@@ -76,7 +76,7 @@
                 imgindex: 0,
                 isPlaying: false,
                 isButtonHide: false,
-                viewHeight: '538px',
+                viewHeight: '538upx',
                 btnTimer: undefined,
                 playbtnclick: false,
                 nextbtnclick: false,
@@ -244,8 +244,8 @@
     
     .pic_title {
         width: 100%;
-        height: 80px;
-        font-size: 28px;
+        height: 80upx;
+        font-size: 28upx;
         color: #333;
         display: flex;
         align-items: center;
@@ -260,15 +260,15 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 28px;
-        margin: 20px 0;
+        font-size: 28upx;
+        margin: 20upx 0;
     }
 
     .btn_panel {
         position: absolute;
-        bottom: 80px;
+        bottom: 80upx;
         width: 100%;
-        height: 200px;
+        height: 200upx;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -278,16 +278,15 @@
     .btn_panel_hide {
         transition: opacity 2s ease, bottom 0s ease 2s, position 0s ease 2s;
         opacity: 0;
-        bottom: -200px;
+        bottom: -200upx;
         position: fixed;
     }
 
     .btn_box {
-        /* border: 1px solid #000; */
         width: 70%;
         left: 15%;
-        bottom: 160px;
-        height: 200px;
+        bottom: 160upx;
+        height: 200upx;
         display: flex;
         align-items: center;
         justify-content: space-around;
@@ -297,7 +296,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+        box-shadow: 0upx 0upx 15upx rgba(0, 0, 0, 0.3);
         color: #666;
         background: -webkit-radial-gradient(#fff, rgb(245, 245, 245), #eee); /* Safari 5.1 - 6.0 */
         background: -o-radial-gradient#fff, (rgb(245, 245, 245), #eee); /* Opera 11.6 - 12.0 */
@@ -305,7 +304,7 @@
         background: radial-gradient(#fff, rgb(245, 245, 245), #eee); /* 标准的语法 */
     }
     .btn_click {
-        box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.6);
+        box-shadow: 0upx 0upx 8upx rgba(0, 0, 0, 0.6);
         background: -webkit-radial-gradient(#fff, #ddd, #ccc); /* Safari 5.1 - 6.0 */
         background: -o-radial-gradient#fff, (#ddd, #ccc); /* Opera 11.6 - 12.0 */
         background: -moz-radial-gradient(#fff, #ddd, #ccc); /* Firefox 3.6 - 15 */
@@ -313,32 +312,30 @@
     }
     .prev,
     .next {
-        /* border: 1px solid #f00; */
-        border-radius: 55px;
-        width: 110px;
-        height: 110px;
-        font-size: 38px;
+        border-radius: 55upx;
+        width: 110upx;
+        height: 110upx;
+        font-size: 38upx;
     }
 
     .play_stop {
-        /* border: 1px solid #0f0; */
-        border-radius: 70px;
-        width: 140px;
-        height: 140px;
-        font-size: 55px;
+        border-radius: 70upx;
+        width: 140upx;
+        height: 140upx;
+        font-size: 55upx;
     }
 
     .prev-icon {
         position: relative;
-        right: 5px;
+        right: 5upx;
     }
     .next-icon {
         position: relative;
-        left: 5px;
+        left: 5upx;
     }
     .play-icon {
         position: relative;
-        left: 5px;
+        left: 5upx;
     }
 
     .imgswiper {

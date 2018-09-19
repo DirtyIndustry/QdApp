@@ -1,12 +1,12 @@
 <template>
     <view class="wrap" @tap="pageTap">
-        <view style="height: 40px;"></view>
+        <view style="height: 40upx;"></view>
         <view class="choose_source">
             <text class="choose-source-header text">数据源:&nbsp;&nbsp;</text>
             <text class="text text-blue">{{data_source}}&nbsp;&nbsp;</text>
         </view>
         <view class="separator"></view>
-        <picSwiperAlt :imgArray="imageArray" :startIndex="startIndex" :autoStart="autostart" interval="3000"
+        <picSwiperAlt :imgArray="imageArray" :startIndex="startIndex" :autoStart="autostart" interval="1500"
             ref="picswiper"></picSwiperAlt>
     </view>
 </template>
@@ -35,7 +35,7 @@
                 let that = this
                 uni.request({
                     url: appsettings.hosturl + 'GetSatelliteCloud_ZG_0905',
-                    data: { name: 'admin', areaflg: '山东', flg: source },
+                    data: { name: 'admin', areaflg: '青岛', flg: source },
                     method: 'POST',
                     success: function (res) {
                         console.log('[服务器]: 返回 卫星云图')
@@ -74,7 +74,6 @@
 </script>
 
 <style scoped>
-    @import "../../common/FontAwesome.css";
     @import "../../common/generic.css";
 
     Page {
@@ -90,13 +89,13 @@
 
     .choose_source {
         width: 100%;
-        height: 80px;
+        height: 80upx;
         background-color: #fff;
-        line-height: 80px;
+        line-height: 80upx;
     }
 
     .choose-source-header {
-        margin-left: 100px;
+        margin-left: 100upx;
     }
 
 </style>

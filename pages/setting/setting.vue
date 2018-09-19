@@ -10,7 +10,7 @@
 		<!-- 推送下方说明文字 -->
 		<view class="detail">
 			<view class="separator-horizontal"></view>
-			<view class="text-small text-gray">请在手机设置 > 通知 > 通知管理中找到山东海洋预报，可关闭通知。关闭后不再接收到推送的消息。</view>
+			<view class="text-small text-gray">请在手机设置 > 通知 > 通知管理中找到青岛海洋预报，可关闭通知。关闭后不再接收到推送的消息。</view>
 			<view class="separator-horizontal"></view>
 		</view>
 		<!-- 欢迎页面 -->
@@ -126,7 +126,7 @@
 					uni.removeStorageSync('bathsdata')
 					uni.removeStorageSync('refineddata')
 					uni.removeStorageSync('fivedaydata')
-					uni.removeStorageSync('weihaidata')
+					uni.removeStorageSync('qdoceandata')
 				} catch (e) {
 					console.log('[缓存]: 删除键值出错')
 					console.log(JSON.stringify(e))
@@ -158,7 +158,7 @@
 				let that = this
 				uni.request({
 					url: appsettings.hosturl + 'GetAndroidUpgrade_0911',
-					data: {name: 'admin', areaflg: '山东'},
+					data: {name: 'admin', areaflg: '青岛'},
 					method: 'POST',
 					success: function (res) {
 						console.log('[服务器]: 返回 安卓升级数据')
@@ -234,28 +234,28 @@
 }
 
 .separator-vertical{
-	height: 40px;
+	height: 40upx;
 }
 
 .separator-vertical-small {
-	height: 10px;
+	height: 10upx;
 }
 
 .separator-horizontal {
-	width: 40px;
+	width: 40upx;
 }
 
 .stripbutton{
-	border-top: 1px solid #999;
-	border-bottom: 1px solid #999;
-	height: 80px;
+	border-top: 1upx solid #999;
+	border-bottom: 1upx solid #999;
+	height: 80upx;
 	background-color: #fff;
 	display: flex;
 	flex-direction: row;
 }
 
 .detail {
-	height: 80px;
+	height: 80upx;
 	display: flex;
 	flex-direction: row;
 }
@@ -274,14 +274,13 @@
 }
 
 .right-column {
-	/* border: 1px solid #000; */
-	width: 200px;
+	width: 200upx;
 	display: flex;
 	align-items: center;
 	flex-direction: row-reverse;
 }
 
 .font-icon {
-	font-size: 50px;
+	font-size: 50upx;
 }
 </style>

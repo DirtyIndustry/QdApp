@@ -1,55 +1,31 @@
 <template>
     <view class="page-body">
-        <image src="../../static/Images/back_images.jpg" mode="aspectFill" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: -1;"
+        <image src="../../static/Images/back_images.png" mode="aspectFill" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: -1;"
 		/>
         <!-- 页眉空白 -->
         <view class="separator"></view>
         <!-- 标题部分 -->
-        <view class="page-section">
-
-            <view class="uni-flex uni-row title-section">
-                <!-- 标题 -->
-                <view class="title text text-bold text-blue">
-                    &nbsp;24小时海区预报
-                </view>
-                <!-- 日期 -->
-                <view class="date text-small">{{forecastdate24h}}</view>
-            </view>
-            <view class="section-body">
-                <oceanTable :data="oceantable24h"></oceanTable>
-            </view>
-            <!-- 表格下方空白 -->
-            <view class="separator"></view>
-        
-            <view class="uni-flex uni-row title-section">
-                <!-- 标题 -->
-                <view class="title text text-bold text-blue">
-                    &nbsp;48小时海区预报
-                </view>
-                <!-- 日期 -->
-                <view class="date text-small">{{forecastdate48h}}</view>
-            </view>
-            <view class="section-body">
-                <oceanTable :data="oceantable48h"></oceanTable>
-            </view>
-            <!-- 表格下方空白 -->
-            <view class="separator"></view>
-
-            <view class="uni-flex uni-row title-section">
-                <!-- 标题 -->
-                <view class="title text text-bold text-blue">
-                    &nbsp;72小时海区预报
-                </view>
-                <!-- 日期 -->
-                <view class="date text-small">{{forecastdate72h}}</view>
-            </view>
-            <view class="section-body">
-                <oceanTable :data="oceantable72h"></oceanTable>
-            </view>
-            
-            <!-- 页脚空白 -->
-            <view class="separator"></view>
+        <view class="page-section section-body">
+            <tableTitle title="24小时海区预报" :date="forecastdate24h" smalltext="true" />
+            <oceanTable :data="oceantable24h"></oceanTable>
         </view>
+        <!-- 表格下方空白 -->
+        <view class="separator"></view>
+    
+        <view class="page-section section-body">
+            <tableTitle title="48小时海区预报" :date="forecastdate48h" smalltext="true" />
+            <oceanTable :data="oceantable48h"></oceanTable>
+        </view>
+        <!-- 表格下方空白 -->
+        <view class="separator"></view>
+
+        <view class="page-section section-body">
+            <tableTitle title="72小时海区预报" :date="forecastdate72h" smalltext="true" />
+            <oceanTable :data="oceantable72h"></oceanTable>
+        </view>
+        
+        <!-- 页脚空白 -->
+        <view class="separator"></view>
         
     </view>
 </template>
@@ -57,10 +33,12 @@
 <script>
 import appsettings from '../../utils/appsettings.js'
 import oceanTable from '../../components/oceanTable.vue'
+import tableTitle from '../../components/tableTitle.vue'
 
 export default {
     components: {
-        oceanTable
+        oceanTable,
+        tableTitle
     },
     data () {
         return {
@@ -159,40 +137,6 @@ export default {
 
     .uni-row {
         flex-direction: row;
-    }
-
-    /* 标题部分容器 */
-    .title-section {
-        border-bottom: 1px solid #666;
-        height: 80px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /* 标题图标+渔场预报字样 */
-    .title {
-        /* border: 1px solid #f00; */
-        flex: 3;
-        height: 60px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /* 标题图标 */
-    .title-icon {
-        width: 60px;
-        height: 60px;
-    }
-
-    /* 标题日期 */
-    .date {
-        /* border: 1px solid #000; */
-        flex: 5;
-        height: 80px;
-        line-height: 125px;
-        text-align: right;
     }
 
 </style>

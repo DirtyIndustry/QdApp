@@ -1,9 +1,8 @@
 <template>
-	<!-- <view style="background-image: url(../../static/Images/back_images.jpg); background-repeat: no-repeat; background-size: contain; background-attachment: scroll;"> -->
+	<!-- <view style="background-image: url(../../static/Images/back_images.png); background-repeat: no-repeat; background-size: contain; background-attachment: scroll;"> -->
 	<view>
-		<myPicker ref="citypicker" :items="cityArray" @itemSelected="mypickerSelect"></myPicker>
 		<view class="page-body">
-			<image src="../../static/Images/back_images.jpg" mode="aspectFill" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: -1;" />
+			<image src="../../static/Images/back_images.png" mode="aspectFill" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: -1;" />
 			<!-- 地区选择模块 -->
 			<!-- #ifdef MP-WEIXIN -->
 			<view style="position: fixed; width: 100%; left: 0; opacity: 0.9; z-index: 9;">
@@ -21,18 +20,18 @@
 				</view>
 			</view>
 			<!-- 占位空白模块 -->
-			<view style="height: 100px;" />
+			<view style="height: 100upx;" />
 			<!-- #endif -->
 			<!-- #ifdef APP-PLUS -->
 			<view class="page-section header text-large text-bold text-blue">{{cityName}}地区预报</view>
-			<view style="height: 20px;" />
+			<view style="height: 20upx;" />
 			<!-- #endif -->
 			<!-- 潮汐预报模块 -->
 			<view class="page-section section-body">
 				<tableTitle title="潮汐预报" icon="../../static/Images/top_left_img_new.png" />
 				<!-- 第一个图表 -->
 				<view class="chart-container">
-					<text class="chart-title text" v-if="tideData.chartTideOneTitle !== ''">{{tideData.chartTideOneTitle}}</text>
+					<text class="chart-title text">{{tideData.chartTideOneTitle}}</text>
 					<scroll-view scroll-x="true">
 						<view class="chart-tide">
 							<mpvue-echarts :echarts="echarts" :onInit="handleInitTideOne" canvasId="canvasIdTideOne" ref="echartsRefTideOne"></mpvue-echarts>
@@ -40,8 +39,7 @@
 					</scroll-view>
 				</view>
 				<!-- 第二个图表 只在青岛地区显示 -->
-				<!-- <view class="section-body" v-show="tideData.chartTideTwoShow"> -->
-				<view class="chart-container" :class="{hide: !tideData.chartTideTwoShow}">
+				<view class="chart-container">
 					<text class="chart-title text">{{tideData.chartTideTwoTitle}}</text>
 					<scroll-view class="scroll-view_H" scroll-x="true" @scroll="scrollTideTwo">
 						<view class="chart-tide">
@@ -68,11 +66,10 @@
 			</view>
 			<view class="separator" />
 			<!-- 精细化预报 -->
-			<!-- <view class="page-section section-body" v-show="refinedData.show"> -->
-			<view class="page-section section-body" :class="{hide: !refinedData.show}">
+			<view class="page-section section-body">
 				<view class="refinedChart-body">
 					<!-- 地名 -->
-					<view v-if="refinedData.dataOne.length > 0" class="chart-title text">{{refinedData.dataOne[0].loc}}</view>
+					<view class="chart-title text">{{refinedData.dataOne[0].loc}}</view>
 					<scroll-view scroll-x="true" @scroll="handleScrollRefinedOne">
 						<view class="chart-refined">
 							<mpvue-echarts :echarts="echarts" :onInit="handleInitRefinedOne" canvasId="canvasIdRefinedOne" ref="echartsRefRefinedOne"></mpvue-echarts>
@@ -102,12 +99,11 @@
 					</view>
 				</view>
 				<!-- 两个图表之间的空白 -->
-				<view style="height: 60px" v-if="refinedData.showTwo" />
-				<!-- <view v-if="refinedData.showTwo"> -->
-				<view :class="{hide: !refinedData.showTwo}">
+				<view style="height: 60upx" />
+				<view>
 					<view class="refinedChart-body">
 						<!-- 地名 -->
-						<view v-if="refinedData.dataTwo.length > 0" class="chart-title text">{{refinedData.dataTwo[0].loc}}</view>
+						<view class="chart-title text">{{refinedData.dataTwo[0].loc}}</view>
 						<scroll-view scroll-x="true" @scroll="handleScrollRefinedTwo">
 							<view class="chart-refined">
 								<mpvue-echarts :echarts="echarts" :onInit="handleInitRefinedTwo" canvasId="canvasIdRefinedTwo" ref="echartsRefRefinedTwo"></mpvue-echarts>
@@ -139,98 +135,6 @@
 				</view>
 			</view>
 			<view class="separator" />
-			<!-- 威海专项预报 -->
-			<!-- <view class="page-section" v-show="weihaiData.show"> -->
-			<view class="page-section" :class="{hide: !weihaiData.show}">
-				<!-- 第一部分 -->
-				<!-- <view v-show="weihaiData.first.show"> -->
-				<view :class="{hide: !weihaiData.first.show}">
-					<tableTitle :title="weihaiData.first.REPORTAREA" icon="../../static/Images/top_left_img_newS.png" />
-					<!-- 图表部分 -->
-					<view class="section-body">
-						<view class="chart-weihai">
-							<mpvue-echarts :echarts="echarts" :onInit="handleInitWeihaiOne" canvasId="canvasIdWeihaiOne" ref="echartsRefWeihaiOne"></mpvue-echarts>
-						</view>
-						<view class="weihai-infopanel">
-							<view class="weihai-infocolumn-side" />
-							<view class="weihai-infocolumn">
-								<view class="text">水温:{{weihaiData.first.WATERTEMP}}℃</view>
-							</view>
-							<view class="weihai-infocolumn">
-								<view class="text">浪高:{{weihaiData.first.WAVEHEIGHT}}米</view>
-							</view>
-							<view class="weihai-infocolumn-side" />
-						</view>
-					</view>
-				</view>
-				<view class="separator" />
-				<!-- 第二部分 -->
-				<!-- <view v-show="weihaiData.second.show"> -->
-				<view :class="{hide: !weihaiData.second.show}">
-					<tableTitle :title="weihaiData.second.REPORTAREA" icon="../../static/Images/top_left_img_newS.png" />
-					<!-- 图表部分 -->
-					<view class="section-body">
-						<view class="chart-weihai">
-							<mpvue-echarts :echarts="echarts" :onInit="handleInitWeihaiTwo" canvasId="canvasIdWeihaiTwo" ref="echartsRefWeihaiTwo"></mpvue-echarts>
-						</view>
-						<view class="weihai-infopanel">
-							<view class="weihai-infocolumn-side" />
-							<view class="weihai-infocolumn">
-								<view class="text">水温:{{weihaiData.second.WATERTEMP}}℃</view>
-							</view>
-							<view class="weihai-infocolumn">
-								<view class="text">浪高:{{weihaiData.second.WAVEHEIGHT}}米</view>
-							</view>
-							<view class="weihai-infocolumn-side" />
-						</view>
-					</view>
-				</view>
-				<view class="separator" />
-				<!-- 第三部分 -->
-				<!-- <view v-show="weihaiData.third.show"> -->
-				<view :class="{hide: !weihaiData.third.show}">
-					<tableTitle :title="weihaiData.third.REPORTAREA" icon="../../static/Images/top_left_img_newS.png" />
-					<!-- 图表部分 -->
-					<view class="section-body">
-						<view class="chart-weihai">
-							<mpvue-echarts :echarts="echarts" :onInit="handleInitWeihaiThree" canvasId="canvasIdWeihaiThree" ref="echartsRefWeihaiThree"></mpvue-echarts>
-						</view>
-						<view class="weihai-infopanel">
-							<view class="weihai-infocolumn-side" />
-							<view class="weihai-infocolumn">
-								<view class="text">水温:{{weihaiData.third.WATERTEMP}}℃</view>
-							</view>
-							<view class="weihai-infocolumn">
-								<view class="text">浪高:{{weihaiData.third.WAVEHEIGHT}}米</view>
-							</view>
-							<view class="weihai-infocolumn-side" />
-						</view>
-					</view>
-				</view>
-				<view class="separator" />
-				<!-- 第四部分 -->
-				<!-- <view v-show="weihaiData.fourth.show"> -->
-				<view :class="{hide: !weihaiData.fourth.show}">
-					<tableTitle :title="weihaiData.fourth.REPORTAREA" icon="../../static/Images/top_left_img_newS.png" />
-					<!-- 图表部分 -->
-					<view class="section-body">
-						<view class="chart-weihai">
-							<mpvue-echarts :echarts="echarts" :onInit="handleInitWeihaiFour" canvasId="canvasIdWeihaiFour" ref="echartsRefWeihaiFour"></mpvue-echarts>
-						</view>
-						<view class="weihai-infopanel">
-							<view class="weihai-infocolumn-side" />
-							<view class="weihai-infocolumn">
-								<view class="text">水温:{{weihaiData.fourth.WATERTEMP}}℃</view>
-							</view>
-							<view class="weihai-infocolumn">
-								<view class="text">浪高:{{weihaiData.fourth.WAVEHEIGHT}}米</view>
-							</view>
-							<view class="weihai-infocolumn-side" />
-						</view>
-					</view>
-				</view>
-			</view>
-			<view class="separator" />
 		</view>
 	</view>
 </template>
@@ -239,7 +143,6 @@
 	import appsettings from '../../utils/appsettings.js'
 	import utils from '../../utils/utils.js'
 	import bathsTable from '../../components/bathsTable.vue'
-	import myPicker from '../../components/myPicker.vue'
 	import tableTitle from '../../components/tableTitle.vue'
 	import inshoreTableNew from '../../components/inshoreTableNew.vue'
 	import * as echarts from 'echarts'
@@ -249,15 +152,10 @@
 	let chartTideTwo = undefined
 	let chartRefinedOne = undefined
 	let chartRefinedTwo = undefined
-	let chartWeihaiOne = undefined
-	let chartWeihaiTwo = undefined
-	let chartWeihaiThree = undefined
-	let chartWeihaiFour = undefined
 
 	export default {
 		components: {
 			bathsTable,
-			myPicker,
 			tableTitle,
 			inshoreTableNew,
 			mpvueEcharts
@@ -342,54 +240,14 @@
 				get() { return this.$store.state.Datas.fivedaydata },
 				set(value) { this.$store.dispatch('setFivedayData', value) }
 			},
-			// 威海专项
-			weihaiData: {
-				get() { return this.$store.state.Datas.weihaidata },
-				set(value) { this.$store.dispatch('setWeihaiData', value) }
-			},
 			// 潮汐预报chart option
 			tideDataOptionOne () { return this.$store.state.Datas.tidedata.optionTideOne },
 			tideDataOptionTwo () { return this.$store.state.Datas.tidedata.optionTideTwo },
 			// 精细化预报chart option
 			refinedDataOptionOne () { return this.$store.state.Datas.refineddata.optionOne },
-			refinedDataOptionTwo () { return this.$store.state.Datas.refineddata.optionTwo },
-			// 威海专项chart option
-			weihaiDataOptionOne () { return this.$store.state.Datas.weihaidata.first.option },
-			weihaiDataOptionTwo () { return this.$store.state.Datas.weihaidata.second.option },
-			weihaiDataOptionThree () { return this.$store.state.Datas.weihaidata.third.option },
-			weihaiDataOptionFour () { return this.$store.state.Datas.weihaidata.fourth.option }
+			refinedDataOptionTwo () { return this.$store.state.Datas.refineddata.optionTwo }
 		},
 		methods: {
-			// 地区选择菜单操作
-			bindPickerChange: function (e) {
-				// 弹出loading toast
-				uni.showLoading({
-					title: '加载中',
-					mask: true
-				})
-				// 写入Vuex和缓存
-				this.cityIndex = e.target.value
-				utils.storeToLocal('cityindex', e.target.value)
-				this.switchCityByIndex(e.target.value)
-
-				// // 10秒后关闭toast
-				// setTimeout(function () {
-				// 	uni.hideLoading()
-				// }.bind(this), 10000)
-			},
-			// 根据index切换城市 允许自动定位 不写入缓存
-			switchCityByIndex(index) {
-				// 切换城市
-				utils.switchCity(this.cityArray[index], this.switchCityByName)
-			},
-			// 根据name切换城市 写入缓存
-			switchCityByName(city) {
-				// 写入Vuex和缓存
-				this.cityName = city
-				utils.storeToLocal('cityname', city)
-				// 根据城市向服务器申请数据
-				this.requestData(city)
-			},
 			// 读取服务器数据
 			requestData(city) {
 				// 任务计数器归零
@@ -505,52 +363,6 @@
 						// 写入Vuex
 						that.fivedayData = fivedayData
 
-						// 威海专项
-						// 判断城市
-						if (res.weihaiDatas.length > 0) {	// 如果是威海
-							that.weihaiData.show = true
-							that.weihaiData.first.show = true
-							that.weihaiData.second.show = true
-							that.weihaiData.third.show = true
-							that.weihaiData.fourth.show = true
-							for (let i = 0; i < res.weihaiDatas.length; i++) {
-								let data = {
-									show: res.weihaiDatas[i].show,
-									REPORTAREA: res.weihaiDatas[i].REPORTAREA,
-									FORECASTDATE: res.weihaiDatas[i].FORECASTDATE,
-									WAVEHEIGHT: res.weihaiDatas[i].WAVEHEIGHT,
-									WATERTEMP: res.weihaiDatas[i].WATERTEMP,
-								}
-								let tide = utils.buildTidedata(res.weihaiDatas[i].tideinfo.tidedata)
-								let mark = utils.buildMarkdata(res.weihaiDatas[i].tideinfo.markdata)
-								data.option = utils.getAstroOptionNew(tide, mark, res.weihaiDatas[i].tideinfo.max, res.weihaiDatas[i].tideinfo.min)
-								data.option.grid = {
-									top: '4%',
-									left: '-3%',
-									right: '5%',
-									bottom: '20%',
-									containLabel: true
-								}
-								switch (res.weihaiDatas[i].REPORTAREA) {
-									case '成山头':
-										that.weihaiData.first = data
-										break
-									case '乳山':
-										that.weihaiData.second = data
-										break
-									case '石岛':
-										that.weihaiData.third = data
-										break
-									case '文登':
-										that.weihaiData.fourth = data
-										break
-									default:
-										break
-								}
-							} // end-for res.weihaiDatas
-						} else {	// 如果是威海以外的城市
-							that.weihaiData.show = false
-						}
 						// 写入本地缓存
 						utils.storeToLocal('weatherdata', JSON.stringify(res.weatherData))
 						utils.storeToLocal('tidedata', JSON.stringify(that.tideData))
@@ -558,7 +370,6 @@
 						utils.storeToLocal('bathsdata', JSON.stringify(that.bathsData))
 						utils.storeToLocal('refineddata', JSON.stringify(that.refinedData))
 						utils.storeToLocal('fivedaydata', JSON.stringify(fivedayData))
-						utils.storeToLocal('weihaidata', JSON.stringify(that.weihaiData))
 
 					}, // success-request
 					fail: function (res) {
@@ -585,8 +396,6 @@
 						this.refinedData.showTwo = true
 						// 7到9月份显示浴场预报
 						this.bathsData.showBaths = new Date().getMonth() > 5 & new Date().getMonth() < 9 ? true : false
-						// 不显示威海专项预报
-						this.weihaiData.show = false
 						break
 					case '威海':
 						// 不显示第二个潮汐曲线
@@ -600,12 +409,6 @@
 						this.refinedData.showTwo = false
 						// 不显示浴场预报
 						this.bathsData.showBaths = false
-						// 显示威海专项预报
-						this.weihaiData.show = true
-						this.weihaiData.first.show = true
-						this.weihaiData.second.show = true
-						this.weihaiData.third.show = true
-						this.weihaiData.fourth.show = true
 						break
 					case '滨州':
 						// 不显示第二个潮汐曲线
@@ -619,8 +422,6 @@
 						this.refinedData.showTwo = false
 						// 不显示浴场预报
 						this.bathsData.showBaths = false
-						// 显示威海专项预报
-						this.weihaiData.show = false
 						break
 					default:
 						// 不显示第二个潮汐曲线
@@ -634,8 +435,6 @@
 						this.refinedData.showTwo = false
 						// 不显示浴场预报
 						this.bathsData.showBaths = false
-						// 显示威海专项预报
-						this.weihaiData.show = false
 						break
 				}
 			},
@@ -699,46 +498,6 @@
 				canvas.setChart(chartRefinedTwo)
 				chartRefinedTwo.setOption(this.refinedData.optionTwo, true)
 				return chartRefinedTwo
-			},
-			// 初始化威海专项图表一
-			handleInitWeihaiOne(canvas, width, height) {
-				chartWeihaiOne = echarts.init(canvas, null, {
-					width: width,
-					height: height
-				})
-				canvas.setChart(chartWeihaiOne)
-				chartWeihaiOne.setOption(this.weihaiData.first.option, true)
-				return chartWeihaiOne
-			},
-			// 初始化威海专项图表二
-			handleInitWeihaiTwo(canvas, width, height) {
-				chartWeihaiTwo = echarts.init(canvas, null, {
-					width: width,
-					height: height
-				})
-				canvas.setChart(chartWeihaiTwo)
-				chartWeihaiTwo.setOption(this.weihaiData.second.option, true)
-				return chartWeihaiTwo
-			},
-			// 初始化威海专项图表三
-			handleInitWeihaiThree(canvas, width, height) {
-				chartWeihaiThree = echarts.init(canvas, null, {
-					width: width,
-					height: height
-				})
-				canvas.setChart(chartWeihaiThree)
-				chartWeihaiThree.setOption(this.weihaiData.third.option, true)
-				return chartWeihaiThree
-			},
-			// 初始化威海专项图表四
-			handleInitWeihaiFour(canvas, width, height) {
-				chartWeihaiFour = echarts.init(canvas, null, {
-					width: width,
-					height: height
-				})
-				canvas.setChart(chartWeihaiFour)
-				chartWeihaiFour.setOption(this.weihaiData.fourth.option, true)
-				return chartWeihaiFour
 			},
 			// 设置曲线图下方日期球的日期
 			setDateballText() {
@@ -833,30 +592,13 @@
 			handleScrollRefinedTwo(e) {
 				// utils.setDateballStatus(e.detail.scrollLeft, this.systemInfo.windowWidth - 60, this.ballStatus)
 				this.setDateballStatus(e.detail.scrollLeft, this.systemInfo.windowWidth, this.ballStatusRefinedTwo)
-			},
-			// 自定义picker选择
-			mypickerSelect(index, item) {
-				// 弹出loading toast
-				uni.showLoading({
-					title: '加载中',
-					mask: true
-				})
-				// 写入Vuex和缓存
-				this.cityIndex = index
-				utils.storeToLocal('cityindex', index)
-				this.switchCityByIndex(index)
-
-				// // 10秒后关闭toast
-				// setTimeout(function () {
-				// 	uni.hideLoading()
-				// }.bind(this), 10000)
 			}
 		}, // end-methods
 		watch: {
 			// 完成的request
 			completedRequestCount: {
 				handler(newVal, oldVal) {
-					if (newVal === 1) {
+					if (newVal >= 1) {
 						uni.hideLoading()
 						uni.stopPullDownRefresh()
 					}
@@ -905,50 +647,6 @@
 						}
 					}
 				}
-			},
-			// 威海专项第一个chart更新
-			weihaiDataOptionOne: {
-				handler (newVal, oldVal) {
-					if (chartWeihaiOne !== undefined) {
-						if (newVal) {
-							chartWeihaiOne.setOption(newVal, true)
-							// this.$refs.echartsRefWeihaiOne.init()
-						}
-					}
-				}
-			},
-			// 威海专项第二个chart更新
-			weihaiDataOptionTwo: {
-				handler (newVal, oldVal) {
-					if (chartWeihaiTwo !== undefined) {
-						if (newVal) {
-							chartWeihaiTwo.setOption(newVal, true)
-							// this.$refs.echartsRefWeihaiTwo.init()
-						}
-					}
-				}
-			},
-			// 威海专项第三个chart更新
-			weihaiDataOptionThree: {
-				handler (newVal, oldVal) {
-					if (chartWeihaiThree !== undefined) {
-						if (newVal) {
-							chartWeihaiThree.setOption(newVal, true)
-							// this.$refs.echartsRefWeihaiThree.init()
-						}
-					}
-				}
-			},
-			// 威海专项第四个chart更新
-			weihaiDataOptionFour: {
-				handler (newVal, oldVal) {
-					if (chartWeihaiFour !== undefined) {
-						if (newVal) {
-							chartWeihaiFour.setOption(newVal, true)
-							// this.$refs.echartsRefWeihaiFour.init()
-						}
-					}
-				}
 			}
 		},
 		onLoad() {
@@ -962,20 +660,10 @@
 			this.setTitleDates(this.cityName)
 			// 加载时根据当前日期设置日期球文字
 			this.setDateballText()
-			// 根据index切换城市 允许自动定位 不写入缓存 
-			// this.switchCityByIndex(this.cityIndex)
-			// // 10秒后关闭toast
-			// setTimeout(function () {
-			// 	uni.hideLoading()
-			// }.bind(this), 10000)
 		},
 		onPullDownRefresh() {
 			console.log('[界面]: 城市预报 下拉刷新')
 			this.requestData(this.cityName)
-			// // 10秒后关闭提示
-			// setTimeout(function () {
-			// 	uni.stopPullDownRefresh()
-			// }.bind(this), 10000)
 		},
 		onNavigationBarButtonTap() {
 			this.$refs.citypicker.switchDialog()
@@ -988,7 +676,7 @@
 
 	.header {
 		/* background-color: #fff; */
-		height: 80px;
+		height: 80upx;
 		display: flex;
 		align-items: center;
 	}
@@ -996,7 +684,7 @@
 	/* 微信小程序城市选择器 */
 	.container {
 		display: flex;
-		height: 80px;
+		height: 80upx;
 		width: 100%;
 	}
 	.main {
@@ -1006,7 +694,7 @@
 		align-items: center;
 	}
 	.sidebar {
-		width: 150px;
+		width: 150upx;
 		height: 100%;
 	}
 	.city-picker {
@@ -1034,14 +722,13 @@
 		position: relative;
         width: 95%;
 		left: 2.5%;
-        border-bottom: 1px solid #666;
+        border-bottom: 1upx solid #666;
 	}
 
 	/* 潮汐预报曲线图的容器 必须设置宽度和高度 */
 	.chart-tide {
 		width: 290%;
-		height: 250px;
-		/* border: 1px solid #000; */
+		height: 250upx;
 	}
 
 	/* 整个精细化组件的容器 */
@@ -1052,17 +739,16 @@
 	/* 曲线图的容器 必须设置宽度和高度 */
 	.chart-refined {
 		width: 290%;
-		height: 250px;
-		/* border: 1px solid #000000; */
+		height: 250upx;
 	}
 
 	/* 日期球的外观样式 */
 	.dateball {
 		display: flex;
-		width: 62px;
-		height: 62px;
+		width: 62upx;
+		height: 62upx;
 		background-color: rgba(148, 148, 148, 0.8);
-		border-radius: 62px;
+		border-radius: 62upx;
 		align-items: center;
 		justify-content: center;
 	}
@@ -1075,28 +761,28 @@
 	/* 第二个球滑动时的定位 调整slideball的top和fixball的bottom 让两种球平行 */
 	.slideball-Snd {
 		position: relative;
-		top: 10px;
+		top: 10upx;
 		left: 96%;
 	}
 
 	/* 第三个球滑动时的定位 */
 	.slideball-Trd {
 		position: relative;
-		top: 10px;
+		top: 10upx;
 		left: 188%;
 	}
 
 	/* 第一个球固定时的定位 */
 	.fixball-Fst {
 		position: relative;
-		bottom: 11px;
+		bottom: 11upx;
 		left: 0%;
 	}
 
 	/* 第二个球固定时的定位 */
 	.fixball-Snd {
 		position: relative;
-		bottom: 11px;
+		bottom: 11upx;
 		left: 74%;
 	}
 
@@ -1108,7 +794,7 @@
 	/* 第三个球固定时的定位 */
 	.fixball-Trd {
 		position: relative;
-		bottom: 11px;
+		bottom: 11upx;
 		left: 74%;
 	}
 
@@ -1127,7 +813,7 @@
 		display: flex;
 		flex-direction: row;
 		flex-wrap: nowrap;
-		height: 80px;
+		height: 80upx;
 	}
 
 	/* 固定的小球的容器 */
@@ -1137,18 +823,18 @@
 		flex-direction: row;
 		flex-wrap: nowrap;
 		position: absolute;
-		bottom: 0px;
+		bottom: 0;
 	}
 
 	/* 图表下方显示信息的面板 */
 	.infopanel {
 		position: absolute;
-		top: 260px;
+		top: 260upx;
 		width: 290%;
 		display: flex;
 		flex-direction: row;
 		flex-wrap: nowrap;
-		height: 80px;
+		height: 80upx;
 	}
 
 	/* 信息面板中一天的部分 */
@@ -1162,42 +848,13 @@
 	/* 信息面板的列 */
 	.infocolumn {
 		flex: 1;
-		padding: 10px;
+		padding: 10upx;
 		white-space: pre-wrap;
 	}
 
 	/* 左边的列 文字水平靠右 */
 	.infocolumn-left {
 		text-align: right;
-	}
-
-	/* 威海专项图表 */
-	.chart-weihai {
-		width: 100%;
-		height: 250px;
-		/* border: 1px solid #000000; */
-	}
-
-	/* 威海专项 图表下信息面板 */
-	.weihai-infopanel {
-		width: 100%;
-		height: 50px;
-		display: flex;
-		flex-direction: row;
-		flex-wrap: nowrap;
-	}
-
-	/* 威海专项 信息面板的列 */
-	.weihai-infocolumn {
-		flex: 2;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	/* 威海专项 信息面板两侧留白列 */
-	.weihai-infocolumn-side {
-		flex: 1;
 	}
 
 </style>

@@ -1,6 +1,4 @@
 var state = {
-    // 当前城市名称
-    cityname: '青岛',
     // 实时天气
     weatherdata: {
         temperature: '25', // 气温
@@ -202,48 +200,16 @@ var state = {
         ],
         optionFiveday: {}   // 五日高低温图表option
     },
-    // 威海专项预报
-    weihaidata: {
-        show: false,
-        first: {
-            show: false,
-            FORECASTDATE: '',
-            REPORTAREA: '',
-            WAVEHEIGHT: '',
-            WATERTEMP: '',
-            option: {}
-        },
-        second: {
-            show: false,
-            FORECASTDATE: '',
-            REPORTAREA: '',
-            WAVEHEIGHT: '',
-            WATERTEMP: '',
-            option: {}
-        },
-        third: {
-            show: false,
-            FORECASTDATE: '',
-            REPORTAREA: '',
-            WAVEHEIGHT: '',
-            WATERTEMP: '',
-            option: {}
-        },
-        fourth: {
-            show: false,
-            FORECASTDATE: '',
-            REPORTAREA: '',
-            WAVEHEIGHT: '',
-            WATERTEMP: '',
-            option: {}
-        }
+    // 青岛首页专项
+    qdoceandata: {
+        wave: '',
+        temp: '',
+        tidehigh: '',
+        tidelow: ''
     }
 }
 
 const mutations = {
-    setcityname (state, value) {
-        state.cityname = value
-    },
     setweather (state, value) {
         state.weatherdata = value
     },
@@ -262,15 +228,12 @@ const mutations = {
     setfiveday (state, value) {
         state.fivedaydata = value
     },
-    setweihai (state, value) {
-        state.weihaidata = value
+    setqdocean (state, value) {
+        state.qdoceandata = value
     }
 }
 
 const actions = {
-    setCityName (context, cityname) {
-        context.commit('setcityname', cityname)
-    },
     setWeatherData (context, weatherdata) {
         context.commit('setweather', weatherdata)
     },
@@ -289,8 +252,8 @@ const actions = {
     setFivedayData (context, fivedaydata) {
         context.commit('setfiveday', fivedaydata)
     },
-    setWeihaiData (context, weihaidata) {
-        context.commit('setweihai', weihaidata)
+    setQdOceanData (context, qdoceandata) {
+        context.commit('setqdocean', qdoceandata)
     }
 }
 

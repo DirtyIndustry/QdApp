@@ -9,7 +9,7 @@
 }
 .section-body {
     background-color: rgba(255, 255, 255, 0.8);
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 2upx 2upx 10upx rgba(0, 0, 0, 0.4);
 }
 .hide {
     position: fixed;
@@ -19,16 +19,22 @@
     height: 5vw;
 }
 .text {
-    font-size: 30px;
+    font-size: 30upx;
 }
 .text-mini {
-    font-size: 20px;
+    font-size: 20upx;
 }
 .text-small {
-    font-size: 24px;
+    font-size: 24upx;
 }
 .text-large {
-    font-size: 37px;
+    font-size: 37upx;
+}
+.text-XL {
+    font-size: 47upx;
+}
+.text-XXL {
+    font-size: 57upx;
 }
 .text-bold {
     font-weight: bold;
@@ -36,8 +42,14 @@
 .text-blue {
     color: #0092d4;
 }
+.text-dark {
+    color: #373737;
+}
 .text-gray {
     color: #666;
+}
+.text-green {
+    color: #08b23a;
 }
 .speed-up {
     -webkit-transform: translateZ(0);

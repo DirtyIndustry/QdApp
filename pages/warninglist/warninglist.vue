@@ -1,8 +1,8 @@
 <template>
 <view class="page-body">
-    <image src="../../static/Images/back_images.jpg" mode="aspectFill" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: -1;"/>
+    <image src="../../static/Images/back_images.png" mode="aspectFill" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: -1;"/>
     <flowTabbar leftLabel="风暴潮" middleLabel="海浪警报" rightLabel="海冰警报" @tabchange="switchTab"></flowTabbar>
-    <view style="height: 160px;" />
+    <view style="height: 160upx;" />
     <view>
         <!-- 左列表 -->
         <slideList :list="listLeft" :left="listLeftLeft" :show="listLeftShow" placeholder="近期没有风暴潮警报" @itemTap="warningTap"></slideList>
@@ -129,7 +129,7 @@ export default {
             let that = this
             uni.request({
                 url: appsettings.hosturl + 'GetDangeWarning_0816',
-                data: {name: 'admin', areaflg: '山东', filename: filename},
+                data: {name: 'admin', areaflg: '青岛', filename: filename},
                 method: 'POST',
                 success: function (res) {
                     console.log('[服务器]: 返回 预警报地址')
