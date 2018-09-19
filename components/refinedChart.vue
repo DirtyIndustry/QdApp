@@ -1,7 +1,7 @@
 <template>
     <view class="refinedChart-body">
         <!-- 地名 -->
-        <view class="chart-title" v-if="data.length > 0">{{data[0].loc}}</view>
+        <view class="chart-title" >{{data[0].loc}}</view>
         <scroll-view scroll-x="true" scroll-with-animation="true" @scroll="handleScroll">
             <view class="chart">
                 <myChart :option="option" :canvasId="canvasId" />

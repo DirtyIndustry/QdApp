@@ -31,7 +31,7 @@
 				<tableTitle title="潮汐预报" icon="../../static/Images/top_left_img_new.png" />
 				<!-- 第一个图表 -->
 				<view class="chart-container">
-					<text class="chart-title text" v-if="tideData.chartTideOneTitle !== ''">{{tideData.chartTideOneTitle}}</text>
+					<text class="chart-title text">{{tideData.chartTideOneTitle}}</text>
 					<scroll-view scroll-x="true">
 						<view class="chart-tide">
 							<mpvue-echarts :echarts="echarts" :onInit="handleInitTideOne" canvasId="canvasIdTideOne" ref="echartsRefTideOne"></mpvue-echarts>
@@ -71,7 +71,7 @@
 			<view class="page-section section-body" :class="{hide: !refinedData.show}">
 				<view class="refinedChart-body">
 					<!-- 地名 -->
-					<view v-if="refinedData.dataOne.length > 0" class="chart-title text">{{refinedData.dataOne[0].loc}}</view>
+					<view class="chart-title text">{{refinedData.dataOne[0].loc}}</view>
 					<scroll-view scroll-x="true" @scroll="handleScrollRefinedOne">
 						<view class="chart-refined">
 							<mpvue-echarts :echarts="echarts" :onInit="handleInitRefinedOne" canvasId="canvasIdRefinedOne" ref="echartsRefRefinedOne"></mpvue-echarts>
@@ -101,12 +101,11 @@
 					</view>
 				</view>
 				<!-- 两个图表之间的空白 -->
-				<view style="height: 60upx" v-if="refinedData.showTwo" />
-				<!-- <view v-if="refinedData.showTwo"> -->
+				<view style="height: 60upx" />
 				<view :class="{hide: !refinedData.showTwo}">
 					<view class="refinedChart-body">
 						<!-- 地名 -->
-						<view v-if="refinedData.dataTwo.length > 0" class="chart-title text">{{refinedData.dataTwo[0].loc}}</view>
+						<view class="chart-title text">{{refinedData.dataTwo[0].loc}}</view>
 						<scroll-view scroll-x="true" @scroll="handleScrollRefinedTwo">
 							<view class="chart-refined">
 								<mpvue-echarts :echarts="echarts" :onInit="handleInitRefinedTwo" canvasId="canvasIdRefinedTwo" ref="echartsRefRefinedTwo"></mpvue-echarts>

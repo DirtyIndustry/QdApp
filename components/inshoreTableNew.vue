@@ -15,7 +15,7 @@
         <!-- 占位 -->
         <view class="separator" />
         <!-- 地区为青岛时 显示额外表格 -->
-        <view v-if="inshoreData.showextra">
+        <view>
             <!-- 表头部分 -->
             <view class="table-body">
                 <view class="uni-flex uni-column">

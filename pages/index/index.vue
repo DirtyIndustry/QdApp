@@ -20,7 +20,7 @@
 				<tableTitle title="潮汐预报" date="" icon="../../static/Images/top_left_img_new.png" />
 				<!-- 第一个图表 -->
 				<view class="chart-container chart-container-one">
-					<text class="chart-title text" v-if="tideData.chartTideOneTitle !== ''">{{tideData.chartTideOneTitle}}</text>
+					<text class="chart-title text">{{tideData.chartTideOneTitle}}</text>
 					<scroll-view scroll-x="true" @scroll="scrollTideOne">
 						<view class="chart-tide">
 							<myChart :option="tideData.optionTideOne" canvasId="tideOne" />
@@ -60,8 +60,8 @@
 			<view class="page-section section-body">
 				<refinedChartAlt :option="refinedData.optionOne" :data="refinedData.dataOne" canvasId="refinedOne" />
 				<!-- 两个图表之间的空白 -->
-				<view style="height: 60upx" v-if="refinedData.showTwo" />
-				<view v-show="refinedData.showTwo">
+				<view style="height: 60upx" />
+				<view>
 					<refinedChartAlt :option="refinedData.optionTwo" :data="refinedData.dataTwo" canvasId="refinedTwo" />
 				</view>
 			</view>
