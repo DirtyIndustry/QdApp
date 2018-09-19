@@ -342,6 +342,9 @@
 					}, // success-request
 					fail: function (res) {
 						console.log('[服务器]: 请求 山东预报数据 失败')
+					},
+					complete: function (res) {
+						that.completedRequestCount++
 					}
 				})
 			},

@@ -715,7 +715,7 @@
 			// 完成的request
 			completedRequestCount: {
 				handler(newVal, oldVal) {
-					if (newVal === 1) {
+					if (newVal >= 1) {
 						uni.hideLoading()
 						uni.stopPullDownRefresh()
 					}
