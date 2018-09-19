@@ -6,7 +6,6 @@
 			<view class="separator" />
 			<!-- 天气预报模块 -->
 			<view class="page-section">
-				<!-- <realtimeWeather :weatherData="weatherData" /> -->
 				<qdRealTime :weatherData="weatherData" :qdOceanData="qdOceanData" />
 			</view>
 			<view class="separator" />
@@ -85,7 +84,6 @@
 	import appsettings from '../../utils/appsettings.js'
 	import utils from '../../utils/utils.js'
 	import myChart from '../../components/myChart.vue'
-	import realtimeWeather from '../../components/realtimeWeather.vue'
 	import qdRealTime from '../../components/qdRealTime.vue'
 	import warningSection from '../../components/warningSection.vue'
 	import fivedayForcast from '../../components/fivedayForcast.vue'
@@ -98,7 +96,6 @@
 	export default {
 		components: {
 			myChart,
-			realtimeWeather,
 			qdRealTime,
 			warningSection,
 			fivedayForcast,

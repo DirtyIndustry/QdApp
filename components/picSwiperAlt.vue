@@ -66,7 +66,7 @@
             interval: {
                 type: Number,
                 default () {
-                    return 2000
+                    return 3000
                 }
             }
         },

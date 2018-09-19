@@ -44,7 +44,6 @@
 <script>
 	import appsettings from '../../utils/appsettings.js'
 	import utils from '../../utils/utils.js'
-	import realtimeWeather from '../../components/realtimeWeather.vue'
 	import realtimeWeatherQD from '../../components/realtimeWeatherQD.vue'
 	import tableTitle from '../../components/tableTitle.vue'
 	import * as echarts from 'echarts'
@@ -54,7 +53,6 @@
 
 	export default {
 		components: {
-			realtimeWeather,
 			realtimeWeatherQD,
 			tableTitle,
 			mpvueEcharts
