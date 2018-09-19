@@ -10,7 +10,7 @@
 		<!-- 推送下方说明文字 -->
 		<view class="detail">
 			<view class="separator-horizontal"></view>
-			<view class="text-small text-gray">请在手机设置 > 通知 > 通知管理中找到山东海洋预报，可关闭通知。关闭后不再接收到推送的消息。</view>
+			<view class="text-small text-gray">请在手机设置 > 通知 > 通知管理中找到青岛海洋预报，可关闭通知。关闭后不再接收到推送的消息。</view>
 			<view class="separator-horizontal"></view>
 		</view>
 		<!-- 欢迎页面 -->

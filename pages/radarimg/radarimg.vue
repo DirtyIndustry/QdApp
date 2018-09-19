@@ -32,7 +32,7 @@
                 let that = this
                 uni.request({
                     url: appsettings.hosturl + 'GetRadarImages_0905',
-                    data: { name: 'admin', areaflg: '山东', cityname: source },
+                    data: { name: 'admin', areaflg: '青岛', cityname: source },
                     method: 'POST',
                     success: function (res) {
                         console.log('[服务器]: 返回 雷达图')

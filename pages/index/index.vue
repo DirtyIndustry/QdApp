@@ -179,7 +179,7 @@
 				let that = this
 				uni.request({
 					url: appsettings.hosturl + 'GetAlarm ',
-					data: {name: 'admin', areaflg: '山东'},
+					data: {name: 'admin', areaflg: '青岛'},
 					method: 'POST',
 					success: function (res) {
 						console.log('[服务器]: 返回 警报数据')
@@ -320,7 +320,7 @@
 						utils.storeToLocal('qdoceandata', JSON.stringify(res.qdOceanData))
 					}, // success-request
 					fail: function (res) {
-						console.log('[服务器]: 请求 山东预报数据 失败')
+						console.log('[服务器]: 请求 青岛预报数据 失败')
 					},
 					complete: function (res) {
 						that.completedRequestCount++

@@ -83,5 +83,7 @@ DONE... change completed request count
 DONE... change image swiper page interval time  
 DONE... icon  
 DONE... splash screen  
+DONE... delete v-if and v-show for city switch function  
+DONE... change areaflg from 山东 to 青岛  
+DONE... delete trend prediction page  
 menifest  
-delete v-if and v-show for city switch function  
