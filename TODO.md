@@ -81,3 +81,7 @@ DONE... ocean warning badge
 DONE... index page bottom copyright infomation  
 DONE... change completed request count  
 DONE... change image swiper page interval time  
+DONE... icon  
+DONE... splash screen  
+menifest  
+delete v-if and v-show for city switch function  
