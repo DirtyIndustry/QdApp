@@ -86,4 +86,5 @@ DONE... splash screen
 DONE... delete v-if and v-show for city switch function  
 DONE... change areaflg from 山东 to 青岛  
 DONE... delete trend prediction page  
+DONE... delete fishery forecast page  
 menifest  
