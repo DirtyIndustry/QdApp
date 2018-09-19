@@ -39,8 +39,7 @@
 					</scroll-view>
 				</view>
 				<!-- 第二个图表 只在青岛地区显示 -->
-				<!-- <view class="section-body" v-show="tideData.chartTideTwoShow"> -->
-				<view class="chart-container" :class="{hide: !tideData.chartTideTwoShow}">
+				<view class="chart-container">
 					<text class="chart-title text">{{tideData.chartTideTwoTitle}}</text>
 					<scroll-view class="scroll-view_H" scroll-x="true" @scroll="scrollTideTwo">
 						<view class="chart-tide">
@@ -67,8 +66,7 @@
 			</view>
 			<view class="separator" />
 			<!-- 精细化预报 -->
-			<!-- <view class="page-section section-body" v-show="refinedData.show"> -->
-			<view class="page-section section-body" :class="{hide: !refinedData.show}">
+			<view class="page-section section-body">
 				<view class="refinedChart-body">
 					<!-- 地名 -->
 					<view class="chart-title text">{{refinedData.dataOne[0].loc}}</view>
@@ -102,7 +100,7 @@
 				</view>
 				<!-- 两个图表之间的空白 -->
 				<view style="height: 60upx" />
-				<view :class="{hide: !refinedData.showTwo}">
+				<view>
 					<view class="refinedChart-body">
 						<!-- 地名 -->
 						<view class="chart-title text">{{refinedData.dataTwo[0].loc}}</view>
