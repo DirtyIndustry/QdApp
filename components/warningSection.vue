@@ -1,7 +1,7 @@
 <template>
     <view v-show="hasWarning">
         <!-- 台风警报 -->
-        <view class="warning-section" v-if="typhoon !== ''" @tap="$emit('typhoonTap')">
+        <view class="warning-section typhoon-warning" v-if="typhoon !== ''" @tap="$emit('typhoonTap')">
             <view class="warning-header">
                 <image class="warning-header-icon" src="../../static/Images/bugle.png" mode="aspectFit"/>
                 <view class="warning-header-text-container">
@@ -17,10 +17,8 @@
             </view>
             <view class="warning-fader warning-fader-right"></view>
         </view>
-        <!-- 分隔栏 -->
-        <view style="height: 5upx;"></view>
         <!-- 海浪警报 -->
-        <view class="warning-section" v-if="wave !== ''" @tap="$emit('waveTap')">
+        <view class="warning-section ocean-warning" v-if="wave !== ''" @tap="$emit('waveTap')">
             <view class="warning-header">
                 <image class="warning-header-icon" src="../../static/Images/warning.png" mode="aspectFit"/>
                 <view class="warning-header-text-container">
@@ -70,11 +68,20 @@ export default {
 @import "../common/generic.css";
 .warning-section {
     border: 1upx solid #999;
+    width: 100%;
     height: 60upx;
-    position: relative;
+    position: fixed;
     overflow: hidden;
     background-color: rgba(255, 255, 255, 0.8);
-    /* --marqueeWidth--: -12em; */
+    z-index: 10;
+}
+.typhoon-warning {
+    top: 0;
+    left: 0;
+}
+.ocean-warning {
+    bottom: 0;
+    left: 0;
 }
 .warning-header {
     position: absolute;

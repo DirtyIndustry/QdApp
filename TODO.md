@@ -76,3 +76,7 @@ DONE... index page realtime weather module
 DONE... index page ocean module  
 DONE... index page change background picture  
 DONE... weather forecast page realtime weather module    
+DONE... typhoon warning badge  
+DONE... ocean warning badge  
+DONE... index page bottom copyright infomation  
+change completed request count  

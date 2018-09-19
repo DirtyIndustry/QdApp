@@ -2,7 +2,7 @@
 	<!-- <view style="background-image: url(../../static/Images/back_images.png); background-repeat: no-repeat; background-size: contain; background-attachment: scroll;"> -->
 	<view>
 		<view class="page-body">
-			<image src="../../static/Images/back_images_Sec.png" mode="aspectFill" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: -1;" />
+			<image src="../../static/Images/back_images.png" mode="aspectFill" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: -1;" />
 			<view class="separator" />
 			<!-- 天气预报模块 -->
 			<view class="page-section">
@@ -73,6 +73,10 @@
 				<fivedayForcast :option="fivedayData.optionFiveday" :fivedayWeather="fivedayData.fivedayWeather" canvasId="fiveday" />
 			</view>
 			<view class="separator" />
+			<!-- 底部版权条 -->
+			<view class="page-section section-body copyright text-small">青岛市海洋与渔业局·青岛市海洋预报中心—版权所有</view>
+			<view class="separator" />
+			<view v-if="warningData.waveWarning !== ''" class="separator" />
 		</view>
 	</view>
 </template>
@@ -458,5 +462,12 @@
 	}
 	.chevron-hide {
 		opacity: 0;
+	}
+	.copyright {
+		height: 80upx;
+		border-radius: 10upx;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 </style>

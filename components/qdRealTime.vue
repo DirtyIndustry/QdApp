@@ -2,6 +2,7 @@
 <view>
     <view class="container">
         <view class="column weather-column" >
+            <view class="separator" />
             <view class="temp-row">
                 <image class="temp-bg" src="../../static/Images/forecastTime_left_img.png" mode="scaleToFill" />
                 <view class="temp-cell text-dark text-bold">
