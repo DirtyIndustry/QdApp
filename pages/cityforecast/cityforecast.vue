@@ -1,7 +1,6 @@
 <template>
 	<!-- <view style="background-image: url(../../static/Images/back_images.png); background-repeat: no-repeat; background-size: contain; background-attachment: scroll;"> -->
 	<view>
-		<myPicker ref="citypicker" :items="cityArray" @itemSelected="mypickerSelect"></myPicker>
 		<view class="page-body">
 			<image src="../../static/Images/back_images.png" mode="aspectFill" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: -1;" />
 			<!-- 地区选择模块 -->
@@ -147,7 +146,6 @@
 	import appsettings from '../../utils/appsettings.js'
 	import utils from '../../utils/utils.js'
 	import bathsTable from '../../components/bathsTable.vue'
-	import myPicker from '../../components/myPicker.vue'
 	import tableTitle from '../../components/tableTitle.vue'
 	import inshoreTableNew from '../../components/inshoreTableNew.vue'
 	import * as echarts from 'echarts'
@@ -161,7 +159,6 @@
 	export default {
 		components: {
 			bathsTable,
-			myPicker,
 			tableTitle,
 			inshoreTableNew,
 			mpvueEcharts
@@ -246,11 +243,6 @@
 				get() { return this.$store.state.Datas.fivedaydata },
 				set(value) { this.$store.dispatch('setFivedayData', value) }
 			},
-			// 威海专项
-			weihaiData: {
-				get() { return this.$store.state.Datas.weihaidata },
-				set(value) { this.$store.dispatch('setWeihaiData', value) }
-			},
 			// 潮汐预报chart option
 			tideDataOptionOne () { return this.$store.state.Datas.tidedata.optionTideOne },
 			tideDataOptionTwo () { return this.$store.state.Datas.tidedata.optionTideTwo },
@@ -259,36 +251,6 @@
 			refinedDataOptionTwo () { return this.$store.state.Datas.refineddata.optionTwo }
 		},
 		methods: {
-			// 地区选择菜单操作
-			bindPickerChange: function (e) {
-				// 弹出loading toast
-				uni.showLoading({
-					title: '加载中',
-					mask: true
-				})
-				// 写入Vuex和缓存
-				this.cityIndex = e.target.value
-				utils.storeToLocal('cityindex', e.target.value)
-				this.switchCityByIndex(e.target.value)
-
-				// // 10秒后关闭toast
-				// setTimeout(function () {
-				// 	uni.hideLoading()
-				// }.bind(this), 10000)
-			},
-			// 根据index切换城市 允许自动定位 不写入缓存
-			switchCityByIndex(index) {
-				// 切换城市
-				utils.switchCity(this.cityArray[index], this.switchCityByName)
-			},
-			// 根据name切换城市 写入缓存
-			switchCityByName(city) {
-				// 写入Vuex和缓存
-				this.cityName = city
-				utils.storeToLocal('cityname', city)
-				// 根据城市向服务器申请数据
-				this.requestData(city)
-			},
 			// 读取服务器数据
 			requestData(city) {
 				// 任务计数器归零
@@ -404,52 +366,6 @@
 						// 写入Vuex
 						that.fivedayData = fivedayData
 
-						// 威海专项
-						// 判断城市
-						if (res.weihaiDatas.length > 0) {	// 如果是威海
-							that.weihaiData.show = true
-							that.weihaiData.first.show = true
-							that.weihaiData.second.show = true
-							that.weihaiData.third.show = true
-							that.weihaiData.fourth.show = true
-							for (let i = 0; i < res.weihaiDatas.length; i++) {
-								let data = {
-									show: res.weihaiDatas[i].show,
-									REPORTAREA: res.weihaiDatas[i].REPORTAREA,
-									FORECASTDATE: res.weihaiDatas[i].FORECASTDATE,
-									WAVEHEIGHT: res.weihaiDatas[i].WAVEHEIGHT,
-									WATERTEMP: res.weihaiDatas[i].WATERTEMP,
-								}
-								let tide = utils.buildTidedata(res.weihaiDatas[i].tideinfo.tidedata)
-								let mark = utils.buildMarkdata(res.weihaiDatas[i].tideinfo.markdata)
-								data.option = utils.getAstroOptionNew(tide, mark, res.weihaiDatas[i].tideinfo.max, res.weihaiDatas[i].tideinfo.min)
-								data.option.grid = {
-									top: '4%',
-									left: '-3%',
-									right: '5%',
-									bottom: '20%',
-									containLabel: true
-								}
-								switch (res.weihaiDatas[i].REPORTAREA) {
-									case '成山头':
-										that.weihaiData.first = data
-										break
-									case '乳山':
-										that.weihaiData.second = data
-										break
-									case '石岛':
-										that.weihaiData.third = data
-										break
-									case '文登':
-										that.weihaiData.fourth = data
-										break
-									default:
-										break
-								}
-							} // end-for res.weihaiDatas
-						} else {	// 如果是威海以外的城市
-							that.weihaiData.show = false
-						}
 						// 写入本地缓存
 						utils.storeToLocal('weatherdata', JSON.stringify(res.weatherData))
 						utils.storeToLocal('tidedata', JSON.stringify(that.tideData))
@@ -457,7 +373,6 @@
 						utils.storeToLocal('bathsdata', JSON.stringify(that.bathsData))
 						utils.storeToLocal('refineddata', JSON.stringify(that.refinedData))
 						utils.storeToLocal('fivedaydata', JSON.stringify(fivedayData))
-						utils.storeToLocal('weihaidata', JSON.stringify(that.weihaiData))
 
 					}, // success-request
 					fail: function (res) {
@@ -484,8 +399,6 @@
 						this.refinedData.showTwo = true
 						// 7到9月份显示浴场预报
 						this.bathsData.showBaths = new Date().getMonth() > 5 & new Date().getMonth() < 9 ? true : false
-						// 不显示威海专项预报
-						this.weihaiData.show = false
 						break
 					case '威海':
 						// 不显示第二个潮汐曲线
@@ -499,12 +412,6 @@
 						this.refinedData.showTwo = false
 						// 不显示浴场预报
 						this.bathsData.showBaths = false
-						// 显示威海专项预报
-						this.weihaiData.show = true
-						this.weihaiData.first.show = true
-						this.weihaiData.second.show = true
-						this.weihaiData.third.show = true
-						this.weihaiData.fourth.show = true
 						break
 					case '滨州':
 						// 不显示第二个潮汐曲线
@@ -518,8 +425,6 @@
 						this.refinedData.showTwo = false
 						// 不显示浴场预报
 						this.bathsData.showBaths = false
-						// 显示威海专项预报
-						this.weihaiData.show = false
 						break
 					default:
 						// 不显示第二个潮汐曲线
@@ -533,8 +438,6 @@
 						this.refinedData.showTwo = false
 						// 不显示浴场预报
 						this.bathsData.showBaths = false
-						// 显示威海专项预报
-						this.weihaiData.show = false
 						break
 				}
 			},
@@ -692,23 +595,6 @@
 			handleScrollRefinedTwo(e) {
 				// utils.setDateballStatus(e.detail.scrollLeft, this.systemInfo.windowWidth - 60, this.ballStatus)
 				this.setDateballStatus(e.detail.scrollLeft, this.systemInfo.windowWidth, this.ballStatusRefinedTwo)
-			},
-			// 自定义picker选择
-			mypickerSelect(index, item) {
-				// 弹出loading toast
-				uni.showLoading({
-					title: '加载中',
-					mask: true
-				})
-				// 写入Vuex和缓存
-				this.cityIndex = index
-				utils.storeToLocal('cityindex', index)
-				this.switchCityByIndex(index)
-
-				// // 10秒后关闭toast
-				// setTimeout(function () {
-				// 	uni.hideLoading()
-				// }.bind(this), 10000)
 			}
 		}, // end-methods
 		watch: {
@@ -972,34 +858,6 @@
 	/* 左边的列 文字水平靠右 */
 	.infocolumn-left {
 		text-align: right;
-	}
-
-	/* 威海专项图表 */
-	.chart-weihai {
-		width: 100%;
-		height: 250upx;
-	}
-
-	/* 威海专项 图表下信息面板 */
-	.weihai-infopanel {
-		width: 100%;
-		height: 50upx;
-		display: flex;
-		flex-direction: row;
-		flex-wrap: nowrap;
-	}
-
-	/* 威海专项 信息面板的列 */
-	.weihai-infocolumn {
-		flex: 2;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	/* 威海专项 信息面板两侧留白列 */
-	.weihai-infocolumn-side {
-		flex: 1;
 	}
 
 </style>
