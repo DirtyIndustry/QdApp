@@ -79,4 +79,5 @@ DONE... weather forecast page realtime weather module
 DONE... typhoon warning badge  
 DONE... ocean warning badge  
 DONE... index page bottom copyright infomation  
-change completed request count  
+DONE... change completed request count  
+DONE... change image swiper page interval time  

@@ -1,10 +1,14 @@
 <template>
 <view>
     <view class="container">
-        <view class="column weather-column" >
+        <!-- 左列 天气列 -->
+        <view class="column" >
             <view class="separator" />
-            <view class="temp-row">
-                <image class="temp-bg" src="../../static/Images/forecastTime_left_img.png" mode="scaleToFill" />
+            <!-- 气温行 -->
+            <view class="title-row">
+                <!-- 背景图片 -->
+                <image class="bgimg" src="../../static/Images/forecastTime_left_img.png" mode="scaleToFill" />
+                <!-- 温度数字 -->
                 <view class="temp-cell text-dark text-bold">
                     <view class="text-huge">{{weatherData.temperature}}</view>
                     <view class="temp-mark">
@@ -12,42 +16,53 @@
                     </view>
                 </view>
             </view>
+            <!-- 天气状况 -->
             <view class="weather-row">
-                <image class="weather-bg" src="../../static/Images/middle_bottom_right_Sec.png" mode="scaleToFill" />
-                <view class="weather-content">
-                    <view class="weather-upper"/>
-                    <view class="weather-cell">
+                <image class="bgimg" src="../../static/Images/middle_bottom_right_Sec.png" mode="scaleToFill" />
+                <view class="row-content">
+                    <!-- 上方空白 -->
+                    <view class="row-content-upper"/>
+                    <view class="row-content-cell">
+                        <!-- 天气图标 -->
                         <view class="cell-header">
                             <image class="image-icon" :src="weatherData.weatherIcon" mode="aspectFit" />
                         </view>
+                        <!-- 文字描述 -->
                         <view class="cell-body text">{{weatherData.weather}}</view>
                     </view>
                 </view>
             </view>
+            <!-- 空气状况 -->
             <view class="weather-row">
-                <image class="weather-bg" src="../../static/Images/middle_bottom_right_Sec.png" mode="scaleToFill" />
-                <view class="weather-content">
-                    <view class="weather-upper"/>
-                    <view class="weather-cell">
+                <image class="bgimg" src="../../static/Images/middle_bottom_right_Sec.png" mode="scaleToFill" />
+                <view class="row-content">
+                    <view class="row-content-upper"/>
+                    <view class="row-content-cell">
+                        <!-- 空气质量图标 -->
                         <view class="cell-header" :class="{vert: weatherData.airconDesc === '优', jeune: weatherData.airconDesc === '良', orange: weatherData.airconDesc === '轻度污染', rouge: weatherData.airconDesc === '重度污染'}">
                             <view class="fa fa-leaf font-icon"/>
                             <view class="text-mini-icon">AQI</view>
                         </view>
+                        <!-- 文字描述 -->
                         <view class="cell-body text">{{weatherData.aircondition}} {{weatherData.airconDesc}}</view>
                     </view>
                 </view>
             </view>
+            <!-- pm2.5 -->
             <view class="weather-row">
-                <image class="weather-bg" src="../../static/Images/middle_bottom_right_Sec.png" mode="scaleToFill" />
-                <view class="weather-content">
-                    <view class="weather-upper"/>
-                    <view class="weather-cell">
+                <image class="bgimg" src="../../static/Images/middle_bottom_right_Sec.png" mode="scaleToFill" />
+                <view class="row-content">
+                    <view class="row-content-upper"/>
+                    <view class="row-content-cell">
+                        <!-- pm2.5字样 -->
                         <view class="text-icon text-large text-bold" :class="{vert: weatherData.airconDesc === '优', jeune: weatherData.airconDesc === '良', orange: weatherData.airconDesc === '轻度污染', rouge: weatherData.airconDesc === '重度污染'}">
                             &nbsp;PM2.5
                         </view>
                         <view class="cell-body">
-                            <view class="cell-content text">&nbsp;{{weatherData.pm25}}</view>
-                            <view class="cell-content">
+                            <!-- pm2.5数值 -->
+                            <view class="cell-pm25-column text">&nbsp;{{weatherData.pm25}}</view>
+                            <!-- 毫克每立方米单位 -->
+                            <view class="cell-pm25-column">
                                 <view style="height: 15upx;" />
                                 <view class="text-mini">&nbsp;μg/m³</view>
                             </view>
@@ -56,53 +71,48 @@
                 </view>
             </view>
         </view>
-        <view class="column-right ocean-column" >
+        <!-- 右列 海洋预报列 -->
+        <view class="column-right" >
             <view style="height: 10vh;" />
+            <!-- 低潮时行 -->
             <view class="ocean-row">
-                <view class="weather-row-right">
-                    <image class="weather-bg" src="../../static/Images/middle_bottom_right_Sec.png" mode="scaleToFill" />
-                    <view class="weather-content">
-                        <view class="weather-upper"/>
-                        <view class="weather-cell">
+                    <image class="bgimg" src="../../static/Images/middle_bottom_right_Sec.png" mode="scaleToFill" />
+                    <view class="row-content">
+                        <view class="row-content-upper"/>
+                        <view class="row-content-cell">
                             <view class="cell-body text">低潮时: {{qdOceanData.tidelow}}</view>
                         </view>
                     </view>
-                </view>
             </view>
+            <!-- 高潮时行 -->
             <view class="ocean-row">
-                <view class="weather-row-right">
-                    <image class="weather-bg" src="../../static/Images/middle_bottom_right_Sec.png" mode="scaleToFill" />
-                    <view class="weather-content">
-                        <view class="weather-upper"/>
-                        <view class="weather-cell">
+                    <image class="bgimg" src="../../static/Images/middle_bottom_right_Sec.png" mode="scaleToFill" />
+                    <view class="row-content">
+                        <view class="row-content-upper"/>
+                        <view class="row-content-cell">
                             <view class="cell-body text">高潮时: {{qdOceanData.tidehigh}}</view>
                         </view>
                     </view>
-                </view>
             </view>
             <view class="ocean-row">
-                <view class="weather-row-right">
-                    <image class="weather-bg" src="../../static/Images/middle_bottom_right_Sec.png" mode="scaleToFill" />
-                    <view class="weather-content">
-                        <view class="weather-upper"/>
-                        <view class="weather-cell">
+                    <image class="bgimg" src="../../static/Images/middle_bottom_right_Sec.png" mode="scaleToFill" />
+                    <view class="row-content">
+                        <view class="row-content-upper"/>
+                        <view class="row-content-cell">
                             <view class="cell-body text">海温: {{qdOceanData.temp}}</view>
                         </view>
                     </view>
-                </view>
             </view>
             <view class="ocean-row">
-                <view class="weather-row-right">
-                    <image class="weather-bg" src="../../static/Images/middle_bottom_right_Sec.png" mode="scaleToFill" />
-                    <view class="weather-content">
-                        <view class="weather-upper"/>
-                        <view class="weather-cell">
+                    <image class="bgimg" src="../../static/Images/middle_bottom_right_Sec.png" mode="scaleToFill" />
+                    <view class="row-content">
+                        <view class="row-content-upper"/>
+                        <view class="row-content-cell">
                             <view class="cell-body text">浪高: {{qdOceanData.wave}}</view>
                         </view>
                     </view>
-                </view>
             </view>
-            <view class="ocean-title">
+            <view class="title-row">
                 <image class="ocean-title-bg" src="../../static/Images/forecastTime_right_img.png" mode="scaleToFill" />
                 <view class="ocean-title-cell">
                     <view class="text-dark text-bold text-XL">海洋预报</view>
@@ -116,7 +126,7 @@
 
 <script>
 export default {
-    name: 'qdRealTime',
+    name: 'qdFrontpage',
     props: {
         // 实时天气
         weatherData: {
@@ -170,37 +180,86 @@ export default {
     @import "../common/generic.css";
     @import "../common/FontAwesome.css";
 
+    /* 整体容器 */
     .container {
         width: 100%;
         height: 100vh;
         display: flex;
         flex-direction: row;
     }
+    /* 左列 */
     .column {
+        flex: 4;
         display: flex;
         flex-direction: column;
         overflow: hidden;
     }
+    /* 右列 */
     .column-right {
+        flex: 3;
         display: flex;
         flex-direction: column-reverse;
     }
-    .weather-column {
-        flex: 4;
-    }
-    .ocean-column {
-        flex: 3;
-    }
-    .temp-row {
+    /* 每列上方温度和海洋预报行 */
+    .title-row {
         position: relative;
         width: 100%;
         height: 250upx;
     }
-    .temp-bg {
+    /* 左列天气行 */
+    .weather-row {
+        position: relative;
+        left: 3%;
+        width: 80%;
+        height: 130upx;
+    }
+    /* 右列海洋行 */
+    .ocean-row {
+        position: relative;
+        width: 100%;
+        height: 100upx;
+    }
+    /* 每行的背景图片 */
+    .bgimg {
         position: absolute;
         width: 100%;
         height: 100%;
     }
+    /* 每行的前景内容 */
+    .row-content {
+        position: absolute;
+        left: 3upx;
+        width: 98%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    /* 每行前景上方占位空白 */
+    .row-content-upper {
+        width: 100%;
+        height: 29%;
+    }
+    /* 每行前景内容格 */
+    .row-content-cell {
+        width: 100%;
+        height: 60%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    /* 每行前景内容格 左方图标部分 */
+    .cell-header {
+        position: relative;
+        width: 88upx;
+        height: 100%;
+    }
+    /* 每行前景内容格 文字内容部分 */
+    .cell-body {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    /* 气温单元格 */
     .temp-cell {
         position: absolute;
         width: 100%;
@@ -209,49 +268,22 @@ export default {
         align-items: center;
         justify-content: center;
     }
+    /* 气温大型字体 */
+    .text-huge {
+        font-size: 120upx;
+    }
+    /* 摄氏度单位容器 */
     .temp-mark {
         height: 50%;
     }
-    .weather-row {
-        position: relative;
-        left: 3%;
-        width: 80%;
-        height: 130upx;
-    }
-    .ocean-row {
-        position: relative;
-        width: 100%;
-        height: 100upx;
-    }
-    .weather-bg {
+    /* 天气状况图片图标 */
+    .image-icon {
         position: absolute;
-        width: 100%;
+        left: 8upx;
+        width: 90%;
         height: 100%;
     }
-    .weather-content {
-        position: absolute;
-        left: 3upx;
-        width: 98%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-    .weather-upper {
-        width: 100%;
-        height: 29%;
-    }
-    .weather-cell {
-        width: 100%;
-        height: 60%;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-    }
-    .cell-header {
-        position: relative;
-        width: 88upx;
-        height: 100%;
-    }
+    /* 空气质量字体icon */
     .font-icon {
         position: absolute;
         left: 8upx;
@@ -261,41 +293,29 @@ export default {
         flex-direction: row;
         align-items: center;
     }
+    /* 空气质量AQI字样 */
     .text-mini-icon {
         position: absolute;
         right: 0;
         bottom: 0;
         font-size: 18upx;
     }
-    .image-icon {
-        position: absolute;
-        left: 8upx;
-        width: 90%;
-        height: 100%;
-    }
+    /* pm2.5文字图标 */
     .text-icon {
         width: 70upx;
         height: 100%;
         display: flex;
         align-items: center;
     }
-    .cell-body {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-    }
-    .cell-content {
+    /* pm2.5单元格内的列 */
+    .cell-pm25-column {
         height: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
     }
-    .ocean-title {
-        position: relative;
-        width: 100%;
-        height: 250upx;
-    }
+    /* 海洋预报背景图片 */
     .ocean-title-bg {
         position: absolute;
         width: 120%;
@@ -303,6 +323,7 @@ export default {
         left: -15%;
         z-index: 1;
     }
+    /* 海洋预报单元格 */
     .ocean-title-cell {
         position: absolute;
         left: -15%;
@@ -314,9 +335,7 @@ export default {
         flex-direction: column;
         z-index: 2;
     }
-    .text-huge {
-        font-size: 120upx;
-    }
+    /* 颜色 */
     .vert {
         color: green;
     }
