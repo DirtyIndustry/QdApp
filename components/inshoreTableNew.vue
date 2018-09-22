@@ -1,6 +1,6 @@
 <template>
     <view>
-        <view class="table-date text-small">{{tabledate}}</view>
+        <view class="table-date text-small">{{inshoreData.timelower}}</view>
         <!-- 近海预报表格 固定三列 -->
         <view class="table-body">
             <view class="uni-flex uni-column">
@@ -15,30 +15,28 @@
         <!-- 占位 -->
         <view class="separator" />
         <!-- 地区为青岛时 显示额外表格 -->
-        <view>
-            <!-- 表头部分 -->
-            <view class="table-body">
-                <view class="uni-flex uni-column">
-                    <view class="inshore-row inshore-row-top">
-                        <view class="inshore-cell inshore-column-head text">青岛海域</view>
-                        <view class="inshore-cell inshore-column inshore-column-right text">浪高(m)</view>
-                        <view class="inshore-cell inshore-column inshore-column-right text">表层水温(℃)</view>
-                    </view>
-                    <view class="inshore-row">
-                        <view class="inshore-cell inshore-column-head text">{{daytwo}}</view>
-                        <view class="inshore-cell inshore-column inshore-column-right text">{{inshoreData.extrawave48h}}</view>
-                        <view class="inshore-cell inshore-column inshore-column-right text">{{inshoreData.extratemp48h}}</view>
-                    </view>
-                    <view class="inshore-row">
-                        <view class="inshore-cell inshore-column-head text">{{daythree}}</view>
-                        <view class="inshore-cell inshore-column inshore-column-right text">{{inshoreData.extrawave72h}}</view>
-                        <view class="inshore-cell inshore-column inshore-column-right text">{{inshoreData.extratemp72h}}</view>
-                    </view>
+        <!-- 表头部分 -->
+        <view class="table-body">
+            <view class="uni-flex uni-column">
+                <view class="inshore-row inshore-row-top">
+                    <view class="inshore-cell inshore-column-head text">青岛海域</view>
+                    <view class="inshore-cell inshore-column inshore-column-right text">浪高(m)</view>
+                    <view class="inshore-cell inshore-column inshore-column-right text">表层水温(℃)</view>
+                </view>
+                <view class="inshore-row">
+                    <view class="inshore-cell inshore-column-head text">{{inshoreData.extradate48h}}</view>
+                    <view class="inshore-cell inshore-column inshore-column-right text">{{inshoreData.extrawave48h}}</view>
+                    <view class="inshore-cell inshore-column inshore-column-right text">{{inshoreData.extratemp48h}}</view>
+                </view>
+                <view class="inshore-row">
+                    <view class="inshore-cell inshore-column-head text">{{inshoreData.extradate72h}}</view>
+                    <view class="inshore-cell inshore-column inshore-column-right text">{{inshoreData.extrawave72h}}</view>
+                    <view class="inshore-cell inshore-column inshore-column-right text">{{inshoreData.extratemp72h}}</view>
                 </view>
             </view>
-            <!-- 占位 -->
-            <view class="separator" />
         </view>
+        <!-- 占位 -->
+        <view class="separator" />
     </view>
 </template>
 
@@ -55,36 +53,6 @@
                     extra: {}
                 }
             }
-        },
-        data () {
-            return {
-                dayone: '',
-                daytwo: '',
-                daythree: '',
-            }
-        },
-        computed:{
-            tabledate () {
-                if (this.inshoreData.showextra) {
-                    return this.dayone + '0时—' + this.daytwo + '0时'
-                } else {
-                    return ''
-                }
-            }
-        },
-        methods: {
-            // 根据当前时间获取显示用日期字符串
-            getDate () {
-                let now = new Date()
-                this.dayone = (now.getMonth() + 1) + '月' + now.getDate() + '日'
-                now.setDate(now.getDate() + 1)
-                this.daytwo = (now.getMonth() + 1) + '月' + now.getDate() + '日'
-                now.setDate(now.getDate() + 1)
-                this.daythree = (now.getMonth() + 1) + '月' + now.getDate() + '日'
-            }
-        },
-        onLoad () {
-            this.getDate()
         }
     }
 </script>

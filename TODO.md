@@ -95,4 +95,9 @@ DONE... clean timer when page unload
 DONE... menu page, about page, setting page stop scroll  
 DONE... ocean forecast font-size auto adjust  
 DONE... change inshore and baths models in vuex  
+DONE... apply inshore and baths in App.vue  
+DONE... apply inshore and baths in index page  
+DONE... apply inshore and baths in components  
+DONE... apply inshore and baths in city forecast page  
+DONE... apply inshore and baths in weather forecast page  
 menifest  

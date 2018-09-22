@@ -46,13 +46,13 @@
 			<view class="separator" />
 			<!-- 近海预报 -->
 			<view class="page-section section-body">
-				<tableTitle title="近海预报" :date="inshoreTitleDate" icon="../../static/Images/top_left_img_newS.png" />
+				<tableTitle title="近海预报" :date="inshoreData.timeupper" icon="../../static/Images/top_left_img_newS.png" />
 				<inshoreTableNew :inshoreData="inshoreData" />
 			</view>
 			<view class="separator" />
 			<!-- 浴场预报 -->
 			<view class="page-section section-body" v-if="bathsData.showBaths">
-				<tableTitle title="浴场预报" :date="bathsTitleDate" icon="../../static/Images/top_left_img_newS.png" />
+				<tableTitle title="浴场预报" :date="bathsData.time" icon="../../static/Images/top_left_img_newS.png" />
 				<bathsTable :bathsData="bathsData.data" />
 			</view>
 			<!-- 精细化预报 -->
@@ -116,11 +116,6 @@
 					waveWarning: '',
 					waveUrl: ''
 				},
-
-				// 近海预报日期字符串
-				inshoreTitleDate: '',
-				// 浴场预报日期字符串
-				bathsTitleDate: '',
 				// 潮汐预报一左右三角箭头显隐
 				tideOneChevronLeftShow: false,
 				tideOneChevronRightShow: true,
@@ -171,7 +166,6 @@
 			requestData(city) {
 				// 任务计数器归零
 				this.completedRequestCount = 0
-				this.setTitleDates(city)
 				this.loadAlarmData()
 				this.loadQingdaoData()
 			},
@@ -263,14 +257,8 @@
 						that.inshoreData = res.inshoreData
 
 						// 浴场预报
-						// 判断月份
-						if (new Date().getMonth() > 5 & new Date().getMonth() < 9) {
-							that.bathsData.showBaths = true
-						} else {
-							that.bathsData.showBaths = false
-						}
 						// 写入Vuex
-						that.bathsData.data = res.bathsDatas
+						that.bathsData = res.bathsData
 
 						// 精细化预报
 						that.refinedData.show = true
@@ -298,7 +286,6 @@
 							}
 						}
 						
-
 						// 五日天气预报
 						let fivedayData = {
 							fivedayWeather: res.fivedayData.fivedayWeathers,
@@ -326,27 +313,6 @@
 						that.completedRequestCount++
 					}
 				})
-			},
-			// 根据城市名称设置近海和浴场预报表头时间
-			setTitleDates (cityname) {
-				let now = new Date()
-				let one = (now.getMonth() + 1) + '月' + now.getDate() + '日'
-				now.setDate(now.getDate() + 1)
-				let two = (now.getMonth() + 1) + '月' + now.getDate() + '日'
-				now.setDate(now.getDate() + 1)
-				let three = (now.getMonth() + 1) + '月' + now.getDate() + '日'
-				now.setDate(now.getDate() + 1)
-				let four = (now.getMonth() + 1) + '月' + now.getDate() + '日'
-				switch (cityname) {
-					case '青岛':
-						this.inshoreTitleDate = ''
-						this.bathsTitleDate = one + '0时至' + two + '0时'
-						break
-					default:
-						this.inshoreTitleDate = one + '0时至' + four + '0时'
-						this.bathsTitleDate = ''
-						break
-				}
 			},
 			// 台风警报点击
 			typhoonWarningTap() {
@@ -405,7 +371,6 @@
 				mask: true
 			})
 			this.completedRequestCount = 1
-			this.setTitleDates('青岛')
 			this.loadAlarmData()
 		},
 		onReady() {
