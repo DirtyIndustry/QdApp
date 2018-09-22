@@ -90,5 +90,6 @@ DONE... delete fishery forecast page
 DONE... map zooming show/hide markers  
 DONE... change var in map and typhoonmap  
 DONE... change echarts  
+DONE... update picSwiper  
 clean timer when page unload  
 menifest  
