@@ -103,11 +103,11 @@ export default {
         },
         // 设置右按钮组右边距
         setRightTabbarRight () {
-            console.log(this.systemInfo.windowWidth)
-            console.log(this.systemInfo.screenWidth)
-            console.log(this.systemInfo.system)
-            console.log(this.systemInfo.platform)
-            console.log(this.sideButtonWidth + this.sideButtonWidth + this.midButtonWidth)
+            // console.log(this.systemInfo.windowWidth)
+            // console.log(this.systemInfo.screenWidth)
+            // console.log(this.systemInfo.system)
+            // console.log(this.systemInfo.platform)
+            // console.log(this.sideButtonWidth + this.sideButtonWidth + this.midButtonWidth)
             if (this.systemInfo.platform === 'android') {
                 if (this.sideButtonWidth + this.sideButtonWidth + this.midButtonWidth < this.systemInfo.windowWidth) {
                     this.rightTabbarRight = '2px'
