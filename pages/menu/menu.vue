@@ -7,20 +7,20 @@
                 <!-- 第一行左 -->
                 <view class="menu-cell menu-column">
                     <view class="button-container" >
-                        <button class="menu-button" type="default" @tap="cityforeTap">
+                        <view class="menu-button" hover-class="button-hover" type="default" @tap="cityforeTap">
                             <image class="menu-button-icon" mode="aspectFit" src="../../static/Images/city_img.png" />
                             <view class="text-large text-dark">近海预报</view>
-                        </button>
+                        </view>
                         <view class="button-shadow" />
                     </view>
                 </view>
                 <!-- 第一行右 -->
                 <view class="menu-cell menu-column">
                     <view class="button-container">
-                        <button class="menu-button" type="default" @tap="warninglistTap">
+                        <view class="menu-button" hover-class="button-hover" type="default" @tap="warninglistTap">
                             <image class="menu-button-icon" mode="aspectFit" src="../../static/Images/Warning_img.png" />
                             <view class="text-large text-dark">海洋警报</view>
-                        </button>
+                        </view>
                         <view class="button-shadow" />
                     </view>
                 </view>
@@ -30,20 +30,20 @@
                 <!-- 第二行左 -->
                 <view class="menu-cell menu-column">
                     <view class="button-container">
-                        <button class="menu-button" type="default" @tap="oceanforecastTap">
+                        <view class="menu-button" hover-class="button-hover" type="default" @tap="oceanforecastTap">
                             <image class="menu-button-icon" mode="aspectFit" src="../../static/Images/area_img.png" />
                             <view class="text-large text-dark">海区预报</view>
-                        </button>
+                        </view>
                         <view class="button-shadow" />
                     </view>
                 </view>
                 <!-- 第二行右 -->
                 <view class="menu-cell menu-column">
                     <view class="button-container">
-                        <button class="menu-button" type="default" @tap="typhoonpathTap">
+                        <view class="menu-button" hover-class="button-hover" type="default" @tap="typhoonpathTap">
                             <image class="menu-button-icon" mode="aspectFit" src="../../static/Images/Typhoon_img.png" />
                             <view class="text-large text-dark">台风路径</view>
-                        </button>
+                        </view>
                         <view class="button-shadow" />
                     </view>
                 </view>
@@ -53,20 +53,20 @@
                 <!-- 第三行左 -->
                 <view class="menu-cell menu-column">
                     <view class="button-container">
-                        <button class="menu-button" type="default" @tap="satelliteimgTap">
+                        <view class="menu-button" hover-class="button-hover" type="default" @tap="satelliteimgTap">
                             <image class="menu-button-icon" mode="aspectFit" src="../../static/Images/SatelliteCloudMap_img.png" />
                             <view class="text-large text-dark">卫星云图</view>
-                        </button>
+                        </view>
                         <view class="button-shadow" />
                     </view>
                 </view>
                 <!-- 第三行右 -->
                 <view class="menu-cell menu-column">
                     <view class="button-container">
-                        <button class="menu-button" type="default" @tap="radarimgTap">
+                        <view class="menu-button" hover-class="button-hover" type="default" @tap="radarimgTap">
                             <image class="menu-button-icon" mode="aspectFit" src="../../static/Images/RadarMap_img.png" />
                             <view class="text-large text-dark">雷达图</view>
-                        </button>
+                        </view>
                         <view class="button-shadow" />
                     </view>
                 </view>
@@ -76,20 +76,20 @@
                 <!-- 第四行左 -->
                 <view class="menu-cell menu-column">
                     <view class="button-container">
-                        <button class="menu-button" type="default" @tap="weatherimgTap">
+                        <view class="menu-button" hover-class="button-hover" type="default" @tap="weatherimgTap">
                             <image class="menu-button-icon" mode="aspectFit" src="../../static/Images/WeatherMap_img.png" />
                             <view class="text-large text-dark">天气图</view>
-                        </button>
+                        </view>
                         <view class="button-shadow" />
                     </view>
                 </view>
                 <!-- 第四行右 -->
                 <view class="menu-cell menu-column">
                     <view class="button-container">
-                        <button class="menu-button" type="default" @tap="weatherTap">
+                        <view class="menu-button" hover-class="button-hover" type="default" @tap="weatherTap">
                             <image class="menu-button-icon" mode="aspectFit" src="../../static/Images/WeatherForecast_img.png" />
                             <view class="text-large text-dark">天气预报</view>
-                        </button>
+                        </view>
                         <view class="button-shadow" />
                     </view>
                 </view>
@@ -202,26 +202,31 @@ export default {
         position: relative;
     }
     .menu-button {
+        position: absolute;
         width: 100%;
         height: 90upx;
         display: flex;
         align-items: center;
         justify-content: center;
+        background-color: #fff;
         border: 1upx solid #373737;
+        border-radius: 10upx;
         z-index: 3;
+    }
+    .button-hover {
+        background-color: rgb(221, 221, 221);
     }
     .button-shadow {
         position: absolute;
         top: 10upx;
         left: 2upx;
-        width: calc(100% - 5upx);
+        width: calc(100% - 2upx);
         height: 90upx;
         background:repeating-linear-gradient(60deg,#fb3, #fb3 2upx, rgba(255, 255, 255, 0.4) 0,rgba(255, 255, 255, 0.4) 10upx);
         border: 1upx solid #fb3;
         border-radius: 10upx;
         z-index: 2;
     }
-
     .menu-button-icon {
         width: 50upx;
         height: 50upx;

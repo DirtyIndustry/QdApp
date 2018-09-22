@@ -102,4 +102,5 @@ DONE... apply inshore and baths in city forecast page
 DONE... apply inshore and baths in weather forecast page  
 DONE... change image page background colors  
 DONE... bienvenu page console message  
+DONE... change menu page button to view with hover-class  
 menifest  
