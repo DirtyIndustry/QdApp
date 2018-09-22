@@ -88,4 +88,7 @@ DONE... change areaflg from 山东 to 青岛
 DONE... delete trend prediction page  
 DONE... delete fishery forecast page  
 DONE... map zooming show/hide markers  
+DONE... change var in map and typhoonmap  
+DONE... change echarts  
+clean timer when page unload  
 menifest  
