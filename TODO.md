@@ -93,4 +93,5 @@ DONE... change echarts
 DONE... update picSwiper  
 DONE... clean timer when page unload  
 DONE... menu page, about page, setting page stop scroll  
+DONE... ocean forecast font-size auto adjust  
 menifest  
