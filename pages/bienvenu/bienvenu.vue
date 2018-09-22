@@ -61,6 +61,7 @@ export default {
                     console.log('[缓存]: 获取 跳过欢迎页')
                     if (res.data === true) {
                         // 跳往首页
+                        console.log('[界面]: 跳转至首页')
                         // setTimeout(function () {
                             that.gotoIndex()
                         // }.bind(that), 100)
