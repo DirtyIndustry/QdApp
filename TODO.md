@@ -100,4 +100,5 @@ DONE... apply inshore and baths in index page
 DONE... apply inshore and baths in components  
 DONE... apply inshore and baths in city forecast page  
 DONE... apply inshore and baths in weather forecast page  
+DONE... change image page background colors  
 menifest  
