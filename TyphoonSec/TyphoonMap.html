@@ -569,21 +569,20 @@
         }
 
         // 台风路径数据相关 请求 显示
-        {
+        
             // 页面加载时向服务器请求起始数据
             const startupRequest = function () {
                 let year = new Date().getFullYear()
                 let url = hosturl + 'GetTyphoonList_0904'
-                let data = 'areaflg=山东&Typhoonyear=' + year
+                let data = 'areaflg=青岛&Typhoonyear=' + year
                 let res = []
                 let xmlhttp = new XMLHttpRequest()
                 xmlhttp.onreadystatechange = function () {
                     if (xmlhttp.readyState === XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE === 4
                         if (xmlhttp.status === 200) {
-                            // console.log(xmlhttp.responseText)
+                            console.log('[服务器]: 返回台风列表')
                             let parser = new DOMParser()
                             let xmldoc = parser.parseFromString(xmlhttp.responseText, 'text/xml')
-                            // console.log(JSON.parse(xmldoc.getElementsByTagName('string')[0].innerHTML))
                             res = JSON.parse(xmldoc.getElementsByTagName('string')[0].innerHTML)
                             // 大于3?
                             if (res.length >= 3) {
@@ -623,12 +622,10 @@
                 xmlhttp.onreadystatechange = function () {
                     if (xmlhttp.readyState === XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE === 4
                         if (xmlhttp.status === 200) {
-                            // console.log(xmlhttp.responseText)
+                            console.log('[服务器]: 返回台风列表')
                             let parser = new DOMParser()
                             let xmldoc = parser.parseFromString(xmlhttp.responseText, 'text/xml')
                             let res = JSON.parse(xmldoc.getElementsByTagName('string')[0].innerHTML)
-                            console.log(res)
-                            // document.getElementById('resultpanel').style.display = 'flex'
                             document.getElementById('resultpanel').style.top = '50px'
                             if (res.length === 0) { // 返回结果数量为零
                                 document.getElementById('resultempty').style.display = 'flex'
@@ -657,10 +654,7 @@
                                     newrow.appendChild(newcol2)
                                     newrow.appendChild(newcol3)
                                     document.getElementById('tablecontent').appendChild(newrow)
-                                    // newelem.innerHTML = '<div class="searchresult-row">< div class="searchresult-column">' + res[j].no + '</div ><div class="searchresult-column">' + res[j].name + '</div><div class="searchresult-column">' + res[j].eng + '</div></div>'
-                                    // document.getElementById('resulttable').appendChild(newelem)
                                 }
-                                // document.getElementById('tablecontent').style.height = 40 * res.length
                                 resultScroll()
                             }
                             
@@ -701,7 +695,7 @@
                 xmlhttp.onreadystatechange = function () {
                     if (xmlhttp.readyState === XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE === 4
                         if (xmlhttp.status === 200) {
-                            // console.log(xmlhttp.responseText)
+                            console.log('[服务器]: 返回台风路径数据')
                             let parser = new DOMParser()
                             let xmldoc = parser.parseFromString(xmlhttp.responseText, 'text/xml')
                             let res = JSON.parse(xmldoc.getElementsByTagName('string')[0].innerHTML)
@@ -711,7 +705,6 @@
                                 res[i].eng = typhoonEng
                                 res[i].date = res[i].date.replace(/-/g, '/')
                             }
-                            // console.log(res)
                             // 判断时效性
                             let today = new Date()
                             today = today.setHours(today.getHours() - 10)
@@ -790,18 +783,15 @@
                 xmlhttp.onreadystatechange = function () {
                     if (xmlhttp.readyState === XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE === 4
                         if (xmlhttp.status === 200) {
-                            // console.log(xmlhttp.responseText)
+                            console.log('[服务器]: 返回台风路径' + forecastsite + '预测数据')
                             let parser = new DOMParser()
                             let xmldoc = parser.parseFromString(xmlhttp.responseText, 'text/xml')
-                            // console.log(forecastsite)
-                            // console.log(xmldoc.getElementsByTagName('string')[0].innerHTML)
                             // 返回值为'当前无台风'时 直接返回
                             let resstring = xmldoc.getElementsByTagName('string')[0].innerHTML
                             if (resstring === '当前无台风') {
                                 return
                             }
                             res = JSON.parse(xmldoc.getElementsByTagName('string')[0].innerHTML)
-                            // console.log(res)
                             for (let i = 0; i < res.length; i++) {
                                 res[i].number = Number(typhoonNo)
                                 res[i].name = typhoonName
@@ -1070,7 +1060,7 @@
                         break
                 } // end-switch
             } // end-showTyphoonName()
-        }
+        
 
         // 切换普通-卫星地图
         const switchMap = function () {
@@ -1087,11 +1077,6 @@
         // 显示-关闭图例
         const switchLegend = function () {
             console.log('legend button clicked!')
-            // if (self.location.href.endsWith('#volet')) {
-            //     self.location.href = '#volet_clos'
-            // } else {
-            //     self.location.href = '#volet'
-            // }
             let elem = document.getElementById('volet')
             if (elem.style.bottom !== '0px') {
                 elem.style.bottom = '0px'
@@ -1142,7 +1127,6 @@
             let searchinput = document.getElementById('searchinput')
             searchinput.value = ''  // 清空输入栏
             searchinput.blur()      // 收起键盘
-            // document.getElementById('resultpanel').style.display = 'none'
             document.getElementById('resultpanel').style.top = '100%'   // 收起搜索结果面板
             search.style.left = '100%'          // 收起搜索条
             name.style.left = '5px'             // 台风名称面板归位
@@ -1228,7 +1212,7 @@
             // Only completely visible elements return true:
             let isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
             // Partially visible elements return true:
-            //isVisible = elemTop < window.innerHeight && elemBottom >= 0;
+            // isVisible = elemTop < window.innerHeight && elemBottom >= 0;
             return isVisible;
         }
 
@@ -1236,19 +1220,14 @@
         const resultScroll = function () {
             let elem = document.getElementById('resulttable')
             if (elem.scrollTop !== 0) { // not on top
-                // document.getElementById('resultUp').style.display = 'flex'
                 document.getElementById('resultUp').innerHTML = '&#61698'
             } else {
-                // console.log('on top.')
-                // document.getElementById('resultUp').style.display = 'none'
                 document.getElementById('resultUp').innerHTML = ''
             }
             if (elem.scrollTop + elem.clientHeight !== elem.scrollHeight) { // not on buttom
-                // document.getElementById('resultDown').style.display = 'flex'
                 document.getElementById('resultDown').innerHTML = '&#61699'
             } else {
                 // console.log('on bottom')
-                // document.getElementById('resultDown').style.display = 'none'
                 document.getElementById('resultDown').innerHTML = ''
             }
         }
