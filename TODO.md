@@ -108,4 +108,5 @@ DONE... update typhoon map with hardware acceleration
 DONE... update refinedChart and refinedChartAlt  
 DONE... add tideChart  
 DONE... update fivedayForecast  
+DONE... utils getQingdaoData  
 menifest  
