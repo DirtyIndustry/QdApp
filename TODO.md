@@ -110,4 +110,5 @@ DONE... add tideChart
 DONE... update fivedayForecast  
 DONE... utils getQingdaoData  
 DONE... update App.vue with getQingdaoData  
+DONE... update index page with getQingdaoData and tideChart  
 menifest  
