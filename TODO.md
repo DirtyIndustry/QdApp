@@ -112,4 +112,5 @@ DONE... utils getQingdaoData
 DONE... update App.vue with getQingdaoData  
 DONE... update index page with getQingdaoData and tideChart  
 DONE... update city forecast page with components and getQingdaoData  
+DONE... update weather forecast page with fivedayForecast and getQingdaoData  
 menifest  
