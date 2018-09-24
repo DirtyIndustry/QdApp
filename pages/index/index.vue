@@ -53,7 +53,7 @@
 			</view>
 			<view class="separator" />
 			<!-- 底部版权条 -->
-			<view class="page-section section-body copyright text-small">青岛市海洋与渔业局·青岛市海洋预报中心—版权所有</view>
+			<view class="page-section section-body copyright text-small">青岛市海洋与渔业局·青岛市海洋预报中心 — 版权所有</view>
 			<view class="separator" />
 			<view v-if="warningData.waveWarning !== ''" class="separator" />
 		</view>
@@ -261,4 +261,12 @@
 
 <style scoped>
 	@import "../../common/generic.css";
+
+	.copyright {
+		height: 80upx;
+		border-radius: 10upx;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 </style>
