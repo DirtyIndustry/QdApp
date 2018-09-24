@@ -107,4 +107,5 @@ DONE... change menu page button to view with hover-class
 DONE... update typhoon map with hardware acceleration  
 DONE... update refinedChart and refinedChartAlt  
 DONE... add tideChart  
+DONE... update fivedayForecast  
 menifest  
