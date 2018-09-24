@@ -109,4 +109,5 @@ DONE... update refinedChart and refinedChartAlt
 DONE... add tideChart  
 DONE... update fivedayForecast  
 DONE... utils getQingdaoData  
+DONE... update App.vue with getQingdaoData  
 menifest  

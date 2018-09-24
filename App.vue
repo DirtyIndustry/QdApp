@@ -195,86 +195,8 @@
 							return false
 						}
 						res = JSON.parse(res.data.d)
-						// 天气预报
-						// 写入Vuex
-						that.weatherData = res.weatherData
-						// 天气图标 pm2.5字体颜色
-						that.weatherData.weatherIcon = utils.setWeatherIcon(res.weatherData.weather)
-						that.weatherData.pm25Style = utils.setAirconClass(res.weatherData.airconDesc)
-
-						// 青岛专项
-						that.qdOceanData = res.qdOceanData
-
-						// 潮汐预报
-						that.tideData.chartTideTwoShow = true
-						that.tideData.chartTideOneTitle = '第一海水浴场'
-						that.tideData.chartTideTwoTitle = '金沙滩'
-						for (let i = 0; i < res.astroDatas.length; i++) {
-							let tide = utils.buildTidedata(res.astroDatas[i].tidedata)
-							let mark = utils.buildMarkdata(res.astroDatas[i].markdata)
-							if (res.astroDatas[i].location === '第一海水浴场') {
-								that.tideData.optionTideOne = utils.getAstroOptionNew(tide, mark, res.astroDatas[i].max, res.astroDatas[i].min)
-							} else {
-								let optiontwo = utils.getAstroOptionNew(tide, mark, res.astroDatas[i].max, res.astroDatas[i].min)
-								optiontwo.series[0].lineStyle.color = '#0092d4'
-								that.tideData.optionTideTwo = optiontwo
-							}
-						}
-
-						// 近海预报
-						// 写入Vuex
-						that.inshoreData = res.inshoreData
-
-						// 浴场预报
-						// 写入Vuex
-						that.bathsData = res.bathsData
-
-						// 精细化预报
-						that.refinedData.show = true
-						that.refinedData.showTwo = true
-						for (let i = 0; i < res.refinedDatas.length; i++) {
-							let tide = utils.buildTidedata(res.refinedDatas[i].tideinfo.tidedata)
-							let mark = utils.buildMarkdata(res.refinedDatas[i].tideinfo.markdata)
-							let option = utils.getAstroOptionNew(tide, mark, res.refinedDatas[i].tideinfo.max, res.refinedDatas[i].tideinfo.min)
-							// 曲线颜色蓝色
-							option.series[0].lineStyle.color = '#0092d4'
-							// label颜色绿色
-							option.series[0].label.color = '#1c8d3b'
-							// 时间颜色红色
-							option.series[0].markLine.label.textStyle.color = 'red'
-							// 不显示日期
-							option.xAxis.axisLabel.show = false
-							// 将地名字母代号转为中文地名
-							res.refinedDatas[i].extrainfo[0].loc = utils.getLocName(res.refinedDatas[i].extrainfo[0].loc)
-							if (res.refinedDatas[i].tideinfo.location === 'DJKP') {
-								that.refinedData.optionOne = option
-								that.refinedData.dataOne = res.refinedDatas[i].extrainfo
-							} else {
-								that.refinedData.optionTwo = option
-								that.refinedData.dataTwo = res.refinedDatas[i].extrainfo
-							}
-						}
-						
-
-						// 五日天气预报
-						let fivedayData = {
-							fivedayWeather: res.fivedayData.fivedayWeathers,
-							optionFiveday: utils.setFivedayChartOptionNew(res.fivedayData.higharr, res.fivedayData.lowarr, res.fivedayData.max, res.fivedayData.min)
-						}
-						for (let i = 0; i < fivedayData.fivedayWeather.length; i++) {
-							fivedayData.fivedayWeather[i].weatherIcon = utils.setWeatherIcon(fivedayData.fivedayWeather[i].weather)
-						}
-						// 写入Vuex
-						that.fivedayData = fivedayData
-
-						// 写入本地缓存
-						utils.storeToLocal('weatherdata', JSON.stringify(res.weatherData))
-						utils.storeToLocal('tidedata', JSON.stringify(that.tideData))
-						utils.storeToLocal('inshoredata', JSON.stringify(res.inshoreData))
-						utils.storeToLocal('bathsdata', JSON.stringify(that.bathsData))
-						utils.storeToLocal('refineddata', JSON.stringify(that.refinedData))
-						utils.storeToLocal('fivedaydata', JSON.stringify(fivedayData))
-						utils.storeToLocal('qdoceandata', JSON.stringify(res.qdOceanData))
+						// 处理数据
+						utils.getQingdaoData(res)
 					}, // success-request
 					fail: function (res) {
 						console.log('[服务器]: 请求 青岛预报数据 失败')
