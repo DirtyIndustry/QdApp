@@ -28,7 +28,7 @@
 			}
 		},
 		{
-			"path": "pages/cityforecastAlt/cityforecastAlt",
+			"path": "pages/cityforecast/cityforecast",
 			"style": {
 				"navigationBarTitleText": "近海预报",
 				"enablePullDownRefresh": true
