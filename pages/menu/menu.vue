@@ -105,8 +105,7 @@ export default {
         cityforeTap (e) {
             console.log('近海预报点击')
             uni.navigateTo({
-                // url: '../cityforecast/cityforecast'
-                url: '../cityforecastAlt/cityforecastAlt'
+                url: '../cityforecast/cityforecast'
             })
         },
         // 海洋警报
