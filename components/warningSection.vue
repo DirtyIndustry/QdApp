@@ -142,7 +142,6 @@ export default {
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     z-index: 5;
-    /* --mywidth: width; */
 }
 .warning-banner-follow {
     margin-left: 100%;
@@ -153,7 +152,6 @@ export default {
         margin-left: 100%;
     }
     to {
-        /* margin-left: var(--mywidth); */
         margin-left: -180%;
     }
 }
