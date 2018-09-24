@@ -33,11 +33,6 @@
 				echarts
 			}
 		},
-		computed: {
-			thischart: function () {
-				return chart
-			}
-		},
 		watch: {
 			option: {
                 handler(newVal, oldVal) {

@@ -105,4 +105,5 @@ DONE... change image page background colors
 DONE... bienvenu page console message  
 DONE... change menu page button to view with hover-class  
 DONE... update typhoon map with hardware acceleration  
+DONE... update refinedChart and refinedChartAlt  
 menifest  

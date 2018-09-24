@@ -4,12 +4,12 @@
         <view class="chart-title" >{{data[0].loc}}</view>
         <scroll-view scroll-x="true" scroll-with-animation="true" @scroll="handleScroll">
             <view class="chart">
-                <myChart :option="option" :canvasId="canvasId" />
+                <mpvue-echarts :echarts="echarts" :onInit="handleInit" :canvasId="canvasId" ref="echartsRef"></mpvue-echarts>
             </view>
             <!-- 滑动的日期球，Move属性决定球是否显示 -->
             <view class="balltrack">
-                <view class="dateball slideball-Snd text-mini" v-if="ballStatus.sndballMove">{{sndballText}}</view>
-                <view class="dateball slideball-Trd text-mini" v-if="ballStatus.trdballMove">{{trdballText}}</view>
+                <view class="dateball slideball-Snd text-mini" :class="{hide: !ballStatus.sndballMove}">{{sndballText}}</view>
+                <view class="dateball slideball-Trd text-mini" :class="{hide: !ballStatus.trdballMove}">{{trdballText}}</view>
             </view>
             <!-- 信息面板 -->
             <view class="infopanel">
@@ -24,26 +24,33 @@
         特别的： 第二个球Move时，第三个球需要用lone属性调整位置 -->
         <view class="balltrack-fix">
             <view class="dateball fixball-Fst text-mini" :class="{'dateball-active': ballStatus.fstballActive}">{{fstballText}}</view>
-            <view class="dateball fixball-Snd text-mini" :class="{'dateball-active': ballStatus.sndballActive, 'fixball-Snd-left': ballStatus.sndballLeft}"
-                v-if="ballStatus.sndballMove == false">{{sndballText}}</view>
-            <view class="dateball fixball-Trd text-mini" :class="{'dateball-active': ballStatus.trdballActive, 'fixball-Trd-lone': ballStatus.sndballMove, 'fixball-Trd-left': ballStatus.trdballLeft}"
-                v-if="!ballStatus.trdballMove">{{trdballText}}</view>
+            <view class="dateball fixball-Snd text-mini" :class="{'hide': ballStatus.sndballMove, 'dateball-active': ballStatus.sndballActive, 'fixball-Snd-left': ballStatus.sndballLeft}">{{sndballText}}</view>
+            <view class="dateball fixball-Trd text-mini" :class="{'hide': ballStatus.trdballMove, 'dateball-active': ballStatus.trdballActive, 'fixball-Trd-lone': ballStatus.sndballMove, 'fixball-Trd-left': ballStatus.trdballLeft}">{{trdballText}}</view>
         </view>
+        <!-- 左右指示箭头 -->
+        <view class="chevron chevron-right fa fa-chevron-right" :class="{hide: !chevronRightShow}" />
+        <view class="chevron chevron-left fa fa-chevron-left" :class="{hide: !chevronLeftShow}" />
     </view>
 </template>
 
 <script>
-    import myChart from './myChart.vue'
+	import * as echarts from './echarts/echarts.common.min.js'
+	import mpvueEcharts from './mpvue-echarts/src/echarts.vue'
+
+    let chart
 
     export default {
         name: 'refinedChart',
         components: {
-            myChart
+            mpvueEcharts
         },
         props: {
             // 画布id 在页面中必须唯一
             canvasId: {
                 type: String,
+                default () {
+                    return ''
+                },
                 required: true
             },
             // 图表数据
@@ -56,32 +63,34 @@
             // 表格数据
             data: {
                 type: Array,
-                default: [
-                    {
-                        loc: '',
-                        time: '',
-                        wave: '',
-                        temp: '',
-                        windLvl: '',
-                        windDir: ''
-                    },
-                    {
-                        loc: '',
-                        time: '',
-                        wave: '',
-                        temp: '',
-                        windLvl: '',
-                        windDir: ''
-                    },
-                    {
-                        loc: '',
-                        time: '',
-                        wave: '',
-                        temp: '',
-                        windLvl: '',
-                        windDir: ''
-                    },
-                ]
+                default () {
+                    return [
+                        {
+                            loc: '',
+                            time: '',
+                            wave: '',
+                            temp: '',
+                            windLvl: '',
+                            windDir: ''
+                        },
+                        {
+                            loc: '',
+                            time: '',
+                            wave: '',
+                            temp: '',
+                            windLvl: '',
+                            windDir: ''
+                        },
+                        {
+                            loc: '',
+                            time: '',
+                            wave: '',
+                            temp: '',
+                            windLvl: '',
+                            windDir: ''
+                        },
+                    ]
+                }
             }
         },
         data() {
@@ -99,7 +108,19 @@
                     trdballActive: false,	// 第三个球是否激活（显示为蓝色）
                     trdballMove: false,		// 第三个球是否滑动
                     trdballLeft: false,		// 第三个球是否位于左端
-                }
+                },
+                trackwidth: 0,          // 滑轨的长度
+                scrollwidth: 0,         // 能滚动的最大长度
+                sndRightPos: 0,         // 第二个小球的右边位置
+                trdRightPos: 0,         // 第三个小球的右边位置
+                stageOne: 0,            // 第二个小球到达左边
+                stageTwo: 0,            // 第三个小球到达左边
+				// 潮汐预报一左右三角箭头显隐
+				chevronLeftShow: false,
+                chevronRightShow: true,
+                // 当前滚动状态
+                currentStage: 0,
+                echarts
             }
         },
         computed: {
@@ -107,6 +128,75 @@
             systemInfo: {
                 get () {
                     return this.$store.state.Infos.systeminfo
+                }
+            }
+        },
+        watch: {
+            // 控制日期球状态
+            currentStage: {
+                handler (newVal, oldVal) {
+                    switch (newVal) {
+                        case 0:
+                            this.ballStatus.fstballActive = true
+                            this.ballStatus.sndballActive = false
+                            this.ballStatus.trdballActive = false
+                            this.ballStatus.sndballMove = false
+                            this.ballStatus.sndballLeft = false
+                            this.ballStatus.trdballMove = false
+                            this.ballStatus.trdballLeft = false
+                            this.chevronLeftShow = false
+                            break
+                        case 1:
+                            this.ballStatus.fstballActive = true
+                            this.ballStatus.sndballActive = false
+                            this.ballStatus.trdballActive = false
+                            this.ballStatus.sndballMove = true
+                            this.ballStatus.sndballLeft = false
+                            this.ballStatus.trdballMove = false
+                            this.ballStatus.trdballLeft = false
+                            this.chevronLeftShow = true
+                            break
+                        case 2:
+                            this.ballStatus.fstballActive = false
+                            this.ballStatus.sndballActive = true
+                            this.ballStatus.trdballActive = false
+                            this.ballStatus.sndballMove = false
+                            this.ballStatus.sndballLeft = true
+                            this.ballStatus.trdballMove = false
+                            this.ballStatus.trdballLeft = false
+                            break
+                        case 3:
+                            this.ballStatus.fstballActive = false
+                            this.ballStatus.sndballActive = true
+                            this.ballStatus.trdballActive = false
+                            this.ballStatus.sndballMove = false
+                            this.ballStatus.sndballLeft = true
+                            this.ballStatus.trdballMove = true
+                            this.ballStatus.trdballLeft = false
+                            this.chevronRightShow = true
+                            break
+                        case 4:
+                            this.ballStatus.fstballActive = false
+                            this.ballStatus.sndballActive = false
+                            this.ballStatus.trdballActive = true
+                            this.ballStatus.sndballMove = false
+                            this.ballStatus.sndballLeft = true
+                            this.ballStatus.trdballMove = false
+                            this.ballStatus.trdballLeft = true
+                            this.chevronRightShow = false
+                            break
+                    }
+                }
+            },
+            // 图表option
+            option: {
+                handler(newVal, oldVal) {
+                    if (chart !== undefined) {
+                        if (newVal) {
+							//chart.setOption(newVal, true)
+							this.$refs.echartsRef.init()
+                        }
+                    }
                 }
             }
         },
@@ -132,84 +222,62 @@
                 now = new Date(now.setDate(now.getDate() + 1))
                 this.trdballText = formatDate(now)
             },
-            // 设置日期球的状态 scrollLeft为滚动距最左边的距离，windowWidth是系统信息屏幕宽度, ballObj为包含一系列bool值的object
-            setDateballStatus (scrollLeft, windowWidth, ballObj) {
-                //开始滚动 scrollLeft为0
+            // 初始化第二三个小球的左距
+            setDateballLeft() {
+                this.trackwidth = this.systemInfo.windowWidth * 90 / 100
+                this.scrollwidth = Math.round(this.trackwidth * 190 / 100) + 1
+                this.sndRightPos = this.trackwidth - 57
+                this.trdRightPos = this.trackwidth - 28
+                this.stageOne = this.trackwidth - 29
+                this.stageTwo = this.scrollwidth - 58
+            },
+            // 设置当前滚动状态
+            setCurrentStage (scrollLeft) {
                 if (scrollLeft < 45) {
+                    this.currentStage = 0
                     // 刚开始滚动 还不足以让第二个球开始动
-                    ballObj.fstballActive = true
-                    ballObj.sndballActive = false
-                    ballObj.trdballActive = false
-                    ballObj.sndballMove = false
-                    ballObj.sndballLeft = false
-                    ballObj.trdballMove = false
-                    ballObj.trdballLeft = false
-                    // } else if (scrollLeft < windowWidth * 0.966) {  // 290 360*0.805
-                } else if (scrollLeft < windowWidth * 0.80555) {
+                } else if (scrollLeft < this.stageOne) {
+                    this.currentStage = 1
                     // 第二个球开始动
-                    ballObj.fstballActive = true
-                    ballObj.sndballActive = false
-                    ballObj.trdballActive = false
-                    ballObj.sndballMove = true
-                    ballObj.sndballLeft = false
-                    ballObj.trdballMove = false
-                    ballObj.trdballLeft = false
-                    // } else if (scrollLeft < windowWidth * 1.066) {  // 320 360*0.888
-                } else if (scrollLeft < windowWidth * 0.88888) {
+                } else if (scrollLeft < this.trackwidth) {
+                    this.currentStage = 2
                     // 第二个球停在最左边 第三个球还没开始动
-                    ballObj.fstballActive = false
-                    ballObj.sndballActive = true
-                    ballObj.trdballActive = false
-                    ballObj.sndballMove = false
-                    ballObj.sndballLeft = true
-                    ballObj.trdballMove = false
-                    ballObj.trdballLeft = false
-                    // } else if (scrollLeft < windowWidth * 1.166) {  // 350 360*0.972
-                } else if (scrollLeft < windowWidth * 0.97222) {
+                } else if (scrollLeft < this.stageTwo) {
+                    this.currentStage = 3
+					this.chevronLeftShow = true
+					this.chevronRightShow = true
                     // 第三个球开始动
-                    ballObj.fstballActive = false
-                    ballObj.sndballActive = true
-                    ballObj.trdballActive = false
-                    ballObj.sndballMove = false
-                    ballObj.sndballLeft = true
-                    ballObj.trdballMove = true
-                    ballObj.trdballLeft = false
-                    // } else if (scrollLeft < windowWidth * 1.9) {    // 570 360*1.583
-                } else if (scrollLeft < windowWidth * 1.58333) {
-                    // 第三个球动
-                    ballObj.fstballActive = false
-                    ballObj.sndballActive = true
-                    ballObj.trdballActive = false
-                    ballObj.sndballMove = false
-                    ballObj.sndballLeft = true
-                    ballObj.trdballMove = true
-                    ballObj.trdballLeft = false
                 } else {
+                    this.currentStage = 4
+					this.chevronRightShow = false
                     // 第三个球停在最左边
-                    ballObj.fstballActive = false
-                    ballObj.sndballActive = false
-                    ballObj.trdballActive = true
-                    ballObj.sndballMove = false
-                    ballObj.sndballLeft = true
-                    ballObj.trdballMove = false
-                    ballObj.trdballLeft = true
                 }
             },
-            // 图标滚动事件
+            // 图表滚动事件
             handleScroll(e) {
-                // console.log(e.detail.scrollLeft)
-                // utils.setDateballStatus(e.detail.scrollLeft, this.systemInfo.windowWidth - 60, this.ballStatus)
-                this.setDateballStatus(e.detail.scrollLeft, this.systemInfo.windowWidth, this.ballStatus)
+                this.setCurrentStage(e.detail.scrollLeft)
             },
+            // 初始化图表
+            handleInit(canvas, width, height) {
+                chart = echarts.init(canvas, null, {
+                    width: width,
+                    height: height
+                })
+                canvas.setChart(chart)
+                chart.setOption(this.option, true)
+                return chart
+            }
         },
         mounted() {
             // 加载时根据当前日期设置日期球文字
             this.setDateballText()
+            this.setDateballLeft()
         }
     }
 </script>
 
 <style scoped>
+    @import "../common/FontAwesome.css";
     @import "../common/generic.css";
 
     /* 整个组件的容器 */
@@ -245,6 +313,11 @@
     /* 日期球激活状态时现时为蓝色 */
     .dateball-active {
         background-color: rgba(0, 148, 255, 0.8);
+    }
+
+    /* 日期球隐藏状态 */
+    .hide {
+        display: none
     }
 
     /* 第二个球滑动时的定位 调整slideball的top和fixball的bottom 让两种球平行 */
@@ -346,4 +419,16 @@
         text-align: right;
     }
 
+    /* 曲线上左右箭头 */
+	.chevron {
+		position: absolute;
+		bottom: 205upx;
+		color: #666;
+	}
+	.chevron-right {
+		right: 2.5%;
+	}
+	.chevron-left {
+		left: 2.5%;
+	}
 </style>
