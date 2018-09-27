@@ -144,7 +144,7 @@
 			loadAlarmData () {
 				let that = this
 				uni.request({
-					url: appsettings.hosturl + 'GetAlarm ',
+					url: appsettings.hosturl + 'GetAlarm',
 					data: {name: 'admin', areaflg: '青岛'},
 					method: 'POST',
 					success: function (res) {
@@ -243,14 +243,14 @@
 				title: '加载中',
 				mask: true
 			})
-			this.completedRequestCount = 1
-			this.loadAlarmData()
 		},
 		onReady() {
 			console.log('index page ready.')
 		},
 		mounted() {
 			console.log('index vue mounted.')
+			this.completedRequestCount = 1
+			this.loadAlarmData()
 		},
 		onPullDownRefresh() {
 			console.log('[界面]: 首页 下拉刷新')

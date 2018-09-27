@@ -28,11 +28,11 @@
         },
         methods: {
             // 向服务器请求图片
-            requestImage(source) {
+            requestImage() {
                 let that = this
                 uni.request({
-                    url: appsettings.hosturl + 'GetRadarImages_0905',
-                    data: { name: 'admin', areaflg: '青岛', cityname: source },
+                    url: appsettings.hosturl + 'GetRadarImages',
+                    data: { name: 'admin', areaflg: '青岛', cityname: '青岛' },
                     method: 'POST',
                     success: function (res) {
                         console.log('[服务器]: 返回 雷达图')
@@ -61,11 +61,11 @@
         },
         onLoad() {
             let that = this
-            this.requestImage('青岛')
+            this.requestImage()
         },
         onPullDownRefresh() {
 			console.log('[界面]: 雷达图 下拉刷新')
-            this.requestImage('青岛')
+            this.requestImage()
             uni.stopPullDownRefresh()
 		},
     }
