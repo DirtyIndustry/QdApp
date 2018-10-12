@@ -8,14 +8,14 @@
             </view>
             <!-- 滑动的日期球，Move属性决定球是否显示 -->
             <view class="balltrack">
-                <view class="dateball slideball-Snd text-mini" :class="{hide: !ballStatus.sndballMove}">{{sndballText}}</view>
-                <view class="dateball slideball-Trd text-mini" :class="{hide: !ballStatus.trdballMove}">{{trdballText}}</view>
+                <view class="dateball slideball-Snd text-xxs" :class="{hide: !ballStatus.sndballMove}">{{sndballText}}</view>
+                <view class="dateball slideball-Trd text-xxs" :class="{hide: !ballStatus.trdballMove}">{{trdballText}}</view>
             </view>
             <!-- 信息面板 -->
             <view class="infopanel">
                 <view class="infopanel-day" v-for="(item, index) in data" :key="index">
-                    <view class="infocolumn infocolumn-left text-mini">浪高：{{item.wave}}米\n风力：{{item.windLvl}}级</view>
-                    <view class="infocolumn text-mini">水温：{{item.temp}}℃\n风向：{{item.windDir}}</view>
+                    <view class="infocolumn infocolumn-left text-xxs">浪高：{{item.wave}}米\n风力：{{item.windLvl}}级</view>
+                    <view class="infocolumn text-xxs">水温：{{item.temp}}℃\n风向：{{item.windDir}}</view>
                 </view>
             </view>
         </scroll-view>
@@ -23,9 +23,9 @@
         Active属性决定球的颜色，Move属性决定球是否显示，Left属性决定球是否在左边
         特别的： 第二个球Move时，第三个球需要用lone属性调整位置 -->
         <view class="balltrack-fix">
-            <view class="dateball fixball-Fst text-mini" :class="{'dateball-active': ballStatus.fstballActive}">{{fstballText}}</view>
-            <view class="dateball fixball-Snd text-mini" :class="{'hide': ballStatus.sndballMove, 'dateball-active': ballStatus.sndballActive, 'fixball-Snd-left': ballStatus.sndballLeft}">{{sndballText}}</view>
-            <view class="dateball fixball-Trd text-mini" :class="{'hide': ballStatus.trdballMove, 'dateball-active': ballStatus.trdballActive, 'fixball-Trd-lone': ballStatus.sndballMove, 'fixball-Trd-left': ballStatus.trdballLeft}">{{trdballText}}</view>
+            <view class="dateball fixball-Fst text-xxs" :class="{'dateball-active': ballStatus.fstballActive}">{{fstballText}}</view>
+            <view class="dateball fixball-Snd text-xxs" :class="{'hide': ballStatus.sndballMove, 'dateball-active': ballStatus.sndballActive, 'fixball-Snd-left': ballStatus.sndballLeft}">{{sndballText}}</view>
+            <view class="dateball fixball-Trd text-xxs" :class="{'hide': ballStatus.trdballMove, 'dateball-active': ballStatus.trdballActive, 'fixball-Trd-lone': ballStatus.sndballMove, 'fixball-Trd-left': ballStatus.trdballLeft}">{{trdballText}}</view>
         </view>
         <!-- 左右指示箭头 -->
         <view class="chevron chevron-right fa fa-chevron-right" :class="{hide: !chevronRightShow}" />

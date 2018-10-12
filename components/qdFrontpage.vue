@@ -64,7 +64,7 @@
                             <!-- 毫克每立方米单位 -->
                             <view class="cell-pm25-column">
                                 <view style="height: 15upx;" />
-                                <view class="text-mini">&nbsp;μg/m³</view>
+                                <view class="text-xxs">&nbsp;μg/m³</view>
                             </view>
                         </view>
                     </view>

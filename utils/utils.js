@@ -455,6 +455,17 @@ const buildMarkdata = function (raw) {
     }
     return result
 }
+// 检查版本
+const needUpdate = function (oldVal, newVal) {
+    let oldarr = oldVal.split('.')
+    let newarr = newVal.split('.')
+    for (let i = 0; i < oldarr.length; i++) {
+        if (oldarr[i] < newarr[i]) {
+            return true
+        }
+    }
+    return false
+}
 
 module.exports = {
     setWeatherIcon: setWeatherIcon, // 天气图标
@@ -465,5 +476,6 @@ module.exports = {
     storeToLocal: storeToLocal, //将数据存入本地缓存
     getAstroOptionNew: getAstroOptionNew,   // 根据tidedata和markdata生成曲线chart option
     buildTidedata: buildTidedata,
-    buildMarkdata: buildMarkdata
+    buildMarkdata: buildMarkdata,
+    needUpdate: needUpdate  // 对比两个版本号 检查是否需要升级
 }

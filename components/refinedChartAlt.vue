@@ -9,17 +9,17 @@
             <!-- 信息面板 -->
             <view class="infopanel">
                 <view class="infopanel-day" v-for="(item, index) in data" :key="index">
-                    <view class="infocolumn infocolumn-left text-mini">浪高：{{item.wave}}米\n风力：{{item.windLvl}}级</view>
-                    <view class="infocolumn text-mini">水温：{{item.temp}}℃\n风向：{{item.windDir}}</view>
+                    <view class="infocolumn infocolumn-left text-xxs">浪高：{{item.wave}}米\n风力：{{item.windLvl}}级</view>
+                    <view class="infocolumn text-xxs">水温：{{item.temp}}℃\n风向：{{item.windDir}}</view>
                 </view>
             </view>
         </scroll-view>
         <!-- 日期球 -->
         <view class="speed-up balltrack-fix">
-            <view class="dateball text-mini" :class="{'dateball-active': ballStatus.fstballActive}">{{fstballText}}</view>
-            <view class="speed-up dateball text-mini" :class="{'dateball-active': ballStatus.sndballActive}"
+            <view class="dateball text-xxs" :class="{'dateball-active': ballStatus.fstballActive}">{{fstballText}}</view>
+            <view class="speed-up dateball text-xxs" :class="{'dateball-active': ballStatus.sndballActive}"
                 :style="{left: ballStatus.sndballLeft + 'px'}">{{sndballText}}</view>
-            <view class="speed-up dateball text-mini" :class="{'dateball-active': ballStatus.trdballActive}"
+            <view class="speed-up dateball text-xxs" :class="{'dateball-active': ballStatus.trdballActive}"
                 :style="{left: ballStatus.trdballLeft + 'px'}">{{trdballText}}</view>
         </view>
         <!-- 左右指示箭头 -->
