@@ -197,13 +197,13 @@ export default {
     }
     .button-container {
         width: 300upx;
-        height: 100upx;
+        height: 140upx;
         position: relative;
     }
     .menu-button {
         position: absolute;
         width: 100%;
-        height: 90upx;
+        height: 130upx;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -220,7 +220,7 @@ export default {
         top: 10upx;
         left: 2upx;
         width: calc(100% - 2upx);
-        height: 90upx;
+        height: 130upx;
         background:repeating-linear-gradient(60deg,#fb3, #fb3 2upx, rgba(255, 255, 255, 0.4) 0,rgba(255, 255, 255, 0.4) 10upx);
         border: 1upx solid #fb3;
         border-radius: 10upx;

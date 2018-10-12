@@ -57,6 +57,9 @@
 .text-green {
     color: #08b23a;
 }
+.text-white {
+    color: #fff;
+}
 .speed-up {
     -webkit-transform: translateZ(0);
     -moz-transform: translateZ(0);

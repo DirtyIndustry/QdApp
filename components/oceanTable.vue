@@ -51,25 +51,25 @@ export default {
     flex-direction: column;
 }
 .table-row {
-    height: 70upx;
+    height: 55rpx;
     display: flex;
     flex-direction: row;
 }
 .border-top {
-    border-top: 1upx solid #666;
+    border-top: 1rpx solid #666;
 }
 .border-left {
-    border-left: 1upx solid #666;
+    border-left: 1rpx solid #666;
 }
 .table-cell {
-    border-bottom: 1upx solid #666;
-    border-right: 1upx solid #666;
+    border-bottom: 1rpx solid #666;
+    border-right: 1rpx solid #666;
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .separator {
-    height: 3.5vw;
+    height: 3.4vw;
 }
 </style>
