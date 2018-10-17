@@ -28,7 +28,7 @@
                             <image class="image-icon" :src="weatherData.weatherIcon" mode="aspectFit" />
                         </view>
                         <!-- 文字描述 -->
-                        <view class="cell-body text">{{weatherData.weather}}</view>
+                        <view class="cell-body text">&nbsp;{{weatherData.weather}}</view>
                     </view>
                 </view>
             </view>
@@ -44,7 +44,7 @@
                             <view class="text-mini-icon">AQI</view>
                         </view>
                         <!-- 文字描述 -->
-                        <view class="cell-body text">{{weatherData.aircondition}} {{weatherData.airconDesc}}</view>
+                        <view class="cell-body" :class="{'text': weatherData.aircondition.length < 3, 'text-small': weatherData.aircondition.length > 2}">&nbsp;{{weatherData.aircondition}} {{weatherData.airconDesc}}</view>
                     </view>
                 </view>
             </view>
@@ -55,15 +55,15 @@
                     <view class="row-content-upper"/>
                     <view class="row-content-cell">
                         <!-- pm2.5字样 -->
-                        <view class="text-icon text-large text-bold" :class="{vert: weatherData.pm25Desc === '优', jeune: weatherData.pm25Desc === '良', orange: weatherData.pm25Desc === '轻度污染', rouge: weatherData.pm25Desc === '重度污染'}">
-                            &nbsp;PM2.5
+                        <view class="text-icon text text-bold" :class="{vert: weatherData.pm25Desc === '优', jeune: weatherData.pm25Desc === '良', orange: weatherData.pm25Desc === '轻度污染', rouge: weatherData.pm25Desc === '重度污染'}">
+                            PM2.5
                         </view>
                         <view class="cell-body">
                             <!-- pm2.5数值 -->
                             <view class="cell-pm25-column text">&nbsp;{{weatherData.pm25}}</view>
                             <!-- 毫克每立方米单位 -->
                             <view class="cell-pm25-column">
-                                <view style="height: 15upx;" />
+                                <view style="height: 12upx;" />
                                 <view class="text-xxs">&nbsp;μg/m³</view>
                             </view>
                         </view>
@@ -73,7 +73,7 @@
         </view>
         <!-- 右列 海洋预报列 -->
         <view class="column-right" >
-            <view style="height: 10vh;" />
+            <view class="bottom-space" />
             <!-- 低潮时行 -->
             <view class="ocean-row">
                     <image class="bgimg" src="../../static/Images/middle_bottom_right_Sec.png" mode="scaleToFill" />
@@ -112,11 +112,12 @@
                         </view>
                     </view>
             </view>
-            <view class="title-row">
-                <image class="ocean-title-bg" src="../../static/Images/forecastTime_right_img.png" mode="scaleToFill" />
+            <view class="title-row-right">
+                <!-- <image class="ocean-title-bg" src="../../static/Images/forecastTime_right_img.png" mode="scaleToFill" /> -->
+                <image class="ocean-title-bg" src="../../static/Images/forecastTime_left_img.png" mode="scaleToFill" />
                 <view class="ocean-title-cell">
                     <view class="text-dark text-bold text-XL">海洋预报</view>
-                    <view class="text-green text-small text-bold">{{datestring}}</view>
+                    <view class="text-green text-xs text-bold">{{datestring}}</view>
                 </view>
             </view>
         </view>
@@ -182,6 +183,7 @@ export default {
 
     /* 整体容器 */
     .container {
+        /* border: 1upx solid #000; */
         width: 100%;
         height: 100vh;
         display: flex;
@@ -189,14 +191,18 @@ export default {
     }
     /* 左列 */
     .column {
-        flex: 4;
+        /* border: 1upx solid #000; */
+        flex: 1;
+        height: 100vh;
         display: flex;
         flex-direction: column;
         overflow: hidden;
     }
     /* 右列 */
     .column-right {
-        flex: 3;
+        /* border: 1upx solid #000; */
+        flex: 1;
+        height: 100vh;
         display: flex;
         flex-direction: column-reverse;
     }
@@ -206,12 +212,17 @@ export default {
         width: 100%;
         height: 250upx;
     }
+    .title-row-right {
+        position: relative;
+        width: 100%;
+        height: 200upx;
+    }
     /* 左列天气行 */
     .weather-row {
         position: relative;
         left: 3%;
         width: 80%;
-        height: 130upx;
+        height: 100upx;
     }
     /* 右列海洋行 */
     .ocean-row {
@@ -222,8 +233,9 @@ export default {
     /* 每行的背景图片 */
     .bgimg {
         position: absolute;
-        width: 100%;
+        width: 93%;
         height: 100%;
+        left: 3.5%;
     }
     /* 每行的前景内容 */
     .row-content {
@@ -246,18 +258,21 @@ export default {
         display: flex;
         flex-direction: row;
         align-items: center;
+        justify-content: center;
     }
     /* 每行前景内容格 左方图标部分 */
     .cell-header {
         position: relative;
-        width: 88upx;
+        width: 55upx;
         height: 100%;
+        /* left: 10upx; */
     }
     /* 每行前景内容格 文字内容部分 */
     .cell-body {
-        width: 100%;
+        height: 100%;
+        /* width: 100%; */
         display: flex;
-        justify-content: center;
+        align-items: center;
     }
     /* 气温单元格 */
     .temp-cell {
@@ -279,16 +294,17 @@ export default {
     /* 天气状况图片图标 */
     .image-icon {
         position: absolute;
-        left: 8upx;
-        width: 90%;
-        height: 100%;
+        /* left: 8upx; */
+        top: 12%;
+        width: 100%;
+        height: 80%;
     }
     /* 空气质量字体icon */
     .font-icon {
         position: absolute;
-        left: 8upx;
+        /* left: 8upx; */
         height: 100%;
-        font-size: 60upx;
+        font-size: 50upx;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -298,11 +314,11 @@ export default {
         position: absolute;
         right: 0;
         bottom: 0;
-        font-size: 18upx;
+        font-size: 14upx;
     }
     /* pm2.5文字图标 */
     .text-icon {
-        width: 70upx;
+        /* width: 70upx; */
         height: 100%;
         display: flex;
         align-items: center;
@@ -318,9 +334,9 @@ export default {
     /* 海洋预报背景图片 */
     .ocean-title-bg {
         position: absolute;
-        width: 120%;
+        width: 100%;
         height: 100%;
-        left: -15%;
+        left: 0;
         z-index: 1;
     }
     /* 海洋预报单元格 */
@@ -334,6 +350,12 @@ export default {
         justify-content: center;
         flex-direction: column;
         z-index: 2;
+    }
+    /* 右列底部占位空白 */
+    .bottom-space {
+        /* border: 1upx solid #f00; */
+        height: 160upx;
+        width: 100%;
     }
     /* 颜色 */
     .vert {

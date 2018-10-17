@@ -58,7 +58,7 @@
 							{
 								"text": "\uf01e",
 								"fontSrc": "/static/fontawesome-webfont.ttf",
-								"fontSize": "16upx",
+								"fontSize": "16px",
 								"color": "#ffffff"
 							}
 						]

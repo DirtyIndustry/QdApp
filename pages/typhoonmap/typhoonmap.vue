@@ -4,7 +4,6 @@
 		<!-- <web-view src="http://123.234.129.238:8001/SdForecast/TyphoonSec/Typhoon.html"></web-view> -->
 		<!-- <web-view src="http://192.168.2.19/TyphoonSec/TyphoonMap.html"></web-view> -->
 		<web-view v-if="url" :src="url"></web-view>
-		<!-- <map style="width: 100%; height: 1200px;" :latitude="centerlati" :longitude="centerlongi" :scale="scale" :markers="markers"></map> -->
     </view>
 </template>
 
@@ -18,6 +17,7 @@
 		},
 		methods: {
 			refresh () {
+				console.log('[界面]: 台风路径 刷新')
 				this.url = ''
 				let timer = setTimeout(function () {
 					this.url = 'http://123.234.129.237:8001/Maps/TyphoonMap.html'
