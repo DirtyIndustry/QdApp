@@ -7,7 +7,7 @@
                 <!-- 气温背景图片 -->
                 <image class="temp-bg" src="../../static/Images/forecastTime_left_img.png" mode="scaleToFill" />
                 <!-- 气温内容 -->
-                <view class="temp-cell text-dark text-bold">
+                <view class="temp-cell text-blue text-bold">
                     <!-- 气温数字 -->
                     <view class="text-huge">{{weatherData.temperature}}</view>
                     <!-- 气温摄氏度标志 -->
@@ -71,7 +71,7 @@
                         <!-- pm2.5内容 -->
                         <view class="weather-cell">
                             <!-- 左侧pm2.5字样 -->
-                            <view class="text-icon text-large text-bold" :class="{vert: weatherData.airconDesc === '优', jeune: weatherData.airconDesc === '良', orange: weatherData.airconDesc === '轻度污染', rouge: weatherData.airconDesc === '重度污染'}">
+                            <view class="text-icon text-large text-bold" :class="{vert: weatherData.pm25Desc === '优', jeune: weatherData.pm25Desc === '良', orange: weatherData.pm25Desc === '轻度污染', rouge: weatherData.pm25Desc === '重度污染'}">
                                 &nbsp;PM2.5
                             </view>
                             <!-- 右侧pm2.5数值和单位 -->

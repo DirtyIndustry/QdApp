@@ -151,6 +151,8 @@ const getQingdaoData = function (res) {
         option.series[0].markLine.label.textStyle.color = 'red'
         // 不显示日期
         option.xAxis.axisLabel.show = false
+        // 不显示最大值横线
+        option.series[1].markLine.data = []
         // 将地名字母代号转为中文地名
         res.refinedDatas[i].extrainfo[0].loc = getLocName(res.refinedDatas[i].extrainfo[0].loc)
         if (res.refinedDatas[i].tideinfo.location === 'DJKP') {
@@ -225,7 +227,7 @@ const getAstroOptionNew = function (tidedata, markdata, max, min) {
                 inside: true,
                 fontSize: '14',
                 align: 'left',
-                padding: [0, 0, 30, 0],
+                padding: [0, 0, 15, 0],
                 color: 'red',
                 formatter: function (value, index) {
                     let date = new Date(value)
@@ -234,6 +236,12 @@ const getAstroOptionNew = function (tidedata, markdata, max, min) {
             }, // end-axisLabel
             axisTick: {
                 show: false
+            },
+            axisLine: {
+                lineStyle: {
+                    type: 'dashed',
+                    color: '#999999'
+                }
             },
             splitLine: {
                 show: false
@@ -250,7 +258,7 @@ const getAstroOptionNew = function (tidedata, markdata, max, min) {
             {
                 name: '潮汐',
                 type: 'line',
-                smooth: 0.3,
+                smooth: 0.4,
                 silent: true,
                 animation: false,
                 symbolSize: 0.0001, // 曲线上数据点小圆圈的大小 不能设为0否则label不显示
@@ -291,12 +299,11 @@ const getAstroOptionNew = function (tidedata, markdata, max, min) {
                         
                     }, // end-label-markLine
                     lineStyle: {
-                        type: 'dot',
+                        type: 'dashed',
                         color: '#999999'
                     },
                     data: markdata
                 }, // end-markLine
-                /*
                 markPoint: {
                     symbol: 'circle',
                     symbolSize: 4,
@@ -308,7 +315,6 @@ const getAstroOptionNew = function (tidedata, markdata, max, min) {
                         {coord:[nowtime, nowdata]}
                     ]
                 }
-                */
             },
             // 第二组series： 两条水平标线 表示三天最高和最低的潮位
             {
@@ -325,7 +331,8 @@ const getAstroOptionNew = function (tidedata, markdata, max, min) {
                     label: {
                         show: false
                     },
-                    data: [{ yAxis: max }, { yAxis: min }]
+                    // data: [{ yAxis: max }, { yAxis: min }]
+                    data: [{ yAxis: max }]
                 } // end-markLine
             }
         ] // end-series
@@ -477,5 +484,5 @@ module.exports = {
     getAstroOptionNew: getAstroOptionNew,   // 根据tidedata和markdata生成曲线chart option
     buildTidedata: buildTidedata,
     buildMarkdata: buildMarkdata,
-    needUpdate: needUpdate  // 对比两个版本号 检查是否需要升级
+    needUpdate: needUpdate  // 对比版本号 检查是否需要更新
 }

@@ -1,7 +1,7 @@
 <template>
     <view class="refinedChart-body">
         <!-- 地名 -->
-        <view class="chart-title">{{data[0].loc}}</view>
+        <view class="chart-title">&nbsp;&nbsp;&nbsp;&nbsp;{{data[0].loc}}</view>
         <scroll-view  class="speed-up" scroll-x="true" scroll-with-animation="true" @scroll="handleScroll">
             <view class="chart">
                 <mpvue-echarts :echarts="echarts" :onInit="handleInit" :canvasId="canvasId" ref="echartsRef"></mpvue-echarts>

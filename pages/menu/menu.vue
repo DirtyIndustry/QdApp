@@ -1,6 +1,6 @@
 <template>
     <view class="page-body menu-page" catchtouchmove>
-        <image src="../../static/Images/back_images.png" mode="aspectFill" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: -1;" />
+        <image src="../../static/Images/back_images.png" mode="scaleToFill" style="width: 100%; height: 100%; position: fixed; bottom: 0; left: 0; z-index: -1;" />
         <view class="menu-table">
             <!-- 第一行 -->
             <view class="menu-row">

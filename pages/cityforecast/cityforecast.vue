@@ -2,7 +2,7 @@
 	<!-- <view style="background-image: url(../../static/Images/back_images.png); background-repeat: no-repeat; background-size: contain; background-attachment: scroll;"> -->
 	<view>
 		<view class="page-body">
-			<image src="../../static/Images/back_images.png" mode="aspectFill" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: -1;" />
+			<image src="../../static/Images/back_images.png" mode="scaleToFill" style="width: 100%; height: 100%; position: fixed; bottom: 0; left: 0; z-index: -1;" />
 			
 			<view class="separator" />
 			<!-- 潮汐预报模块 -->
