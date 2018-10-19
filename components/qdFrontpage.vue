@@ -74,50 +74,50 @@
         <!-- 右列 海洋预报列 -->
         <view class="column-right" >
             <view class="bottom-space" />
-            <!-- 低潮时行 -->
-            <view class="ocean-row">
-                    <image class="bgimg" src="../../static/Images/middle_bottom_right_Sec.png" mode="scaleToFill" />
-                    <view class="row-content">
-                        <view class="row-content-upper"/>
-                        <view class="row-content-cell">
-                            <view class="cell-body text">低潮时: {{qdOceanData.tidelow}}</view>
-                        </view>
-                    </view>
-            </view>
-            <!-- 高潮时行 -->
-            <view class="ocean-row">
-                    <image class="bgimg" src="../../static/Images/middle_bottom_right_Sec.png" mode="scaleToFill" />
-                    <view class="row-content">
-                        <view class="row-content-upper"/>
-                        <view class="row-content-cell">
-                            <view class="cell-body text">高潮时: {{qdOceanData.tidehigh}}</view>
-                        </view>
-                    </view>
-            </view>
-            <view class="ocean-row">
-                    <image class="bgimg" src="../../static/Images/middle_bottom_right_Sec.png" mode="scaleToFill" />
-                    <view class="row-content">
-                        <view class="row-content-upper"/>
-                        <view class="row-content-cell">
-                            <view class="cell-body text">海温: {{qdOceanData.temp}}</view>
-                        </view>
-                    </view>
-            </view>
-            <view class="ocean-row">
-                    <image class="bgimg" src="../../static/Images/middle_bottom_right_Sec.png" mode="scaleToFill" />
-                    <view class="row-content">
-                        <view class="row-content-upper"/>
-                        <view class="row-content-cell">
-                            <view class="cell-body text">浪高: {{qdOceanData.wave}}</view>
-                        </view>
-                    </view>
-            </view>
             <view class="title-row-right">
                 <!-- <image class="ocean-title-bg" src="../../static/Images/forecastTime_right_img.png" mode="scaleToFill" /> -->
                 <image class="ocean-title-bg" src="../../static/Images/forecastTime_left_img.png" mode="scaleToFill" />
                 <view class="ocean-title-cell">
                     <view class="text-dark text-bold text-XL">海洋预报</view>
                     <view class="text-green text-xs text-bold">{{datestring}}</view>
+                </view>
+            </view>
+            <view class="ocean-row">
+                <image class="bgimg" src="../../static/Images/middle_bottom_right_Sec.png" mode="scaleToFill" />
+                <view class="row-content">
+                    <view class="row-content-upper"/>
+                    <view class="row-content-cell">
+                        <view class="cell-body text">浪高: {{qdOceanData.wave}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="ocean-row">
+                <image class="bgimg" src="../../static/Images/middle_bottom_right_Sec.png" mode="scaleToFill" />
+                <view class="row-content">
+                    <view class="row-content-upper"/>
+                    <view class="row-content-cell">
+                        <view class="cell-body text">海温: {{qdOceanData.temp}}</view>
+                    </view>
+                </view>
+            </view>
+            <!-- 高潮时行 -->
+            <view class="ocean-row">
+                <image class="bgimg" src="../../static/Images/middle_bottom_right_Sec.png" mode="scaleToFill" />
+                <view class="row-content">
+                    <view class="row-content-upper"/>
+                    <view class="row-content-cell">
+                        <view class="cell-body text">高潮时: {{qdOceanData.tidehigh}}</view>
+                    </view>
+                </view>
+            </view>
+            <!-- 低潮时行 -->
+            <view class="ocean-row">
+                <image class="bgimg" src="../../static/Images/middle_bottom_right_Sec.png" mode="scaleToFill" />
+                <view class="row-content">
+                    <view class="row-content-upper"/>
+                    <view class="row-content-cell">
+                        <view class="cell-body text">低潮时: {{qdOceanData.tidelow}}</view>
+                    </view>
                 </view>
             </view>
         </view>
@@ -185,7 +185,7 @@ export default {
     .container {
         /* border: 1upx solid #000; */
         width: 100%;
-        height: 100vh;
+        height: 95vh;
         display: flex;
         flex-direction: row;
     }
@@ -193,7 +193,7 @@ export default {
     .column {
         /* border: 1upx solid #000; */
         flex: 1;
-        height: 100vh;
+        /* height: 100vh; */
         display: flex;
         flex-direction: column;
         overflow: hidden;
@@ -202,9 +202,9 @@ export default {
     .column-right {
         /* border: 1upx solid #000; */
         flex: 1;
-        height: 100vh;
+        /* height: 100vh; */
         display: flex;
-        flex-direction: column-reverse;
+        flex-direction: column;
     }
     /* 每列上方温度和海洋预报行 */
     .title-row {
@@ -239,26 +239,30 @@ export default {
     }
     /* 每行的前景内容 */
     .row-content {
+        /* border: 1upx solid #000; */
         position: absolute;
         left: 3upx;
         width: 98%;
         height: 100%;
         display: flex;
+        justify-content: center;
         flex-direction: column;
     }
     /* 每行前景上方占位空白 */
     .row-content-upper {
         width: 100%;
-        height: 29%;
+        height: 22%;
     }
     /* 每行前景内容格 */
     .row-content-cell {
-        width: 100%;
+        /* border: 1upx solid #f00; */
+        width: 88%;
         height: 60%;
+        margin-left: 8%;
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: center;
+        /* justify-content: center; */
     }
     /* 每行前景内容格 左方图标部分 */
     .cell-header {
@@ -354,7 +358,7 @@ export default {
     /* 右列底部占位空白 */
     .bottom-space {
         /* border: 1upx solid #f00; */
-        height: 160upx;
+        height: 340upx;
         width: 100%;
     }
     /* 颜色 */
