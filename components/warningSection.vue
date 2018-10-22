@@ -137,15 +137,23 @@ export default {
     display: flex;
     align-items: center;
     white-space: nowrap;
-    animation-name: around;
-    animation-duration: 14s;  /*过渡时间*/
+    margin-left: 20%;
+    animation: 14s around linear infinite normal; 
+    -webkit-animation: 14s around linear infinite normal;
+    /* animation-name: around;
+    animation-duration: 14s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
+    -webkit-animation-name: around;
+    -webkit-animation-duration: 14s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear; */
     z-index: 5;
 }
 .warning-banner-follow {
     margin-left: 100%;
     animation-delay: 7s;
+    -webkit-animation-delay: 7s;
 }
 @keyframes around {
     from {
@@ -153,6 +161,29 @@ export default {
     }
     to {
         margin-left: -180%;
+    }
+}
+@keyframes wordsLoop {
+    0% {
+        transform: translateX(100%);
+        -webkit-transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(-180%);
+        -webkit-transform: translateX(-180%);
+    }
+}
+
+@-webkit-keyframes wordsLoop {
+    0% {
+        transform: translateX(100%);
+        -webkit-transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(-180%);
+        -webkit-transform: translateX(-180%);
     }
 }
 </style>

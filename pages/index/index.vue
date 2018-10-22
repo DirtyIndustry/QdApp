@@ -159,13 +159,11 @@
 						if (resdata.Typhoon.NUMBER !== '') {
 							console.log('[服务器]: 有台风警报')
 							let nowdate = new Date()
-							that.warningData.typhoonWarning = nowdate.getFullYear() + '年' + (nowdate.getMonth() + 1) + '月' + nowdate.getDate() + '日, ' +
+							that.warningData.typhoonWarning = (nowdate.getMonth() + 1) + '月' + nowdate.getDate() + '日, ' +
 								resdata.Typhoon.NUMBER +
 								'号台风"' +
 								resdata.Typhoon.CHN_NAME +
-								'(' +
-								resdata.Typhoon.ENG_NAME +
-								')"正在接近……'
+								'"来袭……'
 						}
 						if (resdata.Ocean.length > 0) {
 							console.log('[服务器]: 有海洋警报')
