@@ -8,14 +8,14 @@
                     <view class="warning-header-text text-xxs">&nbsp;台风&nbsp;</view>
                 </view>
             </view>
-            <view class="warning-fader warning-fader-left"></view>
+            <!-- <view class="warning-fader warning-fader-left"></view> -->
             <view class="warning-banner text" >
                 {{typhoon}}
             </view>
             <view class="warning-banner warning-banner-follow text" >
                 {{typhoon}}
             </view>
-            <view class="warning-fader warning-fader-right"></view>
+            <!-- <view class="warning-fader warning-fader-right"></view> -->
         </view>
         <!-- 海浪警报 -->
         <view class="warning-section ocean-warning" v-if="wave !== ''" @tap="$emit('waveTap')">
@@ -25,14 +25,14 @@
                     <view class="warning-header-text text-xxs">&nbsp;海浪&nbsp;</view>
                 </view>
             </view>
-            <view class="warning-fader warning-fader-left"></view>
+            <!-- <view class="warning-fader warning-fader-left"></view> -->
             <view class="warning-banner text" >
                 {{wave}}
             </view>
             <view class="warning-banner warning-banner-follow text" >
                 {{wave}}
             </view>
-            <view class="warning-fader warning-fader-right"></view>
+            <!-- <view class="warning-fader warning-fader-right"></view> -->
         </view>
     </view>
 </template>

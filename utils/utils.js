@@ -120,6 +120,8 @@ const getQingdaoData = function (res) {
         let mark = buildMarkdata(res.astroDatas[i].markdata)
         if (res.astroDatas[i].location === '第一海水浴场') {
             tideData.optionTideOne = getAstroOptionNew(tide, mark, res.astroDatas[i].max, res.astroDatas[i].min)
+            // 调整上边距
+            tideData.optionTideOne.grid.top = '12%'
         } else {
             let optiontwo = getAstroOptionNew(tide, mark, res.astroDatas[i].max, res.astroDatas[i].min)
             optiontwo.series[0].lineStyle.color = '#0092d4'
@@ -153,6 +155,8 @@ const getQingdaoData = function (res) {
         option.xAxis.axisLabel.show = false
         // 不显示最大值横线
         option.series[1].markLine.data = []
+        // 不显示时间红点
+        option.series[0].markPoint.symbol = 'none'
         // 将地名字母代号转为中文地名
         res.refinedDatas[i].extrainfo[0].loc = getLocName(res.refinedDatas[i].extrainfo[0].loc)
         if (res.refinedDatas[i].tideinfo.location === 'DJKP') {
