@@ -76,30 +76,30 @@
 										console.log('[服务器]: 返回 安卓升级数据 返回值为空')
 										return false
 									}
-									for (let i = 0; i < result.length; i++) {
-										let resversion = result[i].version
-										let resappname = result[i].appname
-										// 检查app名称是否相同
-										if (resappname === appsettings.appname) {
-											if (utils.needUpdate(appsettings.appversion, resversion)) {	//	需要升级
-												// 弹窗提示
-												uni.showModal({
-													title: '发现新版本',
-													content: appsettings.appversion + ' -> ' + resversion + '\n' + result[i].releasenote,
-													confirmText: '立即升级',
-													cancelText: '取消',
-													success: function (res) {
-														if (res.confirm) {
-															console.log('用户确认升级')
-															plus.runtime.openURL(result[i].url)
-														} else {
-															console.log('用户取消升级')
-														}
-													}
-												})
-											}
-										}
-									}
+									// for (let i = 0; i < result.length; i++) {
+									// 	let resversion = result[i].version
+									// 	let resappname = result[i].appname
+									// 	// 检查app名称是否相同
+									// 	if (resappname === appsettings.appname) {
+									// 		if (utils.needUpdate(appsettings.appversion, resversion)) {	//	需要升级
+									// 			// 弹窗提示
+									// 			uni.showModal({
+									// 				title: '发现新版本',
+									// 				content: appsettings.appversion + ' -> ' + resversion + '\n' + result[i].releasenote,
+									// 				confirmText: '立即升级',
+									// 				cancelText: '取消',
+									// 				success: function (res) {
+									// 					if (res.confirm) {
+									// 						console.log('用户确认升级')
+									// 						plus.runtime.openURL(result[i].url)
+									// 					} else {
+									// 						console.log('用户取消升级')
+									// 					}
+									// 				}
+									// 			})
+									// 		}
+									// 	}
+									// }
 								}, // end-success
 								fail: function (res) {
 									// 无法成功连接服务器 弹出提示
