@@ -10,9 +10,9 @@
             </view>
             <view class="table-row" v-for="(item, index) in data" :key="index">
                 <view class="table-cell border-left text">{{item.seaname}}</view>
-                <view class="table-cell" :class="{'text-xs': item.waveheight.length > 10, 'text': item.waveheight.length < 11}">{{item.waveheight}}</view>
-                <view class="table-cell" :class="{'text-xs': item.wavedir.length > 10, 'text': item.wavedir.length < 11}">{{item.wavedir}}</view>
-                <view class="table-cell" :class="{'text-xs': item.undercurrent.length > 10, 'text': item.undercurrent.length < 11}">{{item.undercurrent}}</view>
+                <view class="table-cell" :class="{'text-small': item.waveheight.length > 10, 'text': item.waveheight.length < 11}">{{item.waveheight}}</view>
+                <view class="table-cell" :class="{'text-small': item.wavedir.length > 10, 'text': item.wavedir.length < 11}">{{item.wavedir}}</view>
+                <view class="table-cell" :class="{'text-small': item.undercurrent.length > 10, 'text': item.undercurrent.length < 11}">{{item.undercurrent}}</view>
             </view>
         </view>
         <view class="separator" />
@@ -51,7 +51,7 @@ export default {
     flex-direction: column;
 }
 .table-row {
-    height: 55rpx;
+    height: 70rpx;
     display: flex;
     flex-direction: row;
 }
@@ -68,6 +68,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 .separator {
     height: 3.4vw;

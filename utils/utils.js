@@ -468,14 +468,17 @@ const buildMarkdata = function (raw) {
 }
 // 检查版本
 const needUpdate = function (oldVal, newVal) {
+    if (oldVal == newVal) {
+        return false
+    }
     let oldarr = oldVal.split('.')
     let newarr = newVal.split('.')
     for (let i = 0; i < oldarr.length; i++) {
-        if (oldarr[i] < newarr[i]) {
-            return true
+        if (oldarr[i] > newarr[i]) {
+            return false
         }
     }
-    return false
+    return true
 }
 
 module.exports = {
