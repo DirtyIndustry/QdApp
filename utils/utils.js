@@ -503,17 +503,23 @@ const needUpdate = function (oldVal, newVal) {
     let newarr = newVal.split('.')
     for (let i = 0; i < oldarr.length; i++) {
         if (Number(oldarr[i]) > Number(newarr[i])) {
+            continue
+        } else if (Number(oldarr[i]) > Number(newarr[i])) {
             return false
+        } else if (Number(oldarr[i]) < Number(newarr[i])) {
+            return true
         }
     }
-    return true
+    return false
 }
 // 升级操作
 const doUpgrade = function () {
     if (plus.os.name == 'Android') {
+        console.log('[设备]: 开始下载安卓更新包 ' + store.state.Infos.androidupgradeurl)
         uni.downloadFile({
-            url: resurl,
+            url: store.state.Infos.androidupgradeurl,
             success: function (res) {
+                console.log('[设备]: 安卓更新包下载完成')
                 plus.runtime.openFile(res.tempFilePath)
             }
         })

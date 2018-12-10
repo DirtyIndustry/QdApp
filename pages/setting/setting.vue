@@ -1,5 +1,5 @@
 <template>
-	<view class="page-body" catchtouchmove>
+	<view class="page-body" >
 		<!-- 上端空白 -->
 		<view class="separator-vertical"></view>
 		<!-- 安卓推送按钮 -->
@@ -16,7 +16,7 @@
 			</view>
 			<view class="separator-horizontal" />
 		</view>
-		<view class="separator-vertical"></view>
+		<view v-if="!isAndroid" class="separator-vertical"></view>
 		<!-- 苹果推送震动 -->
 		<view v-if="!isAndroid" class="stripbutton">
 			<view class="separator-horizontal"></view>
@@ -107,6 +107,11 @@
 			pushVibrate: {
 				get() { return this.$store.state.Infos.pushvibrate },
 				set(value) { this.$store.dispatch('setPushVibrate', value) }
+			},
+			// 安卓下载地址
+			androidupgradeurl: {
+				get() { return this.$store.state.Infos.androidupgradeurl },
+				set(value) { this.$store.dispatch('setAndroidUpgradeUrl', value) }
 			}
 		},
 		methods: {
@@ -209,6 +214,7 @@
 							let resappname = result[i].appname
 							let forceupgradeversion = result[i].forceupgradeversion
 							let resurl = result[i].url
+							that.androidupgradeurl = result[i].url
 							// 检查app名称是否相同
 							if (resappname === appsettings.appname) {
 								if (utils.needUpdate(forceupgradeversion, appsettings.appversion) & forceupgradeversion !== '') { // 强制升级

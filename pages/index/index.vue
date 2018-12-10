@@ -153,6 +153,11 @@
 			needUpgrade: {
 				get() { return this.$store.state.Infos.needupgrade },
 				set(value) { this.$store.dispatch('setNeedUpgrade', value) }
+			},
+			// 安卓下载地址
+			androidupgradeurl: {
+				get() { return this.$store.state.Infos.androidupgradeurl },
+				set(value) { this.$store.dispatch('setAndroidUpgradeUrl', value) }
 			}
 		},
 		methods: {
@@ -324,9 +329,11 @@
 		onReady() {
 			console.log('index page ready.')
 			this.checkPushMessage()
+			uni.hideLoading()
 		},
 		onShow() {
 			console.log('index page onshow')
+			console.log(this.needUpgrade)
 			if (this.forceUpgrade == true) {
 				uni.showModal({
 					title: '错误',
@@ -338,20 +345,20 @@
 					}
 				})
 			} else if (this.needUpgrade == true) {
-				uni.showModal({
-					title: '发现新版本',
-					content: appsettings.appversion + ' -> ' + resversion + '\n' + result[i].releasenote,
-					confirmText: '立即升级',
-					cancelText: '取消',
-					success: function (res) {
-						if (res.confirm) {
-							console.log('用户确认升级')
-							utils.doUpgrade()
-						} else {
-							console.log('用户取消升级')
-						}
-					}
-				})
+				// uni.showModal({
+				// 	title: '发现新版本',
+				// 	content: appsettings.appversion + ' -> ' + resversion + '\n' + result[i].releasenote,
+				// 	confirmText: '立即升级',
+				// 	cancelText: '取消',
+				// 	success: function (res) {
+				// 		if (res.confirm) {
+				// 			console.log('用户确认升级')
+				// 			utils.doUpgrade()
+				// 		} else {
+				// 			console.log('用户取消升级')
+				// 		}
+				// 	}
+				// })
 			}
 		},
 		mounted() {

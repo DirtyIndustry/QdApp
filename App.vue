@@ -78,6 +78,11 @@
 			needUpgrade: {
 				get() { return this.$store.state.Infos.needupgrade },
 				set(value) { this.$store.dispatch('setNeedUpgrade', value) }
+			},
+			// 安卓下载地址
+			androidupgradeurl: {
+				get() { return this.$store.state.Infos.androidupgradeurl },
+				set(value) { this.$store.dispatch('setAndroidUpgradeUrl', value) }
 			}
 		},
 		watch: {
@@ -134,20 +139,24 @@
 										let resappname = result[i].appname
 										let forceupgradeversion = result[i].forceupgradeversion
 										let resurl = result[i].url
+										that.androidupgradeurl = result[i].url
 										// 检查app名称是否相同
+										console.log(utils.needUpdate(appsettings.appversion, resversion))
 										if (resappname === appsettings.appname) {
 											if (utils.needUpdate(forceupgradeversion, appsettings.appversion) == true && forceupgradeversion !== '') { // 强制升级
+												console.log('[服务器]: 需要强制升级')
 												that.forceUpgrade = true
-												uni.showModal({
-													title: '错误',
-													content: '当前版本已停用, 请立即升级',
-													showCancel: false,
-													confirmText: '立即升级',
-													success: function (res) {
-														utils.doUpgrade()
-													}
-												})
+												// uni.showModal({
+												// 	title: '错误',
+												// 	content: '当前版本已停用, 请立即升级',
+												// 	showCancel: false,
+												// 	confirmText: '立即升级',
+												// 	success: function (res) {
+												// 		utils.doUpgrade()
+												// 	}
+												// })
 											} else if (utils.needUpdate(appsettings.appversion, resversion)) {	//	需要升级
+												console.log('[服务器]: 需要升级')
 												that.needUpgrade = true
 												// 弹窗提示
 												uni.showModal({
@@ -315,6 +324,9 @@
 					}, // success-request
 					fail: function (res) {
 						console.log('[服务器]: 请求 青岛预报数据 失败')
+					},
+					complete: function () {
+						that.completedRequestCount++
 					}
 				})
 			},

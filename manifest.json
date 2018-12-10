@@ -113,7 +113,7 @@
         "splashscreen" : {
             "waiting" : false,
             "autoclose" : true,
-            "delay" : 0
+            "delay" : 1000
         }
     },
     "quickapp" : {},
