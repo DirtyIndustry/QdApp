@@ -90,12 +90,12 @@
 				completedRequestCount: 0,
 
 				// 警报数据
-				warningData: {
-					typhoonWarning: '',
-					waveWarning: '',
-					waveUrl: '',
-					filename: ''
-				}
+				// warningData: {
+				// 	typhoonWarning: '',
+				// 	waveWarning: '',
+				// 	waveUrl: '',
+				// 	filename: ''
+				// }
 			}
 		},
 		computed: {
@@ -133,6 +133,26 @@
 			qdOceanData: {
 				get () { return this.$store.state.Datas.qdoceandata },
 				set (value) { this.$store.dispatch('setQdOceanData', value) }
+			},
+			// 警报信息
+			warningData: {
+				get () { return this.$store.state.Datas.warningdata },
+				set (value) { this.$store.dispatch('setWarningData', value) }
+			},
+			// 推送信息
+			pushMessage: {
+				get () { return this.$store.state.Datas.pushmessage },
+				set (value) { this.$store.dispatch('setPushMessage', value) }
+			},
+			// 强制升级
+			forceUpgrade: {
+				get() { return this.$store.state.Infos.forceupgrade },
+				set(value) { this.$store.dispatch('setForceUpgrade', value) }
+			},
+			// 需要升级
+			needUpgrade: {
+				get() { return this.$store.state.Infos.needupgrade },
+				set(value) { this.$store.dispatch('setNeedUpgrade', value) }
 			}
 		},
 		methods: {
@@ -243,6 +263,35 @@
 						})
 					}
 				})
+			},
+			// 处理推送信息
+			checkPushMessage() {
+				if (this.pushMessage.filename !== '') {
+					let that = this
+					uni.request({
+						url: appsettings.hosturl + 'GetOceanAlarmUrl',
+						data: {name: 'admin', areaflg: '山东', filename: that.pushMessage.filename},
+						method: 'POST',
+						success: function (res) {
+							console.log('[服务器]: 返回 预警报地址')
+							if (!res.data.d | res.data.d === '您无权访问此端口' | res.data.d === '') { // 返回的值为空
+								console.log('[服务器]: 返回 预警报地址 返回值为空')
+								return false
+							}
+							// 清空pushMessage
+							that.pushMessage.filename = ''
+							that.pushMessage.name = ''
+							that.pushMessage.datetime = ''
+							that.pushMessage.Url = ''
+							that.pushMessage.message = ''
+							// 打开详细警报页面
+							console.log('[界面]: 跳转至 警报详情页面')
+							uni.navigateTo({
+								url: '../warningdetail/warningdetail?data=' + res.data.d
+							})
+						}
+					})
+				}
 			}
 		}, // end-methods
 		watch: {
@@ -255,17 +304,55 @@
 						uni.stopPullDownRefresh()
 					}
 				}
+			},
+			pushMessage: {
+				handler(newVal, oldVal) {
+					if (newVal) {
+						// 检查推送信息
+						this.checkPushMessage()
+					}
+				}
 			}
 		},
 		onLoad() {
 			console.log('index page onload.')
-			uni.showLoading({
-				title: '加载中',
-				mask: true
-			})
+			// uni.showLoading({
+			// 	title: '加载中',
+			// 	mask: true
+			// })
 		},
 		onReady() {
 			console.log('index page ready.')
+			this.checkPushMessage()
+		},
+		onShow() {
+			console.log('index page onshow')
+			if (this.forceUpgrade == true) {
+				uni.showModal({
+					title: '错误',
+					content: '当前版本已停用, 请立即升级',
+					showCancel: false,
+					confirmText: '立即升级',
+					success: function (res) {
+						utils.doUpgrade()
+					}
+				})
+			} else if (this.needUpgrade == true) {
+				uni.showModal({
+					title: '发现新版本',
+					content: appsettings.appversion + ' -> ' + resversion + '\n' + result[i].releasenote,
+					confirmText: '立即升级',
+					cancelText: '取消',
+					success: function (res) {
+						if (res.confirm) {
+							console.log('用户确认升级')
+							utils.doUpgrade()
+						} else {
+							console.log('用户取消升级')
+						}
+					}
+				})
+			}
 		},
 		mounted() {
 			console.log('index vue mounted.')

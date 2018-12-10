@@ -2,15 +2,34 @@
 	<view class="page-body" catchtouchmove>
 		<!-- 上端空白 -->
 		<view class="separator-vertical"></view>
-		<!-- 推送按钮 -->
-		<view class="stripbutton">
+		<!-- 安卓推送按钮 -->
+		<view v-if="isAndroid" class="stripbutton">
 			<view class="separator-horizontal"></view>
 			<view class="text text-gray">推送</view>
+		</view>
+		<!-- 苹果推送提示音 -->
+		<view v-if="!isAndroid" class="stripbutton">
+			<view class="separator-horizontal"></view>
+			<view class="text text-gray">推送提示音</view>
+			<view class="right-column">
+				<switch :checked="pushBeep" @change="pushBeepChange" color="#0092d4"></switch>
+			</view>
+			<view class="separator-horizontal" />
+		</view>
+		<view class="separator-vertical"></view>
+		<!-- 苹果推送震动 -->
+		<view v-if="!isAndroid" class="stripbutton">
+			<view class="separator-horizontal"></view>
+			<view class="text text-gray">推送震动</view>
+			<view class="right-column">
+				<switch :checked="pushVibrate" @change="pushVibrateChange" color="#0092d4"></switch>
+			</view>
+			<view class="separator-horizontal" />
 		</view>
 		<!-- 推送下方说明文字 -->
 		<view class="detail">
 			<view class="separator-horizontal"></view>
-			<view class="text-small text-gray">请在手机设置 > 通知 > 通知管理中找到青岛海洋预报，可关闭通知。关闭后不再接收到推送的消息。</view>
+			<view class="text-small text-gray">{{pushtext}}</view>
 			<view class="separator-horizontal"></view>
 		</view>
 		<!-- 欢迎页面 -->
@@ -58,14 +77,14 @@
 		<!-- 小分隔条 -->
 		<view class="separator-vertical-small"></view>
 		<!-- 检查更新 -->
-		<!-- <view class="stripbutton" @tap="checkupdateTap">
+		<view v-if="isAndroid" class="stripbutton" @tap="checkupdateTap">
 			<view class="separator-horizontal"></view>
 			<view class="text text-gray">检查更新</view>
 			<view class="right-column">
 				<view class="fa fa-angle-right font-icon text-gray"></view>
 			</view>
 			<view class="separator-horizontal"></view>
-		</view> -->
+		</view>
     </view>
 </template>
 
@@ -74,7 +93,21 @@
 	import utils from '../../utils/utils.js'
 	export default {
 		data: {
+			isAndroid: true,
+			pushtext: '请在手机设置 > 通知和状态栏 > 通知管理中找到山东海洋预报，可关闭通知。关闭后不再接收到推送的消息。',
 			cachesize: ''
+		},
+		computed: {
+			// 推送提示音
+			pushBeep: {
+				get () { return this.$store.state.Infos.pushbeep },
+				set (value) { this.$store.dispatch('setPushBeep', value) }
+			},
+			// 推送震动
+			pushVibrate: {
+				get() { return this.$store.state.Infos.pushvibrate },
+				set(value) { this.$store.dispatch('setPushVibrate', value) }
+			}
 		},
 		methods: {
 			// 获取当前缓存占用空间 单位kb
@@ -174,9 +207,20 @@
 						for (let i = 0; i < result.length; i++) {
 							let resversion = result[i].version
 							let resappname = result[i].appname
+							let forceupgradeversion = result[i].forceupgradeversion
+							let resurl = result[i].url
 							// 检查app名称是否相同
 							if (resappname === appsettings.appname) {
-								if (that.needUpdate(appsettings.appversion, resversion)) {	//	需要升级
+								if (utils.needUpdate(forceupgradeversion, appsettings.appversion) & forceupgradeversion !== '') { // 强制升级
+									uni.showModal({
+										title: '当前版本已停用, 请升级',
+										showCancel: false,
+										confirmText: '立即升级',
+										complete: function (res) {
+											utils.doUpgrade()
+										}
+									})
+								} else if (utils.needUpdate(appsettings.appversion, resversion)) {	//	需要升级
 									// 弹窗提示
 									uni.showModal({
 										title: '发现新版本',
@@ -186,7 +230,7 @@
 										success: function (res) {
 											if (res.confirm) {
 												console.log('用户确认升级')
-												plus.runtime.openURL(result[i].url)
+												utils.doUpgrade()
 											} else {
 												console.log('用户取消升级')
 											}
@@ -213,10 +257,27 @@
 					}
 				}
 				return false
+			},
+			// 设置推送提示音
+			pushBeepChange(e) {
+				this.pushBeep = e.detail.value
+				utils.storeToLocal('pushbeep', this.pushBeep)
+			},
+			// 设置推送震动
+			pushVibrateChange(e) {
+				this.pushVibrate = e.detail.value
+				utils.storeToLocal('pushvibrate', this.pushVibrate)
 			}
 		},
 		onLoad () {
 			this.getCacheSize()
+			if (plus.os.name == 'Android') {
+				this.isAndroid = true
+				this.pushtext = '请在手机设置 > 通知和状态栏 > 通知管理中找到山东海洋预报，可关闭通知。关闭后不再接收到推送的消息。'
+			} else {
+				this.isAndroid = false
+				this.pushtext = '请在手机设置 > 通知中找到山东海洋预报，可关闭后台通知，关闭应用后不再接收到推送的消息。'
+			}
 		}
 	}
 </script>

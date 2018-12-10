@@ -50,7 +50,7 @@
                         <!-- 空气质量内容 -->
                         <view class="weather-cell">
                             <!-- 空气质量图标 -->
-                            <view class="cell-header" :class="{vert: weatherData.airconDesc === '优', jeune: weatherData.airconDesc === '良', orange: weatherData.airconDesc === '轻度污染', rouge: weatherData.airconDesc === '重度污染'}">
+                            <view class="cell-header" :class="{vert: weatherData.airconDesc === '优', jeune: weatherData.airconDesc === '良', orange: weatherData.airconDesc === '轻度污染', sienna: weatherData.airconDesc === '中度污染', rouge: weatherData.airconDesc === '重度污染'}">
                                 <view class="fa fa-leaf font-icon"/>
                                 <view class="text-mini-icon">AQI</view>
                             </view>
@@ -71,7 +71,7 @@
                         <!-- pm2.5内容 -->
                         <view class="weather-cell">
                             <!-- 左侧pm2.5字样 -->
-                            <view class="text-icon text-large text-bold" :class="{vert: weatherData.pm25Desc === '优', jeune: weatherData.pm25Desc === '良', orange: weatherData.pm25Desc === '轻度污染', rouge: weatherData.pm25Desc === '重度污染'}">
+                            <view class="text-icon text-large text-bold" :class="{vert: weatherData.pm25Desc === '优', jeune: weatherData.pm25Desc === '良', orange: weatherData.pm25Desc === '轻度污染', sienna: weatherData.pm25Desc === '中度污染', rouge: weatherData.pm25Desc === '重度污染'}">
                                 &nbsp;PM2.5
                             </view>
                             <!-- 右侧pm2.5数值和单位 -->
@@ -262,6 +262,9 @@ export default {
 }
 .orange {
     color: Chocolate;
+}
+.sienna {
+    color: sienna;
 }
 .rouge {
     color: red;

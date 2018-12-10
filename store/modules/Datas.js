@@ -210,6 +210,21 @@ var state = {
         temp: '',
         tidehigh: '',
         tidelow: ''
+    },
+    // 警报信息
+    warningdata: {
+        typhoonWarning: '',
+        waveWarning: '',
+        waveUrl: '',
+        filename: ''
+    },
+    // 推送信息
+    pushmessage: {
+        filename: '',
+        name: '',
+        datetime: '',
+        Url: '',
+        message: ''
     }
 }
 
@@ -234,6 +249,12 @@ const mutations = {
     },
     setqdocean (state, value) {
         state.qdoceandata = value
+    },
+    setwarningdata (state, value) {
+        state.warningdata = value
+    },
+    setpushmessage (state, value) {
+        state.pushmessage = value
     }
 }
 
@@ -258,6 +279,12 @@ const actions = {
     },
     setQdOceanData (context, qdoceandata) {
         context.commit('setqdocean', qdoceandata)
+    },
+    setPushMessage (context, value) {
+        context.commit('setpushmessage', value)
+    },
+    setWarningData (context, value) {
+        context.commit('setwarningdata', value)
     }
 }
 
