@@ -11,7 +11,7 @@
             <view class="separator-vertical-small"></view>
             <!-- 联系方式 -->
             <view class="input-container">
-                <input name="input_contact" class="input input-small" v-model="postercontact" placeholder="联系人电子邮箱地址" :focus="inputcontactFocus" @confirm="inputcontactConfirm"/>
+                <input name="input_contact" class="input input-small" v-model="postercontact" placeholder="联系人电子邮箱地址" :focus="inputcontactFocus" @confirm="inputcontactConfirm" @input="checkEmail"/>
             </view>
             <!-- 分隔条 -->
             <view class="separator-vertical-small"></view>
@@ -23,6 +23,12 @@
             <view class="separator-vertical"></view>
             <!-- 提交按钮 -->
             <button class="submit-button" type="primary" formType="submit" :disabled="!formValid">{{buttonText}}</button>
+            <!-- 分隔条 -->
+            <view class="separator-vertical"></view>
+            <!-- 二维码 -->
+            <view class="qrcode-container">
+                <image class="qrcode-img" :src="qrcodeurl" mode="widthFix" />
+            </view>
         </form>
     </view>
 </template>
@@ -38,7 +44,7 @@ data () {
         postername: '',         // 联系人姓名
         postercontact: '',      // 联系人联系方式
         postcontent: '',        // 留言内容
-        buttonText: '发送',     // 提交按钮字样
+        buttonText: '发送',     // 发送按钮字样
         inputnameFocus: true,       // 联系人姓名获得焦点
         inputcontactFocus: false,   // 联系方式获得焦点
         inputcontentFocus: false,   // 留言正文获得焦点
@@ -63,6 +69,7 @@ watch: {
     }
 },
 computed: {
+    qrcodeurl() { return appsettings.hosturl.substring(0, appsettings.hosturl.length - 18) + 'Pictures/QRCode/qdqrcode.jpg' },
     nameValid () { return this.postername.trim() !== '' },
     contactValid () { return this.validateEmail(this.postercontact) },
     contentValid () { return this.postcontent.trim() !== '' },
@@ -124,28 +131,39 @@ methods: {
             },
             method: 'POST',
             success: function (res) {
-                console.log('[服务器]: 提交用户留言成功')
+                console.log('[服务器]: 提交用户留言完成')
                 // 关闭loading toast
                 uni.hideLoading()
-                // 更新最后提交时间和提交计数器
-                that.lastpostdate = new Date()
-                that.postcounter++
-                // 写入本地缓存
-                utils.storeToLocal('lastpostdate', that.lastpostdate)
-                utils.storeToLocal('postcounter', that.postcounter)
-                // 弹出提示窗口
-                uni.showModal({
-					title: '成功',
-					content: '用户留言发送成功',
-                    showCancel: false,
-                    success: function (e) {
-                        if (e.confirm) {
-                            console.log('[界面]: 用户点击了确定')
-                            // 点击确定关闭页面
-                            uni.navigateBack()
+                if (res.data.d === true) {
+                    console.log('[服务器]: 提交用户留言成功')
+                    // 更新最后提交时间和提交计数器
+                    that.lastpostdate = new Date()
+                    that.postcounter++
+                    // 写入本地缓存
+                    utils.storeToLocal('lastpostdate', that.lastpostdate)
+                    utils.storeToLocal('postcounter', that.postcounter)
+                    // 弹出提示窗口
+                    uni.showModal({
+                        title: '成功',
+                        content: '用户留言发送成功',
+                        showCancel: false,
+                        success: function (e) {
+                            if (e.confirm) {
+                                console.log('[界面]: 用户点击了确定')
+                                // 点击确定关闭页面
+                                uni.navigateBack()
+                            }
                         }
-                    }
-				})
+                    })
+                } else {
+                    console.log('[服务器]: 提交用户留言失败')
+                    // 弹出提示窗口
+                    uni.showModal({
+                        title: '失败',
+                        content: '用户留言发送失败',
+                        showCancel: false
+                    })
+                }
             }, // end-success-request
             fail: function (res) {
                 console.log('[服务器]: 提交用户留言失败')
@@ -185,6 +203,15 @@ methods: {
             this.postcounter = 0
         }
     },
+    checkEmail() {
+        if (this.limited === true) {
+            this.buttonText = '已达到每日发送次数上限'
+        } else if (this.contactValid === false) {
+            this.buttonText = '邮箱格式不正确'
+        } else {
+            this.buttonText = '发送'
+        }
+    },
     // 验证邮箱有效性
     validateEmail(email) {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -209,9 +236,10 @@ onShow () {
 
 <style scoped>
 .page-body {
-	background-color: #eeeeee;
+	/* background-color: #eeeeee; */
 	width: 100%;
-	height: 100%;
+	/* height: 100%; */
+    overflow-y: visible;
 }
 
 .separator-vertical{
@@ -259,5 +287,17 @@ onShow () {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.qrcode-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qrcode-img {
+    width: 40vw;
+    height: 40vw;
 }
 </style>
